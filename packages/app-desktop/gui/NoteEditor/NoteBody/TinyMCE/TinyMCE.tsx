@@ -633,6 +633,12 @@ const TinyMCE = (props: NoteBodyEditorProps, ref: Ref<NoteBodyEditorRef>) => {
 			.tox .tox-split-button button {
 				margin: 0 !important;
 			}
+
+			.joplin-search-highlight {
+				background-color: #ffe599;
+				color: #000000;
+				border-radius: 2px;
+			}
 		`));
 
 		return () => {
@@ -1069,6 +1075,86 @@ const TinyMCE = (props: NoteBodyEditorProps, ref: Ref<NoteBodyEditorRef>) => {
 		onCursorUpdate: props.onCursorMotion,
 		editor,
 	});
+
+	const clearSearchHighlights = useCallback(() => {
+		if (!editor) return;
+		const body = editor.getBody();
+		const highlights = body.querySelectorAll('.joplin-search-highlight');
+		for (const el of highlights) {
+			const parent = el.parentNode;
+			parent.replaceChild(document.createTextNode(el.textContent), el);
+			parent.normalize();
+		}
+	}, [editor]);
+
+	// logic for search highlighting in TinyMCE
+	const applySearchHighlights = useCallback((query: string) => {
+		if (!editor || !query || query.trim() === '') {
+			clearSearchHighlights();
+			return;
+		}
+
+		clearSearchHighlights();
+
+		const body = editor.getBody();
+		const walker = document.createTreeWalker(body, NodeFilter.SHOW_TEXT, null);
+		const targetQuery = query.toLowerCase();
+		const nodesToHighlight: { node: Node; start: number; length: number }[] = [];
+
+		let currentNode: Node | null;
+		while ((currentNode = walker.nextNode())) {
+			const text = currentNode.textContent || '';
+			const lowerText = text.toLowerCase();
+			let index = lowerText.indexOf(targetQuery);
+
+			while (index !== -1) {
+				nodesToHighlight.push({
+					node: currentNode,
+					start: index,
+					length: targetQuery.length,
+				});
+				index = lowerText.indexOf(targetQuery, index + targetQuery.length);
+			}
+		}
+
+		for (let i = nodesToHighlight.length - 1; i >= 0; i--) {
+			const { node, start, length } = nodesToHighlight[i];
+			if (!node.parentNode) continue;
+
+			const text = node.textContent || '';
+			const matchText = text.substr(start, length);
+
+			const range = document.createRange();
+			range.setStart(node, start);
+			range.setEnd(node, start + length);
+
+			const mark = document.createElement('mark');
+			mark.className = 'joplin-search-highlight';
+			mark.textContent = matchText;
+
+			range.deleteContents();
+			range.insertNode(mark);
+		}
+	}, [editor, clearSearchHighlights]);
+
+	useEffect(() => {
+		if (!editor || !editorReady) {
+			return undefined;
+		}
+
+		const runHighlight = (): void => {
+			const query = props.searchMarkers?.keywords?.[0]?.value || '';
+			applySearchHighlights(query);
+		};
+
+		runHighlight();
+
+		editor.on('SetContent LoadContent', runHighlight);
+
+		return () => {
+			editor.off('SetContent LoadContent', runHighlight);
+		};
+	}, [editor, editorReady, props.searchMarkers, applySearchHighlights]);
 
 	const noteChangeTimeRef = useRef(Date.now());
 	const lastNoteIdRef = useRef(props.noteId);
