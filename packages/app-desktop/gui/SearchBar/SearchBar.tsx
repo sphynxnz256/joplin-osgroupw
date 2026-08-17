@@ -36,7 +36,7 @@ function SearchBar(props: Props) {
 
 	useEffect(() => {
 		function search(searchId: string, query: string, dispatch: Dispatch) {
-			console.log("************* onChange search useffect query: " + query + " *****************************");
+			console.log(`************* onChange search useffect query: ${query} *****************************`);
 			dispatch({
 				type: 'SEARCH_UPDATE',
 				search: {
@@ -89,7 +89,7 @@ function SearchBar(props: Props) {
 	}, [props.selectedNoteId]);
 
 	function onChange(event: { value: string }) {
-		console.log("************* onChange event value: " + event.value + " *****************************");
+		console.log(`************* onChange event value: ${event.value} *****************************`);
 		if (event.value.length === 0) {
 			// Revert to previous state if query string becomes empty
 			void onExitSearch();
@@ -200,9 +200,9 @@ interface OwnProps {
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps) => {
 
-	console.log("********************SearchBar.mapStateToProps: " + state.searches?.[0]?.query_pattern + "********************");
-	
-	
+	console.log(`********************SearchBar.mapStateToProps: ${state.searches?.[0]?.query_pattern}********************`);
+
+
 	const windowState = stateUtils.windowStateById(state, ownProps.windowId);
 
 	let globalQuery = '';
