@@ -823,6 +823,8 @@ const mapStateToProps = (state: AppState, ownProps: ConnectProps) => {
 	const windowState = stateUtils.windowStateById(state, ownProps.windowId);
 	const noteId = stateUtils.selectedNoteId(windowState);
 
+	console.log("********************NoteEditor.mapStateToProps: " + state.searches?.[0]?.query_pattern + "********************");
+
 	let bodyEditor = windowState.editorCodeView ? NoteBodyEditorType.CodeMirror6 : NoteBodyEditorType.TinyMce;
 	if (state.settings.isSafeMode) {
 		bodyEditor = NoteBodyEditorType.PlainText;
