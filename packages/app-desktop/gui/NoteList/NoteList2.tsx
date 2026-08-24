@@ -215,9 +215,11 @@ const NoteList = (props: Props) => {
 
 	const renderEmptyList = () => {
 		if (props.notes.length) return null;
+		// check if the empty list is a result of a search.
+		const isSearch = props.notesParentType === 'Search';
 		// Role status is necessary for the screenreader to announce that the list is empty, since when there are
 		// zero items there is not list to render
-		return <div className="emptylist" role="status">{getEmptyFolderMessage(props.folders, props.selectedFolderId)}</div>;
+		return <div className="emptylist" role="status">{getEmptyFolderMessage(props.folders, props.selectedFolderId, isSearch)}</div>;
 	};
 
 	const renderFiller = (key: string, style: React.CSSProperties) => {
@@ -350,7 +352,7 @@ const mapStateToProps = (state: AppState, ownProps: ConnectProps) => {
 		selectedNoteIds: windowState.selectedNoteIds,
 		selectedFolderId: windowState.selectedFolderId,
 		themeId: state.settings.theme,
-		notesParentType: state.notesParentType,
+		notesParentType: windowState.notesParentType,
 		searches: state.searches,
 		selectedSearchId: windowState.selectedSearchId,
 		watchedNoteFiles: state.watchedNoteFiles,
