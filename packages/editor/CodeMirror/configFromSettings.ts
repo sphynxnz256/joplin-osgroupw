@@ -26,7 +26,7 @@ const closingFencedBlock = StateField.define<boolean>({
 		const pos = tr.state.selection.main.from;
 		const textBefore = tr.state.doc.sliceString(Math.max(0, pos - 2), pos);
 		const backticksBefore = textBefore.length - textBefore.replace(/`+$/, '').length;
-		return backticksBefore >= 2;
+		return tr.state.selection.main.empty && backticksBefore >= 2;
 	},
 });
 

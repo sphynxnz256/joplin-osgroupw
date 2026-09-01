@@ -3,6 +3,7 @@ import createEditorControl from './testing/createEditorControl';
 import { EditorCommandType } from '../types';
 import pressReleaseKey from './testing/pressReleaseKey';
 import { EditorSelection, EditorState } from '@codemirror/state';
+import typeText from './testing/typeText';
 
 describe('CodeMirrorControl', () => {
 	it('clearHistory should clear the undo/redo history', () => {
@@ -247,4 +248,17 @@ describe('CodeMirrorControl', () => {
 		control.updateBody('Test', { noteId: 'updated-2' });
 		expect(noteId).toBe('updated-2');
 	});
+
+	it('should wrap selected text when typing 3 backticks without replacing it', () => {
+		const text = 'const x = 10;';
+		const control = createEditorControl(text, { automatchBraces: true });
+		control.select(0, text.length);
+		typeText(control.editor, '`');
+		expect(control.getValue()).toBe('`const x = 10;`');
+		typeText(control.editor, '`');
+		expect(control.getValue()).toBe('``const x = 10;``');
+		typeText(control.editor, '`');
+		expect(control.getValue()).toBe('```const x = 10;```');
+	});
+
 });
