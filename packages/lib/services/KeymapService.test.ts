@@ -121,11 +121,13 @@ describe('services_KeymapService', () => {
 			expect(keymapService.getAccelerator('newNote')).toEqual('Ctrl+N');
 			expect(keymapService.getAccelerator('synchronize')).toEqual('Ctrl+S');
 			expect(keymapService.getAccelerator('closeWindow')).toEqual('Ctrl+W');
+			expect(keymapService.getAccelerator('toggleNoteList')).toEqual('F9');
 
 			keymapService.initialize([], 'win32');
 			expect(keymapService.getAccelerator('textSelectAll')).toEqual('Ctrl+A');
 			expect(keymapService.getAccelerator('textBold')).toEqual('Ctrl+B');
 			expect(keymapService.getAccelerator('closeWindow')).toEqual('Ctrl+W');
+			expect(keymapService.getAccelerator('toggleNoteList')).toEqual('F9');
 		});
 
 		it('should throw when an invalid command is requested', () => {

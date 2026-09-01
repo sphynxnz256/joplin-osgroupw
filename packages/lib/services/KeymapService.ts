@@ -107,7 +107,7 @@ const defaultKeymapItems = {
 		// Avoid Ctrl+Shift+I: it's Electron's default DevTools accelerator on
 		// Linux/Windows, so binding to it would shadow developer tools.
 		{ accelerator: 'Ctrl+Alt+I', command: 'toggleAiChat' },
-		{ accelerator: 'F11', command: 'toggleNoteList' },
+		{ accelerator: 'F9', command: 'toggleNoteList' },
 		{ accelerator: 'Ctrl+L', command: 'toggleVisiblePanes' },
 		{ accelerator: 'Alt+Ctrl+V', command: 'toggleEditorPlugin' },
 		{ accelerator: 'Alt+Ctrl+E', command: 'toggleEditors' },
@@ -348,8 +348,8 @@ export default class KeymapService extends BaseService {
 	private validateKeymapItem(item: KeymapItem) {
 		if (!item.hasOwnProperty('command')) {
 			throw new Error(_('"%s" is missing the required "%s" property.', JSON.stringify(item), _('command')));
-		// } else if (!this.keymap.hasOwnProperty(item.command)) {
-		// 	throw new Error(_('Invalid %s: %s.', _('command'), item.command));
+			// } else if (!this.keymap.hasOwnProperty(item.command)) {
+			// 	throw new Error(_('Invalid %s: %s.', _('command'), item.command));
 		}
 
 		if (!item.hasOwnProperty('accelerator')) {
@@ -445,7 +445,7 @@ export default class KeymapService extends BaseService {
 
 	// Electron and aria-keyshortcuts have slightly different formats for accelerators.
 	// See https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts
-	public getAriaKeyShortcuts(commandName: string): string|undefined {
+	public getAriaKeyShortcuts(commandName: string): string | undefined {
 		const electronAccelerator = this.getAccelerator(commandName);
 		return electronAccelerator?.replace('Ctrl', 'Control');
 	}
