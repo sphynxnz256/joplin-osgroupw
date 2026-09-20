@@ -2,6 +2,7 @@ import { FormNote } from './types';
 
 import HtmlToMd, { ParseOptions } from '@joplin/lib/HtmlToMd';
 import Note from '@joplin/lib/models/Note';
+import Setting from '@joplin/lib/models/Setting';
 import { MarkupToHtml } from '@joplin/renderer';
 
 export async function htmlToMarkdown(markupLanguage: number, html: string, originalCss: string, parseOptions: ParseOptions = null): Promise<string> {
@@ -14,9 +15,9 @@ export async function htmlToMarkdown(markupLanguage: number, html: string, origi
 			preserveNestedTables: true,
 			preserveTableStyles: true,
 			preserveColorStyles: true,
+			preserveBlankParagraphs: Setting.value('editor.preserveBlankLines'),
 			...parseOptions,
-		});
-		newBody = await Note.replaceResourceExternalToInternalLinks(newBody, { useAbsolutePaths: true });
+		});		newBody = await Note.replaceResourceExternalToInternalLinks(newBody, { useAbsolutePaths: true });
 	} else {
 		newBody = await Note.replaceResourceExternalToInternalLinks(html, { useAbsolutePaths: true });
 		if (originalCss) newBody = `<style>${originalCss}</style>\n${newBody}`;

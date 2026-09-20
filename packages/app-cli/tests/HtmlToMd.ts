@@ -129,4 +129,12 @@ describe('HtmlToMd', () => {
 		expect(collapsedResult).toContain('\n\n');
 	});
 
+	it('should support preserveBlankParagraphs option', async () => {
+		const htmlToMd = new HtmlToMd();
+		const html = '<ul><li>a</li></ul><p><br></p><h3><strong></strong></h3><h3>Title</h3>';
+
+		expect(htmlToMd.parse(html)).toBe('- a\n\n  \n\n### Title');
+		expect(htmlToMd.parse(html, { preserveBlankParagraphs: true })).toBe('- a\n\n&nbsp;\n\n&nbsp;\n\n### Title');
+	});
+
 });

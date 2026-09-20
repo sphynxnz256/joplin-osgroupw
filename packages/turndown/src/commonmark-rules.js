@@ -32,6 +32,12 @@ rules.paragraph = {
     const leadingNonbreakingSpace = /^\u{00A0}/ug;
     content = content.replace(leadingNonbreakingSpace, '&nbsp;');
 
+    // A paragraph with only <br> would otherwise become a whitespace-only line,
+    // which Markdown renderers collapse.
+    if (options.preserveBlankParagraphs && node.querySelector('br') && /^[\s ]*$/.test(node.textContent)) {
+      return '\n\n&nbsp;\n\n';
+    }
+
     // Paragraphs that are truly empty (not even containing nonbreaking spaces)
     // take up by default no space. Output nothing.
     if (content === '') {

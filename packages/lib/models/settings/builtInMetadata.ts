@@ -1137,6 +1137,17 @@ const builtInMetadata = (Setting: typeof SettingType) => {
 			storage: SettingStorage.File,
 			isGlobal: true,
 		},
+		'editor.preserveBlankLines': {
+			value: false,
+			type: SettingItemType.Bool,
+			public: true,
+			section: 'editor',
+			appTypes: [AppType.Desktop],
+			label: () => _('Preserve blank lines in the Rich Text Editor'),
+			description: () => _('By default, Markdown collapses empty lines. When enabled, blank lines you add in the Rich Text Editor, such as after a list, are saved as non-breaking spaces so they are kept.'),
+			storage: SettingStorage.File,
+			isGlobal: true,
+		},
 		'editor.enableTextPatterns': {
 			value: true,
 			type: SettingItemType.Bool,

@@ -56,7 +56,9 @@ export default function TurndownService (options) {
     preserveColorStyles: false,
     tightLists: false,
     collapseMultipleBlankLines: false,
-    blankReplacement: function (content, node) {
+    preserveBlankParagraphs: false,
+    blankReplacement: function (content, node, options) {
+      if (options.preserveBlankParagraphs && /^(P|H[1-6])$/.test(node.nodeName)) return '\n\n&nbsp;\n\n'
       return node.isBlock ? '\n\n' : ''
     },
     keepReplacement: function (content, node) {
