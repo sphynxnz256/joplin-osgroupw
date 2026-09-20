@@ -34,7 +34,7 @@ rules.paragraph = {
 
     // A paragraph with only <br> would otherwise become a whitespace-only line,
     // which Markdown renderers collapse.
-    if (options.preserveBlankParagraphs && node.querySelector('br') && /^[\s ]*$/.test(node.textContent)) {
+    if (options.preserveBlankParagraphs && node.querySelector('br') && /^\s*$/.test(node.textContent)) {
       return '\n\n&nbsp;\n\n';
     }
 

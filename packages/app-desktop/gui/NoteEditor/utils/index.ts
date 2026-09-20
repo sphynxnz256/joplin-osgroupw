@@ -17,7 +17,8 @@ export async function htmlToMarkdown(markupLanguage: number, html: string, origi
 			preserveColorStyles: true,
 			preserveBlankParagraphs: Setting.value('editor.preserveBlankLines'),
 			...parseOptions,
-		});		newBody = await Note.replaceResourceExternalToInternalLinks(newBody, { useAbsolutePaths: true });
+		});
+		newBody = await Note.replaceResourceExternalToInternalLinks(newBody, { useAbsolutePaths: true });
 	} else {
 		newBody = await Note.replaceResourceExternalToInternalLinks(html, { useAbsolutePaths: true });
 		if (originalCss) newBody = `<style>${originalCss}</style>\n${newBody}`;
