@@ -6,7 +6,7 @@ import Button, { ButtonLevel, ButtonSize, buttonSizePx } from '../Button/Button'
 import CommandService from '@joplin/lib/services/CommandService';
 import { runtime as focusSearchRuntime } from './commands/focusSearch';
 import Note from '@joplin/lib/models/Note';
-import { notesSortOrderNextField } from '@joplin/lib/services/sortOrder/notesSortOrderUtils';
+import { notesSortOrderNextField, notesSortOrderFieldArray } from '@joplin/lib/services/sortOrder/notesSortOrderUtils';
 import { _ } from '@joplin/lib/locale';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -15,6 +15,7 @@ import { getTrashFolderId } from '@joplin/lib/services/trash';
 import { Breakpoints } from '../NoteList/utils/types';
 import { stateUtils } from '@joplin/lib/reducer';
 import { WindowIdContext } from '../NewWindowOrIFrame';
+import bridge from '../../services/bridge';
 
 interface Props {
 	showNewNoteButtons: boolean;
@@ -68,6 +69,15 @@ const StyledPairButtonL = styled(Button)`
 	border-radius: 3px 0 0 3px;
 	min-width: ${(props: StyleProps) => buttonSizePx(props)}px;
 	max-width: ${(props: StyleProps) => buttonSizePx(props)}px;
+`;
+
+const StyledPairButtonM = styled(Button)`
+	min-width: 12px;
+	max-width: 12px;
+	border-radius: 0;
+	border-width: 1px 1px 1px 0;
+	width: 12px;
+	padding: 0;
 `;
 
 const StyledPairButtonR = styled(Button)`
@@ -179,6 +189,21 @@ function NoteListControls(props: Props) {
 		void CommandService.instance().execute('toggleNotesSortOrderField');
 	}
 
+	function onSortOrderMenuButtonClick() {
+		const menu = new (bridge().Menu)();
+		for (const field of notesSortOrderFieldArray()) {
+			menu.append(new (bridge().MenuItem)({
+				label: Note.fieldToLabel(field),
+				type: 'radio',
+				checked: field === props.sortOrderField,
+				click: () => {
+					void CommandService.instance().execute('toggleNotesSortOrderField', field);
+				},
+			}));
+		}
+		menu.popup({ window: bridge().activeWindow() });
+	}
+
 	function onSortOrderReverseButtonClick() {
 		void CommandService.instance().execute('toggleNotesSortOrderReverse');
 	}
@@ -263,6 +288,14 @@ function NoteListControls(props: Props) {
 							level={ButtonLevel.Secondary}
 							size={props.buttonSize}
 							onClick={onSortOrderFieldButtonClick}
+						/>
+						<StyledPairButtonM
+							className="sort-order-menu-button"
+							tooltip={_('Sort notes by')}
+							iconName="fas fa-caret-down"
+							level={ButtonLevel.Secondary}
+							size={props.buttonSize}
+							onClick={onSortOrderMenuButtonClick}
 						/>
 						<StyledPairButtonR
 							className="sort-order-reverse-button"
