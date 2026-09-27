@@ -88,6 +88,11 @@ const declarations: CommandDeclaration[] = [
 		iconName: 'icon-code',
 	},
 	{
+		name: 'textHighlight',
+		label: () => _('Highlight'),
+		iconName: 'fas fa-highlighter',
+	},
+	{
 		name: 'attachFile',
 		label: () => _('Attach file'),
 		iconName: 'icon-attachment',

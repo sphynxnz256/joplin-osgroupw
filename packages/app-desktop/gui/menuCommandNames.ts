@@ -30,6 +30,7 @@ export default function() {
 		'textBold',
 		'textCode',
 		'textCopy',
+		'textHighlight',
 		'textCut',
 		'textItalic',
 		'textLink',

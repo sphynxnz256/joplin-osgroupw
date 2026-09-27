@@ -14,6 +14,7 @@ export default function isEditorCommand(commandName: string) {
         commandName === 'textBold' ||
         commandName === 'textItalic' ||
         commandName === 'textCode' ||
+        commandName === 'textHighlight' ||
         commandName === 'attachFile' ||
         commandName === 'textNumberedList' ||
         commandName === 'textBulletedList' ||
