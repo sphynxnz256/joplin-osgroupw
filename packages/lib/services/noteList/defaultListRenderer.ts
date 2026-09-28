@@ -114,6 +114,10 @@ const renderer: ListRenderer = {
 					padding-right: 4px;
 					color: var(--joplin-color);
 				}
+
+				> .publishedicon {
+					padding-right: 4px;
+				}
 	
 			}
 
@@ -187,6 +191,7 @@ const renderer: ListRenderer = {
 			<div class="title" data-id="{{note.id}}">
 				<i class="watchedicon fa fa-share-square"></i>
 				{{#note.is_locked}}<i class="lockedicon fa fa-lock"></i>{{/note.is_locked}}
+				{{#note.is_published}}<i class="publishedicon fa fa-globe" role="img" aria-label="{{publishedLabel}}" title="{{publishedLabel}}"></i>{{/note.is_published}}
 				<span>{{note.title}}</span>
 			</div>
 			{{#checkboxStats}}
@@ -207,6 +212,7 @@ const renderer: ListRenderer = {
 			...props,
 			note: { ...props.note, is_locked: isNoteLockEnabled() ? props.note.is_locked : 0 },
 			checkboxStats: props.note.checkboxes,
+			publishedLabel: _('Published'),
 		};
 	},
 };

@@ -72,6 +72,11 @@ const renderer: ListRenderer = {
 				display: none;
 				margin-right: 8px;
 			}
+
+			> .item > .content > .publishedicon {
+				display: none;
+				margin-right: 8px;
+			}
 		}
 
 		> .row.-watched > .item[data-name="note.title"] > .content > .watchedicon {
@@ -79,6 +84,10 @@ const renderer: ListRenderer = {
 		}
 
 		> .row.-locked > .item[data-name="note.title"] > .content > .lockedicon {
+			display: inline-block;
+		}
+
+		> .row.-published > .item[data-name="note.title"] > .content > .publishedicon {
 			display: inline-block;
 		}
 
@@ -120,7 +129,7 @@ const renderer: ListRenderer = {
 				{{#cells}}
 					<div data-name="{{name}}" class="item" style="{{{styleHtml}}}">
 						<div class="content">
-							<i class="watchedicon fa fa-share-square"></i><i class="lockedicon fa fa-lock"></i>{{{contentHtml}}}
+							<i class="watchedicon fa fa-share-square"></i><i class="lockedicon fa fa-lock"></i><i class="publishedicon fa fa-globe" role="img" aria-label="{{publishedLabel}}" title="{{publishedLabel}}"></i>{{{contentHtml}}}
 						</div>
 					</div>
 				{{/cells}}
@@ -161,6 +170,7 @@ const renderer: ListRenderer = {
 		return {
 			...props,
 			note: { ...props.note, is_locked: isNoteLockEnabled() ? props.note.is_locked : 0 },
+			publishedLabel: _('Published'),
 		};
 	},
 };

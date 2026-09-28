@@ -113,6 +113,10 @@ const defaultLeftToRightItemRenderer: ListRenderer = {
 					color: var(--joplin-color);
 				}
 
+				> .publishedicon {
+					padding-right: 4px;
+				}
+
 				> .titlecontent {
 					word-break: break-all;
 					overflow: hidden;
@@ -172,6 +176,7 @@ const defaultLeftToRightItemRenderer: ListRenderer = {
 				{{/note.is_todo}}
 				<i class="watchedicon fa fa-share-square"></i>
 				{{#note.is_locked}}<i class="lockedicon fa fa-lock"></i>{{/note.is_locked}}
+				{{#note.is_published}}<i class="publishedicon fa fa-globe" role="img" aria-label="{{publishedLabel}}" title="{{publishedLabel}}"></i>{{/note.is_published}}
 				<div class="titlecontent">{{note.title}}</div>
 			</div>
 			<div class="preview">{{notePreview}}</div>
@@ -188,6 +193,7 @@ const defaultLeftToRightItemRenderer: ListRenderer = {
 			// A locked note's body is ciphertext, so there is no meaningful preview to show.
 			notePreview: isLocked ? '' : markupToHtml_.stripMarkup(MarkupLanguage.Markdown, props.note.body).substring(0, 200),
 			titleWidth: props.item.size.width - 32,
+			publishedLabel: _('Published'),
 		};
 	},
 };
