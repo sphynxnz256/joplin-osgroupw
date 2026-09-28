@@ -48,6 +48,7 @@ export interface WhenClauseContext {
 	noteIsMarkdown: boolean;
 	noteIsReadOnly: boolean;
 	noteIsReadOnlyShare: boolean;
+	notesIncludeReadOnlyShare: boolean;
 	noteIsTodo: boolean;
 	notesAreBeingSaved: boolean;
 	noteTodoCompleted: boolean;
@@ -131,6 +132,7 @@ export default function stateToWhenClauseContext(state: State, options: WhenClau
 		noteLockSessionUnlocked: state.noteLockSessionUnlocked,
 		noteIsReadOnly: noteLockContentUnavailable || noteIsReadOnlyShare,
 		noteIsReadOnlyShare,
+		notesIncludeReadOnlyShare: selectedNotes.some(n => itemIsReadOnlySync(ModelType.Note, ItemChange.SOURCE_UNSPECIFIED, n as ItemSlice, settings['sync.userId'], state.shareService, true)),
 		noteIsDeleted: selectedNote ? !!selectedNote.deleted_time : false,
 
 		// Current context folder -- if multiple folders are selected, this only applies to one

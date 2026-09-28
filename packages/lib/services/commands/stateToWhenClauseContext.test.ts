@@ -1,5 +1,7 @@
 import { defaultState } from '../../reducer';
 import SyncTargetRegistry from '../../SyncTargetRegistry';
+import BaseItem from '../../models/BaseItem';
+import { simulateReadOnlyShareEnv } from '../../testing/test-utils';
 import { FolderEntity, NoteEntity } from '../database/types';
 import { getTrashFolderId } from '../trash';
 import stateToWhenClauseContext from './stateToWhenClauseContext';
@@ -65,6 +67,24 @@ describe('stateToWhenClauseContext', () => {
 
 		expect(resultingState.noteIsReadOnly).toBe(expected);
 		expect(resultingState.noteIsReadOnlyShare).toBe(false);
+	});
+
+	it.each([
+		{ label: 'one of the selected notes is in a read-only share', shareIds: ['', 'readOnlyShare'], expected: true },
+		{ label: 'none of the selected notes are in a read-only share', shareIds: ['', ''], expected: false },
+	])('should set notesIncludeReadOnlyShare correctly when $label', ({ shareIds, expected }) => {
+		const cleanup = simulateReadOnlyShareEnv('readOnlyShare');
+		const applicationState = {
+			...buildState({
+				selectedNoteIds: ['1', '2'],
+				notes: shareIds.map((share_id, i) => ({ id: `${i + 1}`, share_id, deleted_time: 0 })),
+			}),
+			shareService: BaseItem.syncShareCache,
+			settings: { 'sync.userId': 'abcd' },
+		};
+
+		expect(stateToWhenClauseContext(applicationState).notesIncludeReadOnlyShare).toBe(expected);
+		cleanup();
 	});
 
 	it('should be in trash if selected note has been deleted and selected folder is trash', async () => {
