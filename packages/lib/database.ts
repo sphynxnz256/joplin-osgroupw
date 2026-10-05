@@ -1,9 +1,11 @@
 import Logger from '@joplin/utils/Logger';
 import time from './time';
 import shim from './shim';
+import queryBuilder, { toSqlQuery } from './services/database/queryBuilder';
 import { SqlParams, SqlQuery, StringOrSqlQuery } from './services/database/types';
 
 import { Mutex } from 'async-mutex';
+import { Compilable } from 'kysely';
 
 // Row values come back as SQLite primitives (string|number|null|Buffer for BLOBs)
 // but per-table column shapes vary, and callers across the codebase index without
@@ -114,11 +116,15 @@ export default class Database {
 		return output.join(',');
 	}
 
-	public async tryCall(callName: string, inputSql: StringOrSqlQuery, inputParams: SqlParams) {
+	public async tryCall(callName: string, inputSql: StringOrSqlQuery | Compilable, inputParams: SqlParams) {
 		let sql: string = null;
 		let params: SqlParams = null;
 
-		if (typeof inputSql === 'object') {
+		if (typeof inputSql === 'object' && 'compile' in inputSql) {
+			const query = toSqlQuery(inputSql);
+			params = query.params;
+			sql = query.sql;
+		} else if (typeof inputSql === 'object') {
 			params = (inputSql as SqlQuery).params;
 			sql = (inputSql as SqlQuery).sql;
 		} else {
@@ -174,7 +180,7 @@ export default class Database {
 		}
 	}
 
-	public async selectOne(sql: string, params: SqlParams = null): Promise<Row> {
+	public async selectOne(sql: string | Compilable, params: SqlParams = null): Promise<Row> {
 		return this.tryCall('selectOne', sql, params);
 	}
 
@@ -187,23 +193,23 @@ export default class Database {
 		}
 	}
 
-	public async selectAll<T = Row>(sql: string, params: SqlParams = null): Promise<T[]> {
+	public async selectAll<T = Row>(sql: string | Compilable, params: SqlParams = null): Promise<T[]> {
 		return this.tryCall('selectAll', sql, params);
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Field values are heterogeneous per query (string ids, numbers, booleans); callers across models narrow at use-site
-	public async selectAllFields(sql: string, params: SqlParams, field: string): Promise<any[]> {
+	public async selectAllFields(sql: string | Compilable, params: SqlParams, field: string): Promise<any[]> {
 		const rows = await this.tryCall('selectAll', sql, params);
 		const output = [];
 		for (let i = 0; i < rows.length; i++) {
 			const v = rows[i][field];
-			if (!v) throw new Error(`No such field: ${field}. Query was: ${sql}`);
+			if (!v) throw new Error(`No such field: ${field}. Query was: ${typeof sql === 'string' ? sql : toSqlQuery(sql).sql}`);
 			output.push(rows[i][field]);
 		}
 		return output;
 	}
 
-	public async exec(sql: StringOrSqlQuery, params: SqlParams = null) {
+	public async exec(sql: StringOrSqlQuery | Compilable, params: SqlParams = null) {
 		return this.tryCall('exec', sql, params);
 	}
 
@@ -291,56 +297,33 @@ export default class Database {
 		if (params !== null && params.length) this.logger().debug(JSON.stringify(params));
 	}
 
+	// Properties ending with an underscore are not database fields, and undefined is stored as NULL
+	private static rowValues(data: Record<string, unknown>) {
+		const output: Record<string, unknown> = {};
+		for (const key in data) {
+			if (!data.hasOwnProperty(key)) continue;
+			if (key[key.length - 1] === '_') continue;
+			output[key] = data[key] === undefined ? null : data[key];
+		}
+		return output;
+	}
+
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- data is an arbitrary entity slice (e.g. NoteEntity, FolderEntity); narrowing forces index-signature errors at call sites
 	public static insertQuery(tableName: string, data: Record<string, any>) {
 		if (!data || !Object.keys(data).length) throw new Error('Data is empty');
-
-		let keySql = '';
-		let valueSql = '';
-		const params = [];
-		for (const key in data) {
-			if (!data.hasOwnProperty(key)) continue;
-			if (key[key.length - 1] === '_') continue;
-			if (keySql !== '') keySql += ', ';
-			if (valueSql !== '') valueSql += ', ';
-			keySql += `\`${key}\``;
-			valueSql += '?';
-			params.push(data[key]);
-		}
-		return {
-			sql: `INSERT INTO \`${tableName}\` (${keySql}) VALUES (${valueSql})`,
-			params: params,
-		};
+		return toSqlQuery(queryBuilder.insertInto(tableName).values(this.rowValues(data)));
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- See insertQuery above
-	public static updateQuery(tableName: string, data: Record<string, any>, where: string | Record<string, any>) {
+	public static updateQuery(tableName: string, data: Record<string, any>, where: Record<string, any>) {
 		if (!data || !Object.keys(data).length) throw new Error('Data is empty');
 
-		let sql = '';
-		const params = [];
-		for (const key in data) {
-			if (!data.hasOwnProperty(key)) continue;
-			if (key[key.length - 1] === '_') continue;
-			if (sql !== '') sql += ', ';
-			sql += `\`${key}\`=?`;
-			params.push(data[key]);
+		let query = queryBuilder.updateTable(tableName).set(this.rowValues(data));
+		for (const n in where) {
+			if (!where.hasOwnProperty(n)) continue;
+			query = query.where(n, '=', where[n]);
 		}
-
-		if (typeof where !== 'string') {
-			const s = [];
-			for (const n in where) {
-				if (!where.hasOwnProperty(n)) continue;
-				params.push(where[n]);
-				s.push(`\`${n}\`=?`);
-			}
-			where = s.join(' AND ');
-		}
-
-		return {
-			sql: `UPDATE \`${tableName}\` SET ${sql} WHERE ${where}`,
-			params: params,
-		};
+		return toSqlQuery(query);
 	}
 
 	public alterColumnQueries(tableName: string, fields: Record<string, string>) {

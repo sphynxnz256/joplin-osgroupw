@@ -72,6 +72,7 @@ import { dirname } from '@joplin/utils/path';
 import SyncTargetJoplinServerSAML from '../SyncTargetJoplinServerSAML';
 import { MarkupLanguage } from '@joplin/renderer';
 import SearchEngine from '../services/search/SearchEngine';
+import queryBuilder, { toSqlQuery } from '../services/database/queryBuilder';
 
 // Each suite has its own separate data and temp directory so that multiple
 // suites can be run at the same time. suiteName is what is used to
@@ -341,8 +342,8 @@ async function clearDatabase(id: number = null) {
 
 	const queries = [];
 	for (const n of tableNames) {
-		queries.push(`DELETE FROM ${n}`);
-		queries.push(`DELETE FROM sqlite_sequence WHERE name="${n}"`); // Reset autoincremented IDs
+		queries.push(toSqlQuery(queryBuilder.deleteFrom(n)));
+		queries.push(toSqlQuery(queryBuilder.deleteFrom('sqlite_sequence').where('name', '=', n))); // Reset autoincremented IDs
 	}
 	await databases_[id].transactionExecBatch(queries);
 }

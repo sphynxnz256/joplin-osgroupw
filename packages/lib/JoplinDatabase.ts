@@ -5,6 +5,8 @@ import { SqlQuery } from './services/database/types';
 import addMigrationFile from './services/database/addMigrationFile';
 import sqlStringToLines from './services/database/sqlStringToLines';
 import migrations from './services/database/migrations';
+import queryBuilder, { toSqlQuery } from './services/database/queryBuilder';
+import { sql } from 'kysely';
 
 const { sprintf } = require('sprintf-js');
 
@@ -233,21 +235,25 @@ export default class JoplinDatabase extends Database {
 
 		const queries = [];
 		for (const n of tableNames) {
-			queries.push(`DELETE FROM ${n}`);
-			queries.push(`DELETE FROM sqlite_sequence WHERE name="${n}"`); // Reset autoincremented IDs
+			queries.push(toSqlQuery(queryBuilder.deleteFrom(n)));
+			queries.push(toSqlQuery(queryBuilder.deleteFrom('sqlite_sequence').where('name', '=', n))); // Reset autoincremented IDs
 		}
 
-		queries.push('DELETE FROM settings WHERE key="sync.1.context"');
-		queries.push('DELETE FROM settings WHERE key="sync.2.context"');
-		queries.push('DELETE FROM settings WHERE key="sync.3.context"');
-		queries.push('DELETE FROM settings WHERE key="sync.4.context"');
-		queries.push('DELETE FROM settings WHERE key="sync.5.context"');
-		queries.push('DELETE FROM settings WHERE key="sync.6.context"');
-		queries.push('DELETE FROM settings WHERE key="sync.7.context"');
-
-		queries.push('DELETE FROM settings WHERE key="revisionService.lastProcessedChangeId"');
-		queries.push('DELETE FROM settings WHERE key="resourceService.lastProcessedChangeId"');
-		queries.push('DELETE FROM settings WHERE key="searchEngine.lastProcessedChangeId"');
+		const settingKeys = [
+			'sync.1.context',
+			'sync.2.context',
+			'sync.3.context',
+			'sync.4.context',
+			'sync.5.context',
+			'sync.6.context',
+			'sync.7.context',
+			'revisionService.lastProcessedChangeId',
+			'resourceService.lastProcessedChangeId',
+			'searchEngine.lastProcessedChangeId',
+		];
+		for (const key of settingKeys) {
+			queries.push(toSqlQuery(queryBuilder.deleteFrom('settings').where('key', '=', key)));
+		}
 
 		await this.transactionExecBatch(queries);
 	}
@@ -329,7 +335,7 @@ export default class JoplinDatabase extends Database {
 	public async refreshTableFields(newVersion: number) {
 		this.logger().info('Initializing tables...');
 		const queries: SqlQuery[] = [];
-		queries.push(this.wrapQuery('DELETE FROM table_fields'));
+		queries.push(toSqlQuery(queryBuilder.deleteFrom('table_fields')));
 
 		const countFieldsNotesFts = await this.countFields('notes_fts');
 		const countFieldsItemsFts = await this.countFields('items_fts');
@@ -341,7 +347,7 @@ export default class JoplinDatabase extends Database {
 			name: string;
 		}
 
-		const tableRows: TableRow[] = await this.selectAll('SELECT name FROM sqlite_master WHERE type=\'table\'');
+		const tableRows: TableRow[] = await this.selectAll(queryBuilder.selectFrom('sqlite_master').select('name').where('type', '=', 'table'));
 
 		for (let i = 0; i < tableRows.length; i++) {
 			let pragmas: Row[] = [];
@@ -379,7 +385,7 @@ export default class JoplinDatabase extends Database {
 			}
 		}
 
-		queries.push({ sql: 'UPDATE version SET table_fields_version = ?', params: [newVersion] });
+		queries.push(toSqlQuery(queryBuilder.updateTable('version').set({ table_fields_version: newVersion })));
 		await this.transactionExecBatch(queries);
 	}
 
@@ -966,7 +972,7 @@ export default class JoplinDatabase extends Database {
 				queries = queries.concat(migrationQueries);
 			}
 
-			const updateVersionQuery = { sql: 'UPDATE version SET version = ?', params: [targetVersion] };
+			const updateVersionQuery = toSqlQuery(queryBuilder.updateTable('version').set({ version: targetVersion }));
 
 			queries.push(updateVersionQuery);
 
@@ -1004,7 +1010,7 @@ export default class JoplinDatabase extends Database {
 
 	public async ftsEnabled() {
 		try {
-			await this.selectOne('SELECT count(*) FROM notes_fts');
+			await this.selectOne(queryBuilder.selectFrom('notes_fts').select(sql`count(*)`.as('total')));
 		} catch (error) {
 			this.logger().warn('FTS check failed', error);
 			return false;
@@ -1017,7 +1023,7 @@ export default class JoplinDatabase extends Database {
 
 	public async fuzzySearchEnabled() {
 		try {
-			await this.selectOne('SELECT count(*) FROM notes_spellfix');
+			await this.selectOne(queryBuilder.selectFrom('notes_spellfix').select(sql`count(*)`.as('total')));
 		} catch (error) {
 			this.logger().warn('Fuzzy search check failed', error);
 			return false;
@@ -1036,7 +1042,7 @@ export default class JoplinDatabase extends Database {
 		let versionRow = null;
 		try {
 			// Will throw if the database has not been created yet, but this is handled below
-			versionRow = await this.selectOne('SELECT * FROM version LIMIT 1');
+			versionRow = await this.selectOne(queryBuilder.selectFrom('version').selectAll().limit(1));
 		} catch (error) {
 			if (error.message && error.message.indexOf('no such table: version') >= 0) {
 				// Ignore
@@ -1059,7 +1065,7 @@ export default class JoplinDatabase extends Database {
 
 		this.tableFields_ = {};
 
-		const rows = await this.selectAll('SELECT * FROM table_fields');
+		const rows = await this.selectAll(queryBuilder.selectFrom('table_fields').selectAll());
 
 		for (let i = 0; i < rows.length; i++) {
 			const row = rows[i];

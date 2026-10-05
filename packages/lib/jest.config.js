@@ -21,6 +21,13 @@ module.exports = {
 
 	testEnvironment: 'node',
 
+	transform: {
+		'node_modules[/\\\\]kysely[/\\\\].+[.]js$': `${__dirname}/jest.esmTransformer.js`,
+		// Keep Jest's default transformer for everything else (it hoists jest.mock() calls)
+		'[.]js$': 'babel-jest',
+	},
+	transformIgnorePatterns: ['node_modules[/\\\\](?!kysely[/\\\\])'],
+
 	setupFilesAfterEnv: [
 		'jest-expect-message',
 		`${__dirname}/jest.setup.js`,

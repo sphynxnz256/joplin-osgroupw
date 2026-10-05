@@ -1,5 +1,5 @@
 import JoplinDatabase from '../../JoplinDatabase';
-import paginationToSql from './paginationToSql';
+import queryBuilder, { orderByFields, rawCondition } from '../../services/database/queryBuilder';
 import { Pagination, PaginationOrder } from './types';
 
 export interface ModelFeedPage {
@@ -38,19 +38,14 @@ export default async function(db: JoplinDatabase, tableName: string, pagination:
 		};
 	}
 
-	const orderBySql = paginationToSql(pagination);
-	const fieldsSql = fields.length ? db.escapeFields(fields) : '*';
 	const offset = (pagination.page - 1) * pagination.limit;
 
-	const sql = `
-		SELECT ${fieldsSql} FROM \`${tableName}\`
-		${where.length ? `WHERE ${where.join(' AND ')}` : ''}
-		ORDER BY ${orderBySql}
-		LIMIT ${pagination.limit}
-		OFFSET ${offset}
-	`;
+	const baseQuery = queryBuilder.selectFrom(tableName);
+	let query = fields.length ? baseQuery.select(fields) : baseQuery.selectAll();
+	if (where.length) query = query.where(rawCondition(where.join(' AND '), sqlParams));
+	query = orderByFields(query, pagination.order, pagination.caseInsensitive);
 
-	const rows = await db.selectAll(sql, sqlParams);
+	const rows = await db.selectAll(query.limit(pagination.limit).offset(offset));
 
 	return {
 		items: rows,
