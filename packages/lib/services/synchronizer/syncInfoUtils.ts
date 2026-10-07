@@ -1,4 +1,5 @@
 import Logger from '@joplin/utils/Logger';
+import kysely, { compileQuery } from '../database/kysely/kysely';
 import { FileApi } from '../../file-api';
 import JoplinDatabase from '../../JoplinDatabase';
 import Setting from '../../models/Setting';
@@ -72,7 +73,7 @@ export async function migrateLocalSyncInfo(db: JoplinDatabase) {
 	// TODO: if the sync info is changed, there should be steps to migrate from
 	// v3 to v4, v4 to v5, etc.
 
-	const masterKeys: MasterKeyEntity[] = await db.selectAll('SELECT * FROM master_keys');
+	const masterKeys: MasterKeyEntity[] = await db.selectAll(compileQuery(kysely.selectFrom('master_keys').selectAll()));
 
 	const masterKeyMap: Record<string, MasterKeyEntity> = {};
 	for (const mk of masterKeys) masterKeyMap[mk.id] = mk;

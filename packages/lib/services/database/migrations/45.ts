@@ -1,74 +1,40 @@
-import sqlStringToLines from '../sqlStringToLines';
+import { compileRawQuery } from '../kysely/kysely';
+import { createFtsTableQuery, createFtsTriggerQueries } from '../kysely/rawFragments';
+import { addColumnQuery, autoIncrementKey, createIndexQuery, createTableQuery, emptyText, intDefaultingTo, optionalInt, requiredInt, requiredText } from '../kysely/schema';
 import { SqlQuery } from '../types';
 
-export default (): (SqlQuery|string)[] => {
-	const queries: (SqlQuery|string)[] = [];
+export default (): SqlQuery[] => {
+	const queries: SqlQuery[] = [];
 
-	queries.push('ALTER TABLE `resources` ADD COLUMN `ocr_text` TEXT NOT NULL DEFAULT ""');
-	queries.push('ALTER TABLE `resources` ADD COLUMN `ocr_details` TEXT NOT NULL DEFAULT ""');
-	queries.push('ALTER TABLE `resources` ADD COLUMN `ocr_status` INT NOT NULL DEFAULT 0');
-	queries.push('ALTER TABLE `resources` ADD COLUMN `ocr_error` TEXT NOT NULL DEFAULT ""');
+	queries.push(addColumnQuery('resources', 'ocr_text', emptyText));
+	queries.push(addColumnQuery('resources', 'ocr_details', emptyText));
+	queries.push(addColumnQuery('resources', 'ocr_status', intDefaultingTo(0)));
+	queries.push(addColumnQuery('resources', 'ocr_error', emptyText));
 
-	const itemsNormalized = `
-		CREATE TABLE items_normalized (
-			id INTEGER PRIMARY KEY AUTOINCREMENT, 
-			title TEXT NOT NULL DEFAULT "",
-			body TEXT NOT NULL DEFAULT "",
-			item_id TEXT NOT NULL,
-			item_type INT NOT NULL,
-			user_updated_time INT NOT NULL DEFAULT 0,
-			reserved1 INT NULL,
-			reserved2 INT NULL,
-			reserved3 INT NULL,
-			reserved4 INT NULL,
-			reserved5 INT NULL,
-			reserved6 INT NULL
-		);
-	`;
+	queries.push(createTableQuery('items_normalized', {
+		id: autoIncrementKey,
+		title: emptyText,
+		body: emptyText,
+		item_id: requiredText,
+		item_type: requiredInt,
+		user_updated_time: intDefaultingTo(0),
+		reserved1: optionalInt,
+		reserved2: optionalInt,
+		reserved3: optionalInt,
+		reserved4: optionalInt,
+		reserved5: optionalInt,
+		reserved6: optionalInt,
+	}));
 
-	queries.push(sqlStringToLines(itemsNormalized)[0]);
+	queries.push(createIndexQuery('items_normalized_id', 'items_normalized', ['id']));
+	queries.push(createIndexQuery('items_normalized_item_id', 'items_normalized', ['item_id']));
+	queries.push(createIndexQuery('items_normalized_item_type', 'items_normalized', ['item_type']));
 
-	queries.push('CREATE INDEX items_normalized_id ON items_normalized (id)');
-	queries.push('CREATE INDEX items_normalized_item_id ON items_normalized (item_id)');
-	queries.push('CREATE INDEX items_normalized_item_type ON items_normalized (item_type)');
+	const columns = ['id', 'title', 'body', 'item_id', 'item_type', 'user_updated_time', 'reserved1', 'reserved2', 'reserved3', 'reserved4', 'reserved5', 'reserved6'];
+	const notIndexed = columns.filter(c => c !== 'title' && c !== 'body');
 
-	const tableFields = 'id, title, body, item_id, item_type, user_updated_time, reserved1, reserved2, reserved3, reserved4, reserved5, reserved6';
-
-	const newVirtualTableSql = `
-		CREATE VIRTUAL TABLE items_fts USING fts4(
-			content="items_normalized",
-			notindexed="id",
-			notindexed="item_id",
-			notindexed="item_type",
-			notindexed="user_updated_time",
-			notindexed="reserved1",
-			notindexed="reserved2",
-			notindexed="reserved3",
-			notindexed="reserved4",
-			notindexed="reserved5",
-			notindexed="reserved6",
-			${tableFields}
-		);`
-	;
-
-	queries.push(sqlStringToLines(newVirtualTableSql)[0]);
-
-	queries.push(`
-		CREATE TRIGGER items_fts_before_update BEFORE UPDATE ON items_normalized BEGIN
-			DELETE FROM items_fts WHERE docid=old.rowid;
-		END;`);
-	queries.push(`
-		CREATE TRIGGER items_fts_before_delete BEFORE DELETE ON items_normalized BEGIN
-			DELETE FROM items_fts WHERE docid=old.rowid;
-		END;`);
-	queries.push(`
-		CREATE TRIGGER items_after_update AFTER UPDATE ON items_normalized BEGIN
-			INSERT INTO items_fts(docid, ${tableFields}) SELECT rowid, ${tableFields} FROM items_normalized WHERE new.rowid = items_normalized.rowid;
-		END;`);
-	queries.push(`
-		CREATE TRIGGER items_after_insert AFTER INSERT ON items_normalized BEGIN
-			INSERT INTO items_fts(docid, ${tableFields}) SELECT rowid, ${tableFields} FROM items_normalized WHERE new.rowid = items_normalized.rowid;
-		END;`);
+	queries.push(compileRawQuery(createFtsTableQuery('items_fts', 'items_normalized', notIndexed, columns)));
+	queries.push(...createFtsTriggerQueries({ prefix: 'items', ftsTable: 'items_fts', sourceTable: 'items_normalized', columns }).map(compileRawQuery));
 
 	return queries;
 };

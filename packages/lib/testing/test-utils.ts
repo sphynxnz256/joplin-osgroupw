@@ -1,5 +1,6 @@
 /* eslint-disable require-atomic-updates */
 import BaseApplication from '../BaseApplication';
+import Database from '../database';
 import BaseModel from '../BaseModel';
 import Logger, { TargetType, LoggerWrapper, LogLevel } from '@joplin/utils/Logger';
 import Setting, { AppType, Env } from '../models/Setting';
@@ -339,12 +340,7 @@ async function clearDatabase(id: number = null) {
 		'tags',
 	];
 
-	const queries = [];
-	for (const n of tableNames) {
-		queries.push(`DELETE FROM ${n}`);
-		queries.push(`DELETE FROM sqlite_sequence WHERE name="${n}"`); // Reset autoincremented IDs
-	}
-	await databases_[id].transactionExecBatch(queries);
+	await databases_[id].transactionExecBatch(Database.clearTablesQueries(tableNames));
 }
 
 async function setupDatabase(id: number = null, options: { keychainEnabled?: boolean } = null) {

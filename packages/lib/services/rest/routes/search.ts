@@ -1,4 +1,5 @@
 import BaseModel, { ModelType } from '../../../BaseModel';
+import type { Condition } from '../../database/kysely/kysely';
 import { Request } from '../Api';
 import defaultLoadOptions from '../utils/defaultLoadOptions';
 import { ErrorBadRequest, ErrorMethodNotAllowed } from '../utils/errors';
@@ -20,9 +21,9 @@ export default async function(request: Request) {
 
 	if (modelType !== BaseItem.TYPE_NOTE) {
 		const ModelClass = BaseItem.getClassByItemType(modelType);
-		const options: { fields?: string[]; where: string; whereParams: string[]; caseInsensitive: boolean } = {
-			where: 'title LIKE ?',
-			whereParams: [query.replace(/\*/g, '%')],
+		const titlePattern = query.replace(/\*/g, '%');
+		const options: { fields?: string[]; where: Condition; caseInsensitive: boolean } = {
+			where: eb => eb('title', 'like', titlePattern),
 			caseInsensitive: true,
 		};
 		const fields = requestFields(request, modelType);

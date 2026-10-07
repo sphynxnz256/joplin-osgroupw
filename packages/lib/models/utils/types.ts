@@ -1,4 +1,5 @@
 import { SqlQuery } from '../../services/database/types';
+import type { Condition } from '../../services/database/kysely/kysely';
 import type { DecryptedNoteLockKey } from '../../services/noteLock/NoteLockKey';
 
 export enum PaginationOrderDir {
@@ -22,7 +23,7 @@ export interface Pagination {
 export interface LoadOptions {
 	caseInsensitive?: boolean;
 	fields?: string | string[];
-	where?: string;
+	where?: string | Condition;
 	whereParams?: (string | number | boolean)[];
 	order?: {
 		by: string;

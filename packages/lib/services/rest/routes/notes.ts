@@ -1,4 +1,5 @@
 import Setting from '../../../models/Setting';
+import type { Condition } from '../../database/kysely/kysely';
 import shim from '../../../shim';
 import uuid from '../../../uuid';
 import readonlyProperties from '../utils/readonlyProperties';
@@ -482,10 +483,11 @@ export default async function(request: Request, id: string = null, link: string 
 			throw new ErrorNotFound();
 		}
 
-		const sql: string[] = [];
-		if (request.query.include_deleted !== '1') sql.push('deleted_time = 0');
-		if (request.query.include_conflicts !== '1') sql.push('is_conflict = 0');
-		return defaultAction(BaseModel.TYPE_NOTE, request, id, link, null, { sql: sql.join(' AND ') });
+		const conditions: Condition[] = [];
+		if (request.query.include_deleted !== '1') conditions.push(eb => eb('deleted_time', '=', 0));
+		if (request.query.include_conflicts !== '1') conditions.push(eb => eb('is_conflict', '=', 0));
+		const whereQuery: Condition = eb => eb.and(conditions.map(condition => condition(eb)));
+		return defaultAction(BaseModel.TYPE_NOTE, request, id, link, null, conditions.length ? whereQuery : null);
 	}
 
 	if (request.method === RequestMethod.POST) {

@@ -1,3 +1,4 @@
+import { autoIncrementKey, createTableQuery, dropTableQuery, emptyText, intDefaultingTo, uniqueRequiredText } from '../kysely/schema';
 import { SqlQuery } from '../types';
 
 // Recreate conflict_note_states with a numeric auto-increment primary key, to
@@ -6,17 +7,17 @@ import { SqlQuery } from '../types';
 // shipped in a release yet, so it is safe to drop and recreate it rather than
 // migrate the rows
 
-export default (): (SqlQuery|string)[] => {
+export default (): SqlQuery[] => {
 	return [
-		'DROP TABLE IF EXISTS conflict_note_states',
-		`CREATE TABLE conflict_note_states (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			note_id TEXT NOT NULL UNIQUE,
-			base_body TEXT NOT NULL DEFAULT "",
-			base_title TEXT NOT NULL DEFAULT "",
-			remote_body TEXT NOT NULL DEFAULT "",
-			remote_title TEXT NOT NULL DEFAULT "",
-			remote_updated_time INT NOT NULL DEFAULT 0
-		)`,
+		dropTableQuery('conflict_note_states', true),
+		createTableQuery('conflict_note_states', {
+			id: autoIncrementKey,
+			note_id: uniqueRequiredText,
+			base_body: emptyText,
+			base_title: emptyText,
+			remote_body: emptyText,
+			remote_title: emptyText,
+			remote_updated_time: intDefaultingTo(0),
+		}),
 	];
 };

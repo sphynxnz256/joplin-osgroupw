@@ -1,0 +1,482 @@
+{
+	"history": {
+		"1": {
+			"deleted_items": "{\"type\":\"table\",\"table\":\"deleted_items\",\"sql\":\"create table deleted_items(id integer primary key,item_type int not null,item_id text not null,deleted_time int not null)\",\"columns\":[\"id|integer|0|null|1\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"deleted_time|int|1|null|0\"]}",
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\"]}",
+			"folders_title": "{\"type\":\"index\",\"table\":\"folders\",\"sql\":\"create index folders_title on folders(title)\",\"columns\":[]}",
+			"folders_updated_time": "{\"type\":\"index\",\"table\":\"folders\",\"sql\":\"create index folders_updated_time on folders(updated_time)\",\"columns\":[]}",
+			"note_tags": "{\"type\":\"table\",\"table\":\"note_tags\",\"sql\":\"create table note_tags(id text primary key,note_id text not null,tag_id text not null,created_time int not null,updated_time int not null)\",\"columns\":[\"id|text|0|null|1\",\"note_id|text|1|null|0\",\"tag_id|text|1|null|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\"]}",
+			"note_tags_note_id": "{\"type\":\"index\",\"table\":\"note_tags\",\"sql\":\"create index note_tags_note_id on note_tags(note_id)\",\"columns\":[]}",
+			"note_tags_tag_id": "{\"type\":\"index\",\"table\":\"note_tags\",\"sql\":\"create index note_tags_tag_id on note_tags(tag_id)\",\"columns\":[]}",
+			"note_tags_updated_time": "{\"type\":\"index\",\"table\":\"note_tags\",\"sql\":\"create index note_tags_updated_time on note_tags(updated_time)\",\"columns\":[]}",
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|int|1|0|0\"]}",
+			"notes_is_conflict": "{\"type\":\"index\",\"table\":\"notes\",\"sql\":\"create index notes_is_conflict on notes(is_conflict)\",\"columns\":[]}",
+			"notes_is_todo": "{\"type\":\"index\",\"table\":\"notes\",\"sql\":\"create index notes_is_todo on notes(is_todo)\",\"columns\":[]}",
+			"notes_order": "{\"type\":\"index\",\"table\":\"notes\",\"sql\":\"create index notes_order on notes(order)\",\"columns\":[]}",
+			"notes_title": "{\"type\":\"index\",\"table\":\"notes\",\"sql\":\"create index notes_title on notes(title)\",\"columns\":[]}",
+			"notes_updated_time": "{\"type\":\"index\",\"table\":\"notes\",\"sql\":\"create index notes_updated_time on notes(updated_time)\",\"columns\":[]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\"]}",
+			"resources_title": "{\"type\":\"index\",\"table\":\"resources\",\"sql\":\"create index resources_title on resources(title)\",\"columns\":[]}",
+			"resources_updated_time": "{\"type\":\"index\",\"table\":\"resources\",\"sql\":\"create index resources_updated_time on resources(updated_time)\",\"columns\":[]}",
+			"settings": "{\"type\":\"table\",\"table\":\"settings\",\"sql\":\"create table settings(key text primary key,value text,type int not null)\",\"columns\":[\"key|text|0|null|1\",\"value|text|0|null|0\",\"type|int|1|null|0\"]}",
+			"sync_items": "{\"type\":\"table\",\"table\":\"sync_items\",\"sql\":\"create table sync_items(id integer primary key,sync_target int not null,sync_time int not null default 0,item_type int not null,item_id text not null)\",\"columns\":[\"id|integer|0|null|1\",\"sync_target|int|1|null|0\",\"sync_time|int|1|0|0\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\"]}",
+			"sync_items_item_id": "{\"type\":\"index\",\"table\":\"sync_items\",\"sql\":\"create index sync_items_item_id on sync_items(item_id)\",\"columns\":[]}",
+			"sync_items_item_type": "{\"type\":\"index\",\"table\":\"sync_items\",\"sql\":\"create index sync_items_item_type on sync_items(item_type)\",\"columns\":[]}",
+			"sync_items_sync_target": "{\"type\":\"index\",\"table\":\"sync_items\",\"sql\":\"create index sync_items_sync_target on sync_items(sync_target)\",\"columns\":[]}",
+			"sync_items_sync_time": "{\"type\":\"index\",\"table\":\"sync_items\",\"sql\":\"create index sync_items_sync_time on sync_items(sync_time)\",\"columns\":[]}",
+			"table_fields": "{\"type\":\"table\",\"table\":\"table_fields\",\"sql\":\"create table table_fields(id integer primary key,table_name text not null,field_name text not null,field_type int not null,field_default text)\",\"columns\":[\"id|integer|0|null|1\",\"table_name|text|1|null|0\",\"field_name|text|1|null|0\",\"field_type|int|1|null|0\",\"field_default|text|0|null|0\"]}",
+			"tags": "{\"type\":\"table\",\"table\":\"tags\",\"sql\":\"create table tags(id text primary key,title text not null default,created_time int not null,updated_time int not null)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\"]}",
+			"tags_title": "{\"type\":\"index\",\"table\":\"tags\",\"sql\":\"create index tags_title on tags(title)\",\"columns\":[]}",
+			"tags_updated_time": "{\"type\":\"index\",\"table\":\"tags\",\"sql\":\"create index tags_updated_time on tags(updated_time)\",\"columns\":[]}",
+			"version": "{\"type\":\"table\",\"table\":\"version\",\"sql\":\"create table version(version int not null)\",\"columns\":[\"version|int|1|null|0\"]}"
+		},
+		"2": {
+			"deleted_items": "{\"type\":\"table\",\"table\":\"deleted_items\",\"sql\":\"create table deleted_items(id integer primary key,item_type int not null,item_id text not null,deleted_time int not null,sync_target int not null)\",\"columns\":[\"id|integer|0|null|1\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"deleted_time|int|1|null|0\",\"sync_target|int|1|null|0\"]}",
+			"deleted_items_sync_target": "{\"type\":\"index\",\"table\":\"deleted_items\",\"sql\":\"create index deleted_items_sync_target on deleted_items(sync_target)\",\"columns\":[]}"
+		},
+		"3": {
+			"settings": "{\"type\":\"table\",\"table\":\"settings\",\"sql\":\"create table settings(key text primary key,value text)\",\"columns\":[\"key|text|0|null|1\",\"value|text|0|null|0\"]}"
+		},
+		"4": {},
+		"5": {
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\"]}",
+			"folders_user_updated_time": "{\"type\":\"index\",\"table\":\"folders\",\"sql\":\"create index folders_user_updated_time on folders(user_updated_time)\",\"columns\":[]}",
+			"note_tags": "{\"type\":\"table\",\"table\":\"note_tags\",\"sql\":\"create table note_tags(id text primary key,note_id text not null,tag_id text not null,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"note_id|text|1|null|0\",\"tag_id|text|1|null|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\"]}",
+			"note_tags_user_updated_time": "{\"type\":\"index\",\"table\":\"note_tags\",\"sql\":\"create index note_tags_user_updated_time on note_tags(user_updated_time)\",\"columns\":[]}",
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order int not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|int|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\"]}",
+			"notes_user_updated_time": "{\"type\":\"index\",\"table\":\"notes\",\"sql\":\"create index notes_user_updated_time on notes(user_updated_time)\",\"columns\":[]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\"]}",
+			"resources_user_updated_time": "{\"type\":\"index\",\"table\":\"resources\",\"sql\":\"create index resources_user_updated_time on resources(user_updated_time)\",\"columns\":[]}",
+			"tags": "{\"type\":\"table\",\"table\":\"tags\",\"sql\":\"create table tags(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\"]}",
+			"tags_user_updated_time": "{\"type\":\"index\",\"table\":\"tags\",\"sql\":\"create index tags_user_updated_time on tags(user_updated_time)\",\"columns\":[]}"
+		},
+		"6": {
+			"alarm_note_id": "{\"type\":\"index\",\"table\":\"alarms\",\"sql\":\"create index alarm_note_id on alarms(note_id)\",\"columns\":[]}",
+			"alarms": "{\"type\":\"table\",\"table\":\"alarms\",\"sql\":\"create table alarms(id integer primary key autoincrement,note_id text not null,trigger_time int not null)\",\"columns\":[\"id|integer|0|null|1\",\"note_id|text|1|null|0\",\"trigger_time|int|1|null|0\"]}"
+		},
+		"7": {
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\"]}"
+		},
+		"8": {
+			"sync_items": "{\"type\":\"table\",\"table\":\"sync_items\",\"sql\":\"create table sync_items(id integer primary key,sync_target int not null,sync_time int not null default 0,item_type int not null,item_id text not null,sync_disabled int not null default 0,sync_disabled_reason text not null default)\",\"columns\":[\"id|integer|0|null|1\",\"sync_target|int|1|null|0\",\"sync_time|int|1|0|0\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"sync_disabled|int|1|\\\"0\\\"|0\",\"sync_disabled_reason|text|1|\\\"\\\"|0\"]}"
+		},
+		"9": {
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\"]}",
+			"folders_encryption_applied": "{\"type\":\"index\",\"table\":\"folders\",\"sql\":\"create index folders_encryption_applied on folders(encryption_applied)\",\"columns\":[]}",
+			"master_keys": "{\"type\":\"table\",\"table\":\"master_keys\",\"sql\":\"create table master_keys(id text primary key,created_time int not null,updated_time int not null,source_application text not null,encryption_method int not null,checksum text not null,content text not null)\",\"columns\":[\"id|text|0|null|1\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"source_application|text|1|null|0\",\"encryption_method|int|1|null|0\",\"checksum|text|1|null|0\",\"content|text|1|null|0\"]}",
+			"note_tags": "{\"type\":\"table\",\"table\":\"note_tags\",\"sql\":\"create table note_tags(id text primary key,note_id text not null,tag_id text not null,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"note_id|text|1|null|0\",\"tag_id|text|1|null|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\"]}",
+			"note_tags_encryption_applied": "{\"type\":\"index\",\"table\":\"note_tags\",\"sql\":\"create index note_tags_encryption_applied on note_tags(encryption_applied)\",\"columns\":[]}",
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order int not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|int|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\"]}",
+			"notes_encryption_applied": "{\"type\":\"index\",\"table\":\"notes\",\"sql\":\"create index notes_encryption_applied on notes(encryption_applied)\",\"columns\":[]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\"]}",
+			"resources_encryption_applied": "{\"type\":\"index\",\"table\":\"resources\",\"sql\":\"create index resources_encryption_applied on resources(encryption_applied)\",\"columns\":[]}",
+			"sync_items": "{\"type\":\"table\",\"table\":\"sync_items\",\"sql\":\"create table sync_items(id integer primary key,sync_target int not null,sync_time int not null default 0,item_type int not null,item_id text not null,sync_disabled int not null default 0,sync_disabled_reason text not null default,force_sync int not null default 0)\",\"columns\":[\"id|integer|0|null|1\",\"sync_target|int|1|null|0\",\"sync_time|int|1|0|0\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"sync_disabled|int|1|\\\"0\\\"|0\",\"sync_disabled_reason|text|1|\\\"\\\"|0\",\"force_sync|int|1|0|0\"]}",
+			"tags": "{\"type\":\"table\",\"table\":\"tags\",\"sql\":\"create table tags(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\"]}",
+			"tags_encryption_applied": "{\"type\":\"index\",\"table\":\"tags\",\"sql\":\"create index tags_encryption_applied on tags(encryption_applied)\",\"columns\":[]}"
+		},
+		"10": {
+			"item_changes": "{\"type\":\"table\",\"table\":\"item_changes\",\"sql\":\"create table item_changes(id integer primary key autoincrement,item_type int not null,item_id text not null,type int not null,created_time int not null)\",\"columns\":[\"id|integer|0|null|1\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"type|int|1|null|0\",\"created_time|int|1|null|0\"]}",
+			"item_changes_created_time": "{\"type\":\"index\",\"table\":\"item_changes\",\"sql\":\"create index item_changes_created_time on item_changes(created_time)\",\"columns\":[]}",
+			"item_changes_item_id": "{\"type\":\"index\",\"table\":\"item_changes\",\"sql\":\"create index item_changes_item_id on item_changes(item_id)\",\"columns\":[]}",
+			"item_changes_item_type": "{\"type\":\"index\",\"table\":\"item_changes\",\"sql\":\"create index item_changes_item_type on item_changes(item_type)\",\"columns\":[]}",
+			"note_resources": "{\"type\":\"table\",\"table\":\"note_resources\",\"sql\":\"create table note_resources(id integer primary key,note_id text not null,resource_id text not null,is_associated int not null,last_seen_time int not null)\",\"columns\":[\"id|integer|0|null|1\",\"note_id|text|1|null|0\",\"resource_id|text|1|null|0\",\"is_associated|int|1|null|0\",\"last_seen_time|int|1|null|0\"]}",
+			"note_resources_note_id": "{\"type\":\"index\",\"table\":\"note_resources\",\"sql\":\"create index note_resources_note_id on note_resources(note_id)\",\"columns\":[]}",
+			"note_resources_resource_id": "{\"type\":\"index\",\"table\":\"note_resources\",\"sql\":\"create index note_resources_resource_id on note_resources(resource_id)\",\"columns\":[]}"
+		},
+		"11": {},
+		"12": {
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,parent_id text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\"]}"
+		},
+		"13": {
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,fetch_status int not null default 2,fetch_error text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"fetch_status|int|1|\\\"2\\\"|0\",\"fetch_error|text|1|\\\"\\\"|0\"]}"
+		},
+		"14": {
+			"resource_local_states": "{\"type\":\"table\",\"table\":\"resource_local_states\",\"sql\":\"create table resource_local_states(id integer primary key,resource_id text not null,fetch_status int not null default 2,fetch_error text not null default)\",\"columns\":[\"id|integer|0|null|1\",\"resource_id|text|1|null|0\",\"fetch_status|int|1|\\\"2\\\"|0\",\"fetch_error|text|1|\\\"\\\"|0\"]}",
+			"resource_local_states_resource_fetch_status": "{\"type\":\"index\",\"table\":\"resource_local_states\",\"sql\":\"create index resource_local_states_resource_fetch_status on resource_local_states(fetch_status)\",\"columns\":[]}",
+			"resource_local_states_resource_id": "{\"type\":\"index\",\"table\":\"resource_local_states\",\"sql\":\"create index resource_local_states_resource_id on resource_local_states(resource_id)\",\"columns\":[]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\"]}",
+			"resources_encryption_applied": null,
+			"resources_title": null,
+			"resources_updated_time": null,
+			"resources_user_updated_time": null
+		},
+		"15": {
+			"notes_after_insert": "{\"type\":\"trigger\",\"table\":\"notes\",\"sql\":\"create trigger notes_after_insert after insert on notes begin insert into notes_fts(docid,id,title,body)select rowid,id,title,body from notes where is_conflict=0 and encryption_applied=0 and new.rowid=notes.rowid; end\",\"columns\":[]}",
+			"notes_after_update": "{\"type\":\"trigger\",\"table\":\"notes\",\"sql\":\"create trigger notes_after_update after update on notes begin insert into notes_fts(docid,id,title,body)select rowid,id,title,body from notes where is_conflict=0 and encryption_applied=0 and new.rowid=notes.rowid; end\",\"columns\":[]}",
+			"notes_fts": "{\"type\":\"table\",\"table\":\"notes_fts\",\"sql\":\"create virtual table notes_fts using fts4(content=notes,notindexed=id,id,title,body)\",\"columns\":[\"id||0|null|0\",\"title||0|null|0\",\"body||0|null|0\"]}",
+			"notes_fts_before_delete": "{\"type\":\"trigger\",\"table\":\"notes\",\"sql\":\"create trigger notes_fts_before_delete before delete on notes begin delete from notes_fts where docid=old.rowid; end\",\"columns\":[]}",
+			"notes_fts_before_update": "{\"type\":\"trigger\",\"table\":\"notes\",\"sql\":\"create trigger notes_fts_before_update before update on notes begin delete from notes_fts where docid=old.rowid; end\",\"columns\":[]}"
+		},
+		"16": {},
+		"17": {},
+		"18": {
+			"notes_after_insert": "{\"type\":\"trigger\",\"table\":\"notes_normalized\",\"sql\":\"create trigger notes_after_insert after insert on notes_normalized begin insert into notes_fts(docid,id,title,body)select rowid,id,title,body from notes_normalized where new.rowid=notes_normalized.rowid; end\",\"columns\":[]}",
+			"notes_after_update": "{\"type\":\"trigger\",\"table\":\"notes_normalized\",\"sql\":\"create trigger notes_after_update after update on notes_normalized begin insert into notes_fts(docid,id,title,body)select rowid,id,title,body from notes_normalized where new.rowid=notes_normalized.rowid; end\",\"columns\":[]}",
+			"notes_fts": "{\"type\":\"table\",\"table\":\"notes_fts\",\"sql\":\"create virtual table notes_fts using fts4(content=notes_normalized,notindexed=id,id,title,body)\",\"columns\":[\"id||0|null|0\",\"title||0|null|0\",\"body||0|null|0\"]}",
+			"notes_fts_before_delete": "{\"type\":\"trigger\",\"table\":\"notes_normalized\",\"sql\":\"create trigger notes_fts_before_delete before delete on notes_normalized begin delete from notes_fts where docid=old.rowid; end\",\"columns\":[]}",
+			"notes_fts_before_update": "{\"type\":\"trigger\",\"table\":\"notes_normalized\",\"sql\":\"create trigger notes_fts_before_update before update on notes_normalized begin delete from notes_fts where docid=old.rowid; end\",\"columns\":[]}",
+			"notes_normalized": "{\"type\":\"table\",\"table\":\"notes_normalized\",\"sql\":\"create table notes_normalized(id text not null,title text not null default,body text not null default)\",\"columns\":[\"id|text|1|null|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\"]}",
+			"notes_normalized_id": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_id on notes_normalized(id)\",\"columns\":[]}"
+		},
+		"19": {
+			"item_changes": "{\"type\":\"table\",\"table\":\"item_changes\",\"sql\":\"create table item_changes(id integer primary key autoincrement,item_type int not null,item_id text not null,type int not null,created_time int not null,source int not null default 1,before_change_item text not null default)\",\"columns\":[\"id|integer|0|null|1\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"type|int|1|null|0\",\"created_time|int|1|null|0\",\"source|int|1|1|0\",\"before_change_item|text|1|\\\"\\\"|0\"]}",
+			"revisions": "{\"type\":\"table\",\"table\":\"revisions\",\"sql\":\"create table revisions(id text primary key,parent_id text not null default,item_type int not null,item_id text not null,item_updated_time int not null,title_diff text not null default,body_diff text not null default,metadata_diff text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,updated_time int not null,created_time int not null)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"item_updated_time|int|1|null|0\",\"title_diff|text|1|\\\"\\\"|0\",\"body_diff|text|1|\\\"\\\"|0\",\"metadata_diff|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"updated_time|int|1|null|0\",\"created_time|int|1|null|0\"]}",
+			"revisions_item_id": "{\"type\":\"index\",\"table\":\"revisions\",\"sql\":\"create index revisions_item_id on revisions(item_id)\",\"columns\":[]}",
+			"revisions_item_type": "{\"type\":\"index\",\"table\":\"revisions\",\"sql\":\"create index revisions_item_type on revisions(item_type)\",\"columns\":[]}",
+			"revisions_item_updated_time": "{\"type\":\"index\",\"table\":\"revisions\",\"sql\":\"create index revisions_item_updated_time on revisions(item_updated_time)\",\"columns\":[]}",
+			"revisions_parent_id": "{\"type\":\"index\",\"table\":\"revisions\",\"sql\":\"create index revisions_parent_id on revisions(parent_id)\",\"columns\":[]}",
+			"revisions_updated_time": "{\"type\":\"index\",\"table\":\"revisions\",\"sql\":\"create index revisions_updated_time on revisions(updated_time)\",\"columns\":[]}"
+		},
+		"20": {
+			"migrations": "{\"type\":\"table\",\"table\":\"migrations\",\"sql\":\"create table migrations(id integer primary key,number integer not null,updated_time int not null,created_time int not null)\",\"columns\":[\"id|integer|0|null|1\",\"number|integer|1|null|0\",\"updated_time|int|1|null|0\",\"created_time|int|1|null|0\"]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,size int not null default -1)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"size|int|1|-1|0\"]}"
+		},
+		"21": {
+			"sync_items": "{\"type\":\"table\",\"table\":\"sync_items\",\"sql\":\"create table sync_items(id integer primary key,sync_target int not null,sync_time int not null default 0,item_type int not null,item_id text not null,sync_disabled int not null default 0,sync_disabled_reason text not null default,force_sync int not null default 0,item_location int not null default 1)\",\"columns\":[\"id|integer|0|null|1\",\"sync_target|int|1|null|0\",\"sync_time|int|1|0|0\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"sync_disabled|int|1|\\\"0\\\"|0\",\"sync_disabled_reason|text|1|\\\"\\\"|0\",\"force_sync|int|1|0|0\",\"item_location|int|1|1|0\"]}"
+		},
+		"22": {
+			"resources_to_download": "{\"type\":\"table\",\"table\":\"resources_to_download\",\"sql\":\"create table resources_to_download(id integer primary key,resource_id text not null,updated_time int not null,created_time int not null)\",\"columns\":[\"id|integer|0|null|1\",\"resource_id|text|1|null|0\",\"updated_time|int|1|null|0\",\"created_time|int|1|null|0\"]}",
+			"resources_to_download_resource_id": "{\"type\":\"index\",\"table\":\"resources_to_download\",\"sql\":\"create index resources_to_download_resource_id on resources_to_download(resource_id)\",\"columns\":[]}",
+			"resources_to_download_updated_time": "{\"type\":\"index\",\"table\":\"resources_to_download\",\"sql\":\"create index resources_to_download_updated_time on resources_to_download(updated_time)\",\"columns\":[]}"
+		},
+		"23": {
+			"key_values": "{\"type\":\"table\",\"table\":\"key_values\",\"sql\":\"create table key_values(id integer primary key,key text not null,value text not null,type int not null,updated_time int not null)\",\"columns\":[\"id|integer|0|null|1\",\"key|text|1|null|0\",\"value|text|1|null|0\",\"type|int|1|null|0\",\"updated_time|int|1|null|0\"]}",
+			"key_values_key": "{\"type\":\"index\",\"table\":\"key_values\",\"sql\":\"create unique index key_values_key on key_values(key)\",\"columns\":[]}"
+		},
+		"24": {
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order int not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,markup_language int not null default 1)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|int|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"markup_language|int|1|1|0\"]}"
+		},
+		"25": {
+			"tags_with_note_count": "{\"type\":\"view\",\"table\":\"tags_with_note_count\",\"sql\":\"create view tags_with_note_count select tags.id id,tags.title title,tags.created_time created_time,tags.updated_time updated_time,count(notes.id)note_count from tags left join note_tags nt on nt.tag_id=tags.id left join notes on notes.id=nt.note_id where notes.id is not null group by tags.id\",\"columns\":[\"id|text|0|null|0\",\"title|text|0|null|0\",\"created_time|int|0|null|0\",\"updated_time|int|0|null|0\",\"note_count||0|null|0\"]}"
+		},
+		"26": {
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,parent_id text not null default,is_shared int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\",\"is_shared|int|1|0|0\"]}",
+			"note_tags": "{\"type\":\"table\",\"table\":\"note_tags\",\"sql\":\"create table note_tags(id text primary key,note_id text not null,tag_id text not null,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,is_shared int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"note_id|text|1|null|0\",\"tag_id|text|1|null|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"is_shared|int|1|0|0\"]}",
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order int not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,markup_language int not null default 1,is_shared int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|int|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"markup_language|int|1|1|0\",\"is_shared|int|1|0|0\"]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,size int not null default -1,is_shared int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"size|int|1|-1|0\",\"is_shared|int|1|0|0\"]}",
+			"tags": "{\"type\":\"table\",\"table\":\"tags\",\"sql\":\"create table tags(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,is_shared int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"is_shared|int|1|0|0\"]}"
+		},
+		"27": {},
+		"28": {
+			"resources_size": "{\"type\":\"index\",\"table\":\"resources\",\"sql\":\"create index resources_size on resources(size)\",\"columns\":[]}"
+		},
+		"29": {
+			"version": "{\"type\":\"table\",\"table\":\"version\",\"sql\":\"create table version(version int not null,table_fields_version int not null default 0)\",\"columns\":[\"version|int|1|null|0\",\"table_fields_version|int|1|0|0\"]}"
+		},
+		"30": {
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order numeric not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,markup_language int not null default 1,is_shared int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|numeric|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"markup_language|int|1|1|0\",\"is_shared|int|1|0|0\"]}",
+			"notes_encryption_applied": null,
+			"notes_is_conflict": null,
+			"notes_is_todo": null,
+			"notes_order": null,
+			"notes_title": null,
+			"notes_updated_time": null,
+			"notes_user_updated_time": null
+		},
+		"31": {
+			"tags": "{\"type\":\"table\",\"table\":\"tags\",\"sql\":\"create table tags(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,is_shared int not null default 0,parent_id text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"is_shared|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\"]}"
+		},
+		"32": {},
+		"33": {
+			"notes_after_insert": "{\"type\":\"trigger\",\"table\":\"notes_normalized\",\"sql\":\"create trigger notes_after_insert after insert on notes_normalized begin insert into notes_fts(docid,id,title,body,user_created_time,user_updated_time,is_todo,todo_completed,parent_id,latitude,longitude,altitude,source_url)select rowid,id,title,body,user_created_time,user_updated_time,is_todo,todo_completed,parent_id,latitude,longitude,altitude,source_url from notes_normalized where new.rowid=notes_normalized.rowid; end\",\"columns\":[]}",
+			"notes_after_update": "{\"type\":\"trigger\",\"table\":\"notes_normalized\",\"sql\":\"create trigger notes_after_update after update on notes_normalized begin insert into notes_fts(docid,id,title,body,user_created_time,user_updated_time,is_todo,todo_completed,parent_id,latitude,longitude,altitude,source_url)select rowid,id,title,body,user_created_time,user_updated_time,is_todo,todo_completed,parent_id,latitude,longitude,altitude,source_url from notes_normalized where new.rowid=notes_normalized.rowid; end\",\"columns\":[]}",
+			"notes_fts": "{\"type\":\"table\",\"table\":\"notes_fts\",\"sql\":\"create virtual table notes_fts using fts4(content=notes_normalized,notindexed=id,notindexed=user_created_time,notindexed=user_updated_time,notindexed=is_todo,notindexed=todo_completed,notindexed=parent_id,notindexed=latitude,notindexed=longitude,notindexed=altitude,notindexed=source_url,id,title,body,user_created_time,user_updated_time,is_todo,todo_completed,parent_id,latitude,longitude,altitude,source_url)\",\"columns\":[\"id||0|null|0\",\"title||0|null|0\",\"body||0|null|0\",\"user_created_time||0|null|0\",\"user_updated_time||0|null|0\",\"is_todo||0|null|0\",\"todo_completed||0|null|0\",\"parent_id||0|null|0\",\"latitude||0|null|0\",\"longitude||0|null|0\",\"altitude||0|null|0\",\"source_url||0|null|0\"]}",
+			"notes_normalized": "{\"type\":\"table\",\"table\":\"notes_normalized\",\"sql\":\"create table notes_normalized(id text not null,title text not null default,body text not null default,user_created_time int not null default 0,user_updated_time int not null default 0,is_todo int not null default 0,todo_completed int not null default 0,parent_id text not null default,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,source_url text not null default)\",\"columns\":[\"id|text|1|null|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"is_todo|int|1|0|0\",\"todo_completed|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"source_url|text|1|\\\"\\\"|0\"]}",
+			"notes_normalized_altitude": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_altitude on notes_normalized(altitude)\",\"columns\":[]}",
+			"notes_normalized_is_todo": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_is_todo on notes_normalized(is_todo)\",\"columns\":[]}",
+			"notes_normalized_latitude": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_latitude on notes_normalized(latitude)\",\"columns\":[]}",
+			"notes_normalized_longitude": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_longitude on notes_normalized(longitude)\",\"columns\":[]}",
+			"notes_normalized_parent_id": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_parent_id on notes_normalized(parent_id)\",\"columns\":[]}",
+			"notes_normalized_source_url": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_source_url on notes_normalized(source_url)\",\"columns\":[]}",
+			"notes_normalized_todo_completed": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_todo_completed on notes_normalized(todo_completed)\",\"columns\":[]}",
+			"notes_normalized_user_created_time": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_user_created_time on notes_normalized(user_created_time)\",\"columns\":[]}",
+			"notes_normalized_user_updated_time": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_user_updated_time on notes_normalized(user_updated_time)\",\"columns\":[]}"
+		},
+		"34": {},
+		"35": {
+			"notes_normalized": "{\"type\":\"table\",\"table\":\"notes_normalized\",\"sql\":\"create table notes_normalized(id text not null,title text not null default,body text not null default,user_created_time int not null default 0,user_updated_time int not null default 0,is_todo int not null default 0,todo_completed int not null default 0,parent_id text not null default,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,source_url text not null default,todo_due int not null default 0)\",\"columns\":[\"id|text|1|null|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"is_todo|int|1|0|0\",\"todo_completed|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"source_url|text|1|\\\"\\\"|0\",\"todo_due|int|1|0|0\"]}",
+			"notes_normalized_todo_due": "{\"type\":\"index\",\"table\":\"notes_normalized\",\"sql\":\"create index notes_normalized_todo_due on notes_normalized(todo_due)\",\"columns\":[]}"
+		},
+		"36": {
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,parent_id text not null default,is_shared int not null default 0,share_id text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\"]}",
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order numeric not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,markup_language int not null default 1,is_shared int not null default 0,share_id text not null default)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|numeric|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"markup_language|int|1|1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\"]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,size int not null default -1,is_shared int not null default 0,share_id text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"size|int|1|-1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\"]}"
+		},
+		"37": {},
+		"38": {
+			"tags_with_note_count": "{\"type\":\"view\",\"table\":\"tags_with_note_count\",\"sql\":\"create view tags_with_note_count select tags.id id,tags.title title,tags.created_time created_time,tags.updated_time updated_time,count(notes.id)note_count,sum(case when notes.todo_completed > 0 then 1 else 0 end)todo_completed_count from tags left join note_tags nt on nt.tag_id=tags.id left join notes on notes.id=nt.note_id where notes.id is not null group by tags.id\",\"columns\":[\"id|text|0|null|0\",\"title|text|0|null|0\",\"created_time|int|0|null|0\",\"updated_time|int|0|null|0\",\"note_count||0|null|0\",\"todo_completed_count||0|null|0\"]}"
+		},
+		"39": {
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order numeric not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,markup_language int not null default 1,is_shared int not null default 0,share_id text not null default,conflict_original_id text not null default)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|numeric|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"markup_language|int|1|1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"conflict_original_id|text|1|\\\"\\\"|0\"]}"
+		},
+		"40": {
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,parent_id text not null default,is_shared int not null default 0,share_id text not null default,master_key_id text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\"]}",
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order numeric not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,markup_language int not null default 1,is_shared int not null default 0,share_id text not null default,conflict_original_id text not null default,master_key_id text not null default)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|numeric|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"markup_language|int|1|1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"conflict_original_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\"]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,size int not null default -1,is_shared int not null default 0,share_id text not null default,master_key_id text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"size|int|1|-1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\"]}"
+		},
+		"41": {
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,parent_id text not null default,is_shared int not null default 0,share_id text not null default,master_key_id text not null default,icon text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"icon|text|1|\\\"\\\"|0\"]}"
+		},
+		"42": {},
+		"43": {
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,parent_id text not null default,is_shared int not null default 0,share_id text not null default,master_key_id text not null default,icon text not null default,user_data text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"icon|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\"]}",
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order numeric not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,markup_language int not null default 1,is_shared int not null default 0,share_id text not null default,conflict_original_id text not null default,master_key_id text not null default,user_data text not null default)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|numeric|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"markup_language|int|1|1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"conflict_original_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\"]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,size int not null default -1,is_shared int not null default 0,share_id text not null default,master_key_id text not null default,user_data text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"size|int|1|-1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\"]}",
+			"tags": "{\"type\":\"table\",\"table\":\"tags\",\"sql\":\"create table tags(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,is_shared int not null default 0,parent_id text not null default,user_data text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"is_shared|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\"]}"
+		},
+		"44": {
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,size int not null default -1,is_shared int not null default 0,share_id text not null default,master_key_id text not null default,user_data text not null default,blob_updated_time int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"size|int|1|-1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\",\"blob_updated_time|int|1|0|0\"]}"
+		},
+		"45": {
+			"items_after_insert": "{\"type\":\"trigger\",\"table\":\"items_normalized\",\"sql\":\"create trigger items_after_insert after insert on items_normalized begin insert into items_fts(docid,id,title,body,item_id,item_type,user_updated_time,reserved1,reserved2,reserved3,reserved4,reserved5,reserved6)select rowid,id,title,body,item_id,item_type,user_updated_time,reserved1,reserved2,reserved3,reserved4,reserved5,reserved6 from items_normalized where new.rowid=items_normalized.rowid; end\",\"columns\":[]}",
+			"items_after_update": "{\"type\":\"trigger\",\"table\":\"items_normalized\",\"sql\":\"create trigger items_after_update after update on items_normalized begin insert into items_fts(docid,id,title,body,item_id,item_type,user_updated_time,reserved1,reserved2,reserved3,reserved4,reserved5,reserved6)select rowid,id,title,body,item_id,item_type,user_updated_time,reserved1,reserved2,reserved3,reserved4,reserved5,reserved6 from items_normalized where new.rowid=items_normalized.rowid; end\",\"columns\":[]}",
+			"items_fts": "{\"type\":\"table\",\"table\":\"items_fts\",\"sql\":\"create virtual table items_fts using fts4(content=items_normalized,notindexed=id,notindexed=item_id,notindexed=item_type,notindexed=user_updated_time,notindexed=reserved1,notindexed=reserved2,notindexed=reserved3,notindexed=reserved4,notindexed=reserved5,notindexed=reserved6,id,title,body,item_id,item_type,user_updated_time,reserved1,reserved2,reserved3,reserved4,reserved5,reserved6)\",\"columns\":[\"id||0|null|0\",\"title||0|null|0\",\"body||0|null|0\",\"item_id||0|null|0\",\"item_type||0|null|0\",\"user_updated_time||0|null|0\",\"reserved1||0|null|0\",\"reserved2||0|null|0\",\"reserved3||0|null|0\",\"reserved4||0|null|0\",\"reserved5||0|null|0\",\"reserved6||0|null|0\"]}",
+			"items_fts_before_delete": "{\"type\":\"trigger\",\"table\":\"items_normalized\",\"sql\":\"create trigger items_fts_before_delete before delete on items_normalized begin delete from items_fts where docid=old.rowid; end\",\"columns\":[]}",
+			"items_fts_before_update": "{\"type\":\"trigger\",\"table\":\"items_normalized\",\"sql\":\"create trigger items_fts_before_update before update on items_normalized begin delete from items_fts where docid=old.rowid; end\",\"columns\":[]}",
+			"items_normalized": "{\"type\":\"table\",\"table\":\"items_normalized\",\"sql\":\"create table items_normalized(id integer primary key autoincrement,title text not null default,body text not null default,item_id text not null,item_type int not null,user_updated_time int not null default 0,reserved1 int null,reserved2 int null,reserved3 int null,reserved4 int null,reserved5 int null,reserved6 int null)\",\"columns\":[\"id|integer|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"item_id|text|1|null|0\",\"item_type|int|1|null|0\",\"user_updated_time|int|1|0|0\",\"reserved1|int|0|null|0\",\"reserved2|int|0|null|0\",\"reserved3|int|0|null|0\",\"reserved4|int|0|null|0\",\"reserved5|int|0|null|0\",\"reserved6|int|0|null|0\"]}",
+			"items_normalized_id": "{\"type\":\"index\",\"table\":\"items_normalized\",\"sql\":\"create index items_normalized_id on items_normalized(id)\",\"columns\":[]}",
+			"items_normalized_item_id": "{\"type\":\"index\",\"table\":\"items_normalized\",\"sql\":\"create index items_normalized_item_id on items_normalized(item_id)\",\"columns\":[]}",
+			"items_normalized_item_type": "{\"type\":\"index\",\"table\":\"items_normalized\",\"sql\":\"create index items_normalized_item_type on items_normalized(item_type)\",\"columns\":[]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,size int not null default -1,is_shared int not null default 0,share_id text not null default,master_key_id text not null default,user_data text not null default,blob_updated_time int not null default 0,ocr_text text not null default,ocr_details text not null default,ocr_status int not null default 0,ocr_error text not null default)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"size|int|1|-1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\",\"blob_updated_time|int|1|0|0\",\"ocr_text|text|1|\\\"\\\"|0\",\"ocr_details|text|1|\\\"\\\"|0\",\"ocr_status|int|1|0|0\",\"ocr_error|text|1|\\\"\\\"|0\"]}"
+		},
+		"46": {
+			"folders": "{\"type\":\"table\",\"table\":\"folders\",\"sql\":\"create table folders(id text primary key,title text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,parent_id text not null default,is_shared int not null default 0,share_id text not null default,master_key_id text not null default,icon text not null default,user_data text not null default,deleted_time int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"parent_id|text|1|\\\"\\\"|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"icon|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\",\"deleted_time|int|1|0|0\"]}",
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order numeric not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,markup_language int not null default 1,is_shared int not null default 0,share_id text not null default,conflict_original_id text not null default,master_key_id text not null default,user_data text not null default,deleted_time int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|numeric|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"markup_language|int|1|1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"conflict_original_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\",\"deleted_time|int|1|0|0\"]}",
+			"tags_with_note_count": "{\"type\":\"view\",\"table\":\"tags_with_note_count\",\"sql\":\"create view tags_with_note_count select tags.id id,tags.title title,tags.created_time created_time,tags.updated_time updated_time,count(notes.id)note_count,sum(case when notes.todo_completed > 0 then 1 else 0 end)todo_completed_count from tags left join note_tags nt on nt.tag_id=tags.id left join notes on notes.id=nt.note_id where notes.id is not null and notes.deleted_time=0 group by tags.id\",\"columns\":[\"id|text|0|null|0\",\"title|text|0|null|0\",\"created_time|int|0|null|0\",\"updated_time|int|0|null|0\",\"note_count||0|null|0\",\"todo_completed_count||0|null|0\"]}"
+		},
+		"47": {
+			"sync_items": "{\"type\":\"table\",\"table\":\"sync_items\",\"sql\":\"create table sync_items(id integer primary key,sync_target int not null,sync_time int not null default 0,item_type int not null,item_id text not null,sync_disabled int not null default 0,sync_disabled_reason text not null default,force_sync int not null default 0,item_location int not null default 1,sync_warning_ignored int not null default 0)\",\"columns\":[\"id|integer|0|null|1\",\"sync_target|int|1|null|0\",\"sync_time|int|1|0|0\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"sync_disabled|int|1|\\\"0\\\"|0\",\"sync_disabled_reason|text|1|\\\"\\\"|0\",\"force_sync|int|1|0|0\",\"item_location|int|1|1|0\",\"sync_warning_ignored|int|1|\\\"0\\\"|0\"]}"
+		},
+		"48": {
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,size int not null default -1,is_shared int not null default 0,share_id text not null default,master_key_id text not null default,user_data text not null default,blob_updated_time int not null default 0,ocr_text text not null default,ocr_details text not null default,ocr_status int not null default 0,ocr_error text not null default,ocr_driver_id int not null default 1)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"size|int|1|-1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\",\"blob_updated_time|int|1|0|0\",\"ocr_text|text|1|\\\"\\\"|0\",\"ocr_details|text|1|\\\"\\\"|0\",\"ocr_status|int|1|0|0\",\"ocr_error|text|1|\\\"\\\"|0\",\"ocr_driver_id|int|1|\\\"1\\\"|0\"]}"
+		},
+		"49": {
+			"sync_items": "{\"type\":\"table\",\"table\":\"sync_items\",\"sql\":\"create table sync_items(id integer primary key,sync_target int not null,sync_time int not null default 0,item_type int not null,item_id text not null,sync_disabled int not null default 0,sync_disabled_reason text not null default,force_sync int not null default 0,item_location int not null default 1,sync_warning_ignored int not null default 0,remote_item_updated_time int not null default 0)\",\"columns\":[\"id|integer|0|null|1\",\"sync_target|int|1|null|0\",\"sync_time|int|1|0|0\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"sync_disabled|int|1|\\\"0\\\"|0\",\"sync_disabled_reason|text|1|\\\"\\\"|0\",\"force_sync|int|1|0|0\",\"item_location|int|1|1|0\",\"sync_warning_ignored|int|1|\\\"0\\\"|0\",\"remote_item_updated_time|int|1|0|0\"]}"
+		},
+		"50": {
+			"notes": "{\"type\":\"table\",\"table\":\"notes\",\"sql\":\"create table notes(id text primary key,parent_id text not null default,title text not null default,body text not null default,created_time int not null,updated_time int not null,is_conflict int not null default 0,latitude numeric not null default 0,longitude numeric not null default 0,altitude numeric not null default 0,author text not null default,source_url text not null default,is_todo int not null default 0,todo_due int not null default 0,todo_completed int not null default 0,source text not null default,source_application text not null default,application_data text not null default,order numeric not null default 0,user_created_time int not null default 0,user_updated_time int not null default 0,encryption_cipher_text text not null default,encryption_applied int not null default 0,markup_language int not null default 1,is_shared int not null default 0,share_id text not null default,conflict_original_id text not null default,master_key_id text not null default,user_data text not null default,deleted_time int not null default 0,is_locked int not null default 0,extracted_resource_ids text not null default)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"title|text|1|\\\"\\\"|0\",\"body|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"is_conflict|int|1|0|0\",\"latitude|numeric|1|0|0\",\"longitude|numeric|1|0|0\",\"altitude|numeric|1|0|0\",\"author|text|1|\\\"\\\"|0\",\"source_url|text|1|\\\"\\\"|0\",\"is_todo|int|1|0|0\",\"todo_due|int|1|0|0\",\"todo_completed|int|1|0|0\",\"source|text|1|\\\"\\\"|0\",\"source_application|text|1|\\\"\\\"|0\",\"application_data|text|1|\\\"\\\"|0\",\"order|numeric|1|0|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"markup_language|int|1|1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"conflict_original_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\",\"deleted_time|int|1|0|0\",\"is_locked|int|1|0|0\",\"extracted_resource_ids|text|1|\\\"\\\"|0\"]}",
+			"resources": "{\"type\":\"table\",\"table\":\"resources\",\"sql\":\"create table resources(id text primary key,title text not null default,mime text not null,filename text not null default,created_time int not null,updated_time int not null,user_created_time int not null default 0,user_updated_time int not null default 0,file_extension text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,encryption_blob_encrypted int not null default 0,size int not null default -1,is_shared int not null default 0,share_id text not null default,master_key_id text not null default,user_data text not null default,blob_updated_time int not null default 0,ocr_text text not null default,ocr_details text not null default,ocr_status int not null default 0,ocr_error text not null default,ocr_driver_id int not null default 1,is_locked int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"title|text|1|\\\"\\\"|0\",\"mime|text|1|null|0\",\"filename|text|1|\\\"\\\"|0\",\"created_time|int|1|null|0\",\"updated_time|int|1|null|0\",\"user_created_time|int|1|0|0\",\"user_updated_time|int|1|0|0\",\"file_extension|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"encryption_blob_encrypted|int|1|0|0\",\"size|int|1|-1|0\",\"is_shared|int|1|0|0\",\"share_id|text|1|\\\"\\\"|0\",\"master_key_id|text|1|\\\"\\\"|0\",\"user_data|text|1|\\\"\\\"|0\",\"blob_updated_time|int|1|0|0\",\"ocr_text|text|1|\\\"\\\"|0\",\"ocr_details|text|1|\\\"\\\"|0\",\"ocr_status|int|1|0|0\",\"ocr_error|text|1|\\\"\\\"|0\",\"ocr_driver_id|int|1|\\\"1\\\"|0\",\"is_locked|int|1|0|0\"]}",
+			"revisions": "{\"type\":\"table\",\"table\":\"revisions\",\"sql\":\"create table revisions(id text primary key,parent_id text not null default,item_type int not null,item_id text not null,item_updated_time int not null,title_diff text not null default,body_diff text not null default,metadata_diff text not null default,encryption_cipher_text text not null default,encryption_applied int not null default 0,updated_time int not null,created_time int not null,is_locked int not null default 0)\",\"columns\":[\"id|text|0|null|1\",\"parent_id|text|1|\\\"\\\"|0\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"item_updated_time|int|1|null|0\",\"title_diff|text|1|\\\"\\\"|0\",\"body_diff|text|1|\\\"\\\"|0\",\"metadata_diff|text|1|\\\"\\\"|0\",\"encryption_cipher_text|text|1|\\\"\\\"|0\",\"encryption_applied|int|1|0|0\",\"updated_time|int|1|null|0\",\"created_time|int|1|null|0\",\"is_locked|int|1|0|0\"]}"
+		},
+		"51": {
+			"conflict_note_states": "{\"type\":\"table\",\"table\":\"conflict_note_states\",\"sql\":\"create table conflict_note_states(note_id text primary key,base_body text not null default,base_title text not null default,remote_body text not null default,remote_title text not null default,remote_updated_time int not null default 0)\",\"columns\":[\"note_id|text|0|null|1\",\"base_body|text|1|\\\"\\\"|0\",\"base_title|text|1|\\\"\\\"|0\",\"remote_body|text|1|\\\"\\\"|0\",\"remote_title|text|1|\\\"\\\"|0\",\"remote_updated_time|int|1|0|0\"]}",
+			"sync_items": "{\"type\":\"table\",\"table\":\"sync_items\",\"sql\":\"create table sync_items(id integer primary key,sync_target int not null,sync_time int not null default 0,item_type int not null,item_id text not null,sync_disabled int not null default 0,sync_disabled_reason text not null default,force_sync int not null default 0,item_location int not null default 1,sync_warning_ignored int not null default 0,remote_item_updated_time int not null default 0,base_body text not null default,base_title text not null default,base_conflict_note_id text not null default)\",\"columns\":[\"id|integer|0|null|1\",\"sync_target|int|1|null|0\",\"sync_time|int|1|0|0\",\"item_type|int|1|null|0\",\"item_id|text|1|null|0\",\"sync_disabled|int|1|\\\"0\\\"|0\",\"sync_disabled_reason|text|1|\\\"\\\"|0\",\"force_sync|int|1|0|0\",\"item_location|int|1|1|0\",\"sync_warning_ignored|int|1|\\\"0\\\"|0\",\"remote_item_updated_time|int|1|0|0\",\"base_body|text|1|\\\"\\\"|0\",\"base_title|text|1|\\\"\\\"|0\",\"base_conflict_note_id|text|1|\\\"\\\"|0\"]}"
+		},
+		"52": {
+			"note_embeddings_meta": "{\"type\":\"table\",\"table\":\"note_embeddings_meta\",\"sql\":\"create table note_embeddings_meta(id integer primary key autoincrement,note_id text not null,chunk_index integer not null,model_id text not null,chunk_text text not null,created_time int not null default 0)\",\"columns\":[\"id|integer|0|null|1\",\"note_id|text|1|null|0\",\"chunk_index|integer|1|null|0\",\"model_id|text|1|null|0\",\"chunk_text|text|1|null|0\",\"created_time|int|1|0|0\"]}",
+			"note_embeddings_meta_note_chunk": "{\"type\":\"index\",\"table\":\"note_embeddings_meta\",\"sql\":\"create unique index note_embeddings_meta_note_chunk on note_embeddings_meta(note_id,chunk_index)\",\"columns\":[]}",
+			"note_embeddings_meta_note_id": "{\"type\":\"index\",\"table\":\"note_embeddings_meta\",\"sql\":\"create index note_embeddings_meta_note_id on note_embeddings_meta(note_id)\",\"columns\":[]}"
+		},
+		"53": {
+			"conflict_note_states": "{\"type\":\"table\",\"table\":\"conflict_note_states\",\"sql\":\"create table conflict_note_states(id integer primary key autoincrement,note_id text not null unique,base_body text not null default,base_title text not null default,remote_body text not null default,remote_title text not null default,remote_updated_time int not null default 0)\",\"columns\":[\"id|integer|0|null|1\",\"note_id|text|1|null|0\",\"base_body|text|1|\\\"\\\"|0\",\"base_title|text|1|\\\"\\\"|0\",\"remote_body|text|1|\\\"\\\"|0\",\"remote_title|text|1|\\\"\\\"|0\",\"remote_updated_time|int|1|0|0\"]}"
+		}
+	},
+	"tableFields": [
+		"alarms|id|1|null",
+		"alarms|note_id|2|null",
+		"alarms|trigger_time|1|null",
+		"conflict_note_states|base_body|2|",
+		"conflict_note_states|base_title|2|",
+		"conflict_note_states|id|1|null",
+		"conflict_note_states|note_id|2|null",
+		"conflict_note_states|remote_body|2|",
+		"conflict_note_states|remote_title|2|",
+		"conflict_note_states|remote_updated_time|1|0",
+		"deleted_items|deleted_time|1|null",
+		"deleted_items|id|1|null",
+		"deleted_items|item_id|2|null",
+		"deleted_items|item_type|1|null",
+		"deleted_items|sync_target|1|null",
+		"folders|created_time|1|null",
+		"folders|deleted_time|1|0",
+		"folders|encryption_applied|1|0",
+		"folders|encryption_cipher_text|2|",
+		"folders|icon|2|",
+		"folders|id|2|null",
+		"folders|is_shared|1|0",
+		"folders|master_key_id|2|",
+		"folders|parent_id|2|",
+		"folders|share_id|2|",
+		"folders|title|2|",
+		"folders|updated_time|1|null",
+		"folders|user_created_time|1|0",
+		"folders|user_data|2|",
+		"folders|user_updated_time|1|0",
+		"item_changes|before_change_item|2|",
+		"item_changes|created_time|1|null",
+		"item_changes|id|1|null",
+		"item_changes|item_id|2|null",
+		"item_changes|item_type|1|null",
+		"item_changes|source|1|1",
+		"item_changes|type|1|null",
+		"items_normalized|body|2|",
+		"items_normalized|id|1|null",
+		"items_normalized|item_id|2|null",
+		"items_normalized|item_type|1|null",
+		"items_normalized|reserved1|1|null",
+		"items_normalized|reserved2|1|null",
+		"items_normalized|reserved3|1|null",
+		"items_normalized|reserved4|1|null",
+		"items_normalized|reserved5|1|null",
+		"items_normalized|reserved6|1|null",
+		"items_normalized|title|2|",
+		"items_normalized|user_updated_time|1|0",
+		"key_values|id|1|null",
+		"key_values|key|2|null",
+		"key_values|type|1|null",
+		"key_values|updated_time|1|null",
+		"key_values|value|2|null",
+		"master_keys|checksum|2|null",
+		"master_keys|content|2|null",
+		"master_keys|created_time|1|null",
+		"master_keys|encryption_method|1|null",
+		"master_keys|id|2|null",
+		"master_keys|source_application|2|null",
+		"master_keys|updated_time|1|null",
+		"migrations|created_time|1|null",
+		"migrations|id|1|null",
+		"migrations|number|1|null",
+		"migrations|updated_time|1|null",
+		"note_embeddings_meta|chunk_index|1|null",
+		"note_embeddings_meta|chunk_text|2|null",
+		"note_embeddings_meta|created_time|1|0",
+		"note_embeddings_meta|id|1|null",
+		"note_embeddings_meta|model_id|2|null",
+		"note_embeddings_meta|note_id|2|null",
+		"note_resources|id|1|null",
+		"note_resources|is_associated|1|null",
+		"note_resources|last_seen_time|1|null",
+		"note_resources|note_id|2|null",
+		"note_resources|resource_id|2|null",
+		"note_tags|created_time|1|null",
+		"note_tags|encryption_applied|1|0",
+		"note_tags|encryption_cipher_text|2|",
+		"note_tags|id|2|null",
+		"note_tags|is_shared|1|0",
+		"note_tags|note_id|2|null",
+		"note_tags|tag_id|2|null",
+		"note_tags|updated_time|1|null",
+		"note_tags|user_created_time|1|0",
+		"note_tags|user_updated_time|1|0",
+		"notes|altitude|3|0",
+		"notes|application_data|2|",
+		"notes|author|2|",
+		"notes|body|2|",
+		"notes|conflict_original_id|2|",
+		"notes|created_time|1|null",
+		"notes|deleted_time|1|0",
+		"notes|encryption_applied|1|0",
+		"notes|encryption_cipher_text|2|",
+		"notes|extracted_resource_ids|2|",
+		"notes|id|2|null",
+		"notes|is_conflict|1|0",
+		"notes|is_locked|1|0",
+		"notes|is_shared|1|0",
+		"notes|is_todo|1|0",
+		"notes|latitude|3|0",
+		"notes|longitude|3|0",
+		"notes|markup_language|1|1",
+		"notes|master_key_id|2|",
+		"notes|order|3|0",
+		"notes|parent_id|2|",
+		"notes|share_id|2|",
+		"notes|source|2|",
+		"notes|source_application|2|",
+		"notes|source_url|2|",
+		"notes|title|2|",
+		"notes|todo_completed|1|0",
+		"notes|todo_due|1|0",
+		"notes|updated_time|1|null",
+		"notes|user_created_time|1|0",
+		"notes|user_data|2|",
+		"notes|user_updated_time|1|0",
+		"notes_normalized|altitude|3|0",
+		"notes_normalized|body|2|",
+		"notes_normalized|id|2|null",
+		"notes_normalized|is_todo|1|0",
+		"notes_normalized|latitude|3|0",
+		"notes_normalized|longitude|3|0",
+		"notes_normalized|parent_id|2|",
+		"notes_normalized|source_url|2|",
+		"notes_normalized|title|2|",
+		"notes_normalized|todo_completed|1|0",
+		"notes_normalized|todo_due|1|0",
+		"notes_normalized|user_created_time|1|0",
+		"notes_normalized|user_updated_time|1|0",
+		"resource_local_states|fetch_error|2|",
+		"resource_local_states|fetch_status|1|2",
+		"resource_local_states|id|1|null",
+		"resource_local_states|resource_id|2|null",
+		"resources|blob_updated_time|1|0",
+		"resources|created_time|1|null",
+		"resources|encryption_applied|1|0",
+		"resources|encryption_blob_encrypted|1|0",
+		"resources|encryption_cipher_text|2|",
+		"resources|file_extension|2|",
+		"resources|filename|2|",
+		"resources|id|2|null",
+		"resources|is_locked|1|0",
+		"resources|is_shared|1|0",
+		"resources|master_key_id|2|",
+		"resources|mime|2|null",
+		"resources|ocr_details|2|",
+		"resources|ocr_driver_id|1|1",
+		"resources|ocr_error|2|",
+		"resources|ocr_status|1|0",
+		"resources|ocr_text|2|",
+		"resources|share_id|2|",
+		"resources|size|1|-1",
+		"resources|title|2|",
+		"resources|updated_time|1|null",
+		"resources|user_created_time|1|0",
+		"resources|user_data|2|",
+		"resources|user_updated_time|1|0",
+		"resources_to_download|created_time|1|null",
+		"resources_to_download|id|1|null",
+		"resources_to_download|resource_id|2|null",
+		"resources_to_download|updated_time|1|null",
+		"revisions|body_diff|2|",
+		"revisions|created_time|1|null",
+		"revisions|encryption_applied|1|0",
+		"revisions|encryption_cipher_text|2|",
+		"revisions|id|2|null",
+		"revisions|is_locked|1|0",
+		"revisions|item_id|2|null",
+		"revisions|item_type|1|null",
+		"revisions|item_updated_time|1|null",
+		"revisions|metadata_diff|2|",
+		"revisions|parent_id|2|",
+		"revisions|title_diff|2|",
+		"revisions|updated_time|1|null",
+		"settings|key|2|null",
+		"settings|value|2|null",
+		"sync_items|base_body|2|",
+		"sync_items|base_conflict_note_id|2|",
+		"sync_items|base_title|2|",
+		"sync_items|force_sync|1|0",
+		"sync_items|id|1|null",
+		"sync_items|item_id|2|null",
+		"sync_items|item_location|1|1",
+		"sync_items|item_type|1|null",
+		"sync_items|remote_item_updated_time|1|0",
+		"sync_items|sync_disabled|1|0",
+		"sync_items|sync_disabled_reason|2|",
+		"sync_items|sync_target|1|null",
+		"sync_items|sync_time|1|0",
+		"sync_items|sync_warning_ignored|1|0",
+		"tags|created_time|1|null",
+		"tags|encryption_applied|1|0",
+		"tags|encryption_cipher_text|2|",
+		"tags|id|2|null",
+		"tags|is_shared|1|0",
+		"tags|parent_id|2|",
+		"tags|title|2|",
+		"tags|updated_time|1|null",
+		"tags|user_created_time|1|0",
+		"tags|user_data|2|",
+		"tags|user_updated_time|1|0",
+		"version|table_fields_version|1|0",
+		"version|version|1|null"
+	],
+	"version": 53
+}

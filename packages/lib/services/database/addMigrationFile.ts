@@ -1,4 +1,6 @@
+import { compileQuery, insertRow } from './kysely/kysely';
+
 export default (num: number) => {
 	const timestamp = Date.now();
-	return { sql: 'INSERT INTO migrations (number, created_time, updated_time) VALUES (?, ?, ?)', params: [num, timestamp, timestamp] };
+	return compileQuery(insertRow('migrations', { number: num, created_time: timestamp, updated_time: timestamp }));
 };

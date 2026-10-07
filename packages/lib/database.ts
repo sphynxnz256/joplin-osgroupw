@@ -2,6 +2,7 @@ import Logger from '@joplin/utils/Logger';
 import time from './time';
 import shim from './shim';
 import { SqlParams, SqlQuery, StringOrSqlQuery } from './services/database/types';
+import { compileQuery, genericKysely } from './services/database/kysely/kysely';
 
 import { Mutex } from 'async-mutex';
 
@@ -75,45 +76,6 @@ export default class Database {
 		}
 	}
 
-	public escapeField(field: string) {
-		if (field === '*') return '*';
-		const p = field.split('.');
-		if (p.length === 1) return `\`${field}\``;
-		if (p.length === 2) return `${p[0]}.\`${p[1]}\``;
-
-		throw new Error(`Invalid field format: ${field}`);
-	}
-
-	public escapeFields(fields: string[] | string): string[] | string {
-		if (fields === '*') return '*';
-
-		const output = [];
-		for (let i = 0; i < fields.length; i++) {
-			output.push(this.escapeField(fields[i]));
-		}
-		return output;
-	}
-
-	public escapeValues(values: string[]) {
-		return values.map(value => {
-			// See https://www.sqlite.org/printf.html#percentq
-			return `'${value.replace(/[']/g, '\'\'')}'`;
-		});
-	}
-
-	public escapeFieldsToString(fields: string[] | string): string {
-		if (typeof fields === 'string') {
-			if (fields === '*') return '*';
-			throw new Error(`Invalid field value (only "*" is supported): ${fields}`);
-		}
-
-		const output = [];
-		for (let i = 0; i < fields.length; i++) {
-			output.push(this.escapeField(fields[i]));
-		}
-		return output.join(',');
-	}
-
 	public async tryCall(callName: string, inputSql: StringOrSqlQuery, inputParams: SqlParams) {
 		let sql: string = null;
 		let params: SqlParams = null;
@@ -174,7 +136,7 @@ export default class Database {
 		}
 	}
 
-	public async selectOne(sql: string, params: SqlParams = null): Promise<Row> {
+	public async selectOne(sql: StringOrSqlQuery, params: SqlParams = null): Promise<Row> {
 		return this.tryCall('selectOne', sql, params);
 	}
 
@@ -187,7 +149,7 @@ export default class Database {
 		}
 	}
 
-	public async selectAll<T = Row>(sql: string, params: SqlParams = null): Promise<T[]> {
+	public async selectAll<T = Row>(sql: StringOrSqlQuery, params: SqlParams = null): Promise<T[]> {
 		return this.tryCall('selectAll', sql, params);
 	}
 
@@ -291,94 +253,51 @@ export default class Database {
 		if (params !== null && params.length) this.logger().debug(JSON.stringify(params));
 	}
 
+	// Keys ending with an underscore are not columns (e.g. `type_`), and undefined
+	// is stored as NULL, which is what the SQLite drivers do when binding it.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- data is an arbitrary entity slice (e.g. NoteEntity, FolderEntity); narrowing forces index-signature errors at call sites
-	public static insertQuery(tableName: string, data: Record<string, any>) {
+	private static columnValues(data: Record<string, any>) {
 		if (!data || !Object.keys(data).length) throw new Error('Data is empty');
 
-		let keySql = '';
-		let valueSql = '';
-		const params = [];
-		for (const key in data) {
-			if (!data.hasOwnProperty(key)) continue;
+		const output: Record<string, unknown> = {};
+		for (const key of Object.keys(data)) {
 			if (key[key.length - 1] === '_') continue;
-			if (keySql !== '') keySql += ', ';
-			if (valueSql !== '') valueSql += ', ';
-			keySql += `\`${key}\``;
-			valueSql += '?';
-			params.push(data[key]);
-		}
-		return {
-			sql: `INSERT INTO \`${tableName}\` (${keySql}) VALUES (${valueSql})`,
-			params: params,
-		};
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- See insertQuery above
-	public static updateQuery(tableName: string, data: Record<string, any>, where: string | Record<string, any>) {
-		if (!data || !Object.keys(data).length) throw new Error('Data is empty');
-
-		let sql = '';
-		const params = [];
-		for (const key in data) {
-			if (!data.hasOwnProperty(key)) continue;
-			if (key[key.length - 1] === '_') continue;
-			if (sql !== '') sql += ', ';
-			sql += `\`${key}\`=?`;
-			params.push(data[key]);
+			output[key] = data[key] === undefined ? null : data[key];
 		}
 
-		if (typeof where !== 'string') {
-			const s = [];
-			for (const n in where) {
-				if (!where.hasOwnProperty(n)) continue;
-				params.push(where[n]);
-				s.push(`\`${n}\`=?`);
-			}
-			where = s.join(' AND ');
-		}
-
-		return {
-			sql: `UPDATE \`${tableName}\` SET ${sql} WHERE ${where}`,
-			params: params,
-		};
-	}
-
-	public alterColumnQueries(tableName: string, fields: Record<string, string>) {
-		const fieldsNoType = [];
-		for (const n in fields) {
-			if (!fields.hasOwnProperty(n)) continue;
-			fieldsNoType.push(n);
-		}
-
-		const fieldsWithType = [];
-		for (const n in fields) {
-			if (!fields.hasOwnProperty(n)) continue;
-			fieldsWithType.push(`${this.escapeField(n)} ${fields[n]}`);
-		}
-
-		let sql = `
-			CREATE TEMPORARY TABLE _BACKUP_TABLE_NAME_(_FIELDS_TYPE_);
-			INSERT INTO _BACKUP_TABLE_NAME_ SELECT _FIELDS_NO_TYPE_ FROM _TABLE_NAME_;
-			DROP TABLE _TABLE_NAME_;
-			CREATE TABLE _TABLE_NAME_(_FIELDS_TYPE_);
-			INSERT INTO _TABLE_NAME_ SELECT _FIELDS_NO_TYPE_ FROM _BACKUP_TABLE_NAME_;
-			DROP TABLE _BACKUP_TABLE_NAME_;
-		`;
-
-		sql = sql.replace(/_BACKUP_TABLE_NAME_/g, this.escapeField(`${tableName}_backup`));
-		sql = sql.replace(/_TABLE_NAME_/g, this.escapeField(tableName));
-		sql = sql.replace(/_FIELDS_NO_TYPE_/g, (this.escapeFields(fieldsNoType) as string[]).join(','));
-		sql = sql.replace(/_FIELDS_TYPE_/g, fieldsWithType.join(','));
-
-		return sql.trim().split('\n');
-	}
-
-	public wrapQueries(queries: (string | SqlQuery | [string, SqlParams?])[]) {
-		const output = [];
-		for (let i = 0; i < queries.length; i++) {
-			output.push(this.wrapQuery(queries[i]));
-		}
+		if (!Object.keys(output).length) throw new Error('Data is empty');
 		return output;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- See columnValues above
+	public static insertQuery(tableName: string, data: Record<string, any>) {
+		const values = this.columnValues(data);
+		return compileQuery(genericKysely.insertInto(tableName).values(values));
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- See columnValues above
+	public static updateQuery(tableName: string, data: Record<string, any>, where: Record<string, any>) {
+		const values = this.columnValues(data);
+
+		const conditions = Object.keys(where);
+		// Without this check Kysely would produce an UPDATE that changes every row
+		if (!conditions.length) throw new Error('Where condition is empty');
+
+		let query = genericKysely.updateTable(tableName).set(values);
+		for (const name of conditions) {
+			query = query.where(name, '=', where[name] === undefined ? null : where[name]);
+		}
+		return compileQuery(query);
+	}
+
+	// Deletes all the rows of the tables and resets their auto-increment counters
+	public static clearTablesQueries(tableNames: string[]) {
+		const queries = [];
+		for (const tableName of tableNames) {
+			queries.push(compileQuery(genericKysely.deleteFrom(tableName)));
+			queries.push(compileQuery(genericKysely.deleteFrom('sqlite_sequence').where('name', '=', tableName)));
+		}
+		return queries;
 	}
 
 	public wrapQuery(sql: string | SqlQuery | [string, SqlParams?], params: SqlParams = null): SqlQuery {

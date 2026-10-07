@@ -20,7 +20,7 @@ export default async function(request: Request, id: string = null, link: string 
 			const output = await Folder.allAsTree(folders);
 			return output;
 		} else {
-			return defaultAction(BaseModel.TYPE_FOLDER, request, id, link, null, includeDeleted ? null : { sql: 'deleted_time = 0' });
+			return defaultAction(BaseModel.TYPE_FOLDER, request, id, link, null, includeDeleted ? null : eb => eb('deleted_time', '=', 0));
 		}
 	}
 
@@ -28,8 +28,10 @@ export default async function(request: Request, id: string = null, link: string 
 		if (link && link === 'notes') {
 			const folder = await Folder.load(id);
 			if (!folder) throw new ErrorNotFound();
-			const sql = includeDeleted ? 'parent_id = ?' : 'parent_id = ? AND deleted_time = 0';
-			return paginatedResults(BaseModel.TYPE_NOTE, request, { sql, params: [folder.id] });
+			return paginatedResults(BaseModel.TYPE_NOTE, request, eb => eb.and([
+				eb('parent_id', '=', folder.id),
+				...(includeDeleted ? [] : [eb('deleted_time', '=', 0)]),
+			]));
 		} else if (link) {
 			throw new ErrorNotFound();
 		}

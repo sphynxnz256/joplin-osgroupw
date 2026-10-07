@@ -1,8 +1,10 @@
+import { addColumnQuery, intDefaultingTo } from '../kysely/schema';
+import kysely, { compileQuery } from '../kysely/kysely';
 import { SqlQuery } from '../types';
 
-export default (): (SqlQuery|string)[] => {
+export default (): SqlQuery[] => {
 	return [
-		'ALTER TABLE `resources` ADD COLUMN blob_updated_time INT NOT NULL DEFAULT 0',
-		'UPDATE `resources` SET blob_updated_time = updated_time',
+		addColumnQuery('resources', 'blob_updated_time', intDefaultingTo(0)),
+		compileQuery(kysely.updateTable('resources').set(eb => ({ blob_updated_time: eb.ref('updated_time') }))),
 	];
 };

@@ -26,7 +26,7 @@ export interface SqlQuery {
 
 export type StringOrSqlQuery = string | SqlQuery;
 
-export type Migration = () => (SqlQuery|string)[];
+export type Migration = () => SqlQuery[];
 
 export enum FolderIconType {
   Emoji = 1,

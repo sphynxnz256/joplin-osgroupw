@@ -1,6 +1,41 @@
 import BaseModel from './BaseModel';
+import Folder from './models/Folder';
+import { setupDatabaseAndSynchronizer, switchClient } from './testing/test-utils';
 
 describe('BaseModel', () => {
+	beforeEach(async () => {
+		await setupDatabaseAndSynchronizer(1);
+		await switchClient(1);
+	});
+
+	test('should run generic queries', async () => {
+		const b = await Folder.save({ title: 'b' });
+		const a = await Folder.save({ title: 'A' });
+		const c = await Folder.save({ title: 'c', parent_id: a.id });
+
+		expect(await Folder.count()).toBe(3);
+		expect(await Folder.count({ where: eb => eb('parent_id', '!=', '') })).toBe(1);
+		expect(await Folder.count({ where: eb => eb('title', '=', 'b') })).toBe(1);
+
+		expect((await Folder.allIds({ order: [{ by: 'title', dir: 'DESC' }], limit: 2 }))).toEqual([c.id, b.id]);
+		expect((await Folder.allIds({ order: [{ by: 'title', dir: 'ASC' }], caseInsensitive: true })).slice(0, 2)).toEqual([a.id, b.id]);
+		expect((await Folder.all({ fields: ['id'], where: 'title = ? OR title = ?', whereParams: ['b', 'c'], order: [{ by: 'title', dir: 'ASC' }] })).map(f => f.id)).toEqual([b.id, c.id]);
+		expect((await Folder.byIds([a.id, c.id, 'unknown'])).map(f => f.id).sort()).toEqual([a.id, c.id].sort());
+		expect((await Folder.search({ conditions: [eb => eb('parent_id', '=', a.id), eb => eb('title', '=', 'c')] })).map(f => f.id)).toEqual([c.id]);
+		expect((await Folder.search({ titlePattern: '*' })).length).toBe(3);
+
+		expect((await Folder.loadByField('title', 'B', { caseInsensitive: true })).id).toBe(b.id);
+		expect(await Folder.loadByField('title', 'B')).toBeFalsy();
+		expect((await Folder.loadByFields({ title: 'c', parent_id: a.id })).id).toBe(c.id);
+		expect((await Folder.loadByTitle('b')).id).toBe(b.id);
+		expect((await Folder.loadByPartialId(a.id.substr(0, 8))).map(f => f.id)).toContain(a.id);
+
+		await Folder.delete(a.id);
+		await Folder.delete(b.id);
+		await Folder.delete(c.id);
+		expect(await Folder.count()).toBe(0);
+	});
+
 	test.each([
 		[0, 0],
 		[4, 10],

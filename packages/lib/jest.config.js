@@ -21,6 +21,14 @@ module.exports = {
 
 	testEnvironment: 'node',
 
+	// Kysely only ships ES modules, so it must be converted to CommonJS. The
+	// patterns use "." for path separators so they work on Windows and Linux.
+	transform: {
+		'node_modules.kysely.+[.]js$': `${__dirname}/jest.esmTransformer.js`,
+		'[.][jt]sx?$': 'babel-jest',
+	},
+	transformIgnorePatterns: ['.node_modules.(?!kysely.)'],
+
 	setupFilesAfterEnv: [
 		'jest-expect-message',
 		`${__dirname}/jest.setup.js`,

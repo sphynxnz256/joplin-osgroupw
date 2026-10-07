@@ -1,7 +1,7 @@
 import addMigrationFile from '../addMigrationFile';
 import { SqlQuery } from '../types';
 
-export default (): (SqlQuery|string)[] => {
+export default (): SqlQuery[] => {
 	return [
 		addMigrationFile(42),
 	];

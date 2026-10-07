@@ -1,4 +1,5 @@
 import { ModelType, DeleteOptions } from '../BaseModel';
+import kysely, { compileQuery, genericKysely, inLiterals, insertRow, notInLiterals } from '../services/database/kysely/kysely';
 import { BaseItemEntity, DeletedItemEntity, NoteEntity, SyncItemEntity } from '../services/database/types';
 import Setting from './Setting';
 import BaseModel from '../BaseModel';
@@ -157,8 +158,7 @@ export default class BaseItem extends BaseModel {
 		const itemType = ItemClass.modelType();
 		// The fact that we don't check if the item_id still exist in the corresponding item table, means
 		// that the returned number might be inaccurate (for example if a sync operation was cancelled)
-		const sql = 'SELECT count(*) as total FROM sync_items WHERE sync_target = ? AND item_type = ?';
-		const r = await this.db().selectOne(sql, [syncTarget, itemType]);
+		const r = await this.db().selectOne(compileQuery(kysely.selectFrom('sync_items').select(eb => eb.fn.countAll().as('total')).where('sync_target', '=', syncTarget).where('item_type', '=', itemType)));
 		return r.total;
 	}
 
@@ -199,7 +199,7 @@ export default class BaseItem extends BaseModel {
 	// Returns the IDs of the items that have been synced at least once
 	public static async syncedItemIds(syncTarget: number) {
 		if (!syncTarget) throw new Error('No syncTarget specified');
-		const temp = await this.db().selectAll('SELECT item_id FROM sync_items WHERE sync_time > 0 AND sync_target = ?', [syncTarget]);
+		const temp = await this.db().selectAll(compileQuery(kysely.selectFrom('sync_items').select('item_id').where('sync_time', '>', 0).where('sync_target', '=', syncTarget)));
 		const output = [];
 		for (let i = 0; i < temp.length; i++) {
 			output.push(temp[i].item_id);
@@ -209,7 +209,7 @@ export default class BaseItem extends BaseModel {
 
 	public static async remoteItemMetadata(syncTarget: number): Promise<Map<string, RemoteItemMetadata>> {
 		if (!syncTarget) throw new Error('No syncTarget specified');
-		const temp = await this.db().selectAll('SELECT item_id, remote_item_updated_time FROM sync_items WHERE sync_time > 0 AND sync_target = ?', [syncTarget]);
+		const temp = await this.db().selectAll(compileQuery(kysely.selectFrom('sync_items').select(['item_id', 'remote_item_updated_time']).where('sync_time', '>', 0).where('sync_target', '=', syncTarget)));
 		const output = new Map<string, RemoteItemMetadata>();
 		for (let i = 0; i < temp.length; i++) {
 			const metadata: RemoteItemMetadata = {
@@ -226,11 +226,16 @@ export default class BaseItem extends BaseModel {
 			fields: '*',
 			...options,
 		};
-		return await this.db().selectOne(`SELECT ${this.db().escapeFieldsToString(options.fields)} FROM sync_items WHERE sync_target = ? AND item_id = ?`, [syncTarget, itemId]);
+		return await this.db().selectOne(compileQuery(genericKysely
+			.selectFrom('sync_items')
+			.$if(!Array.isArray(options.fields), qb => qb.selectAll())
+			.$if(Array.isArray(options.fields), qb => qb.select(options.fields as string[]))
+			.where('sync_target', '=', syncTarget)
+			.where('item_id', '=', itemId)));
 	}
 
 	public static async allSyncItems(syncTarget: number) {
-		const output = await this.db().selectAll('SELECT * FROM sync_items WHERE sync_target = ?', [syncTarget]);
+		const output = await this.db().selectAll(compileQuery(kysely.selectFrom('sync_items').selectAll().where('sync_target', '=', syncTarget)));
 		return output;
 	}
 
@@ -265,8 +270,7 @@ export default class BaseItem extends BaseModel {
 		let output: any[] = [];
 		for (let i = 0; i < classes.length; i++) {
 			const ItemClass = this.getClass(classes[i]);
-			const sql = `SELECT * FROM ${ItemClass.tableName()} WHERE id IN (${this.escapeIdsForSql(ids)})`;
-			const models = await ItemClass.modelSelectAll(sql);
+			const models = await ItemClass.modelSelectAll(genericKysely.selectFrom(ItemClass.tableName()).selectAll().where(inLiterals('id', ids)));
 			output = output.concat(models);
 		}
 		return output;
@@ -290,9 +294,11 @@ export default class BaseItem extends BaseModel {
 
 		const fields = options && options.fields ? options.fields : [];
 		const ItemClass = this.getClassByItemType(itemType);
-		const fieldsSql = fields.length ? this.db().escapeFields(fields) : '*';
-		const sql = `SELECT ${fieldsSql} FROM ${ItemClass.tableName()} WHERE id IN (${this.escapeIdsForSql(ids)})`;
-		return ItemClass.modelSelectAll(sql);
+		return ItemClass.modelSelectAll(genericKysely
+			.selectFrom(ItemClass.tableName())
+			.$if(!fields.length, qb => qb.selectAll())
+			.$if(!!fields.length, qb => qb.select(fields as string[]))
+			.where(inLiterals('id', ids)));
 	}
 
 	public static async loadItemByTypeAndId(itemType: ModelType, id: string, options: LoadOptions = null) {
@@ -329,7 +335,7 @@ export default class BaseItem extends BaseModel {
 		// since no other client have (or should have) them.
 		let conflictNoteIds: string[] = [];
 		if (this.modelType() === BaseModel.TYPE_NOTE) {
-			const conflictNotes = await this.db().selectAll(`SELECT id FROM notes WHERE id IN (${this.escapeIdsForSql(ids)}) AND is_conflict = 1`);
+			const conflictNotes = await this.db().selectAll(compileQuery(kysely.selectFrom('notes').select('id').where(inLiterals('id', ids)).where('is_conflict', '=', 1)));
 			conflictNoteIds = conflictNotes.map((n: NoteEntity) => {
 				return n.id;
 			});
@@ -352,10 +358,12 @@ export default class BaseItem extends BaseModel {
 				// For each deleted item, for each sync target, we need to add an entry in deleted_items.
 				// That way, each target can later delete the remote item.
 				for (let j = 0; j < syncTargetIds.length; j++) {
-					queries.push({
-						sql: 'INSERT INTO deleted_items (item_type, item_id, deleted_time, sync_target) VALUES (?, ?, ?, ?)',
-						params: [this.modelType(), ids[i], now, syncTargetIds[j]],
-					});
+					queries.push(compileQuery(insertRow('deleted_items', {
+						item_type: this.modelType(),
+						item_id: ids[i],
+						deleted_time: now,
+						sync_target: Number(syncTargetIds[j]),
+					})));
 				}
 			}
 			await this.db().transactionExecBatch(queries);
@@ -372,17 +380,17 @@ export default class BaseItem extends BaseModel {
 	//   that it was previously deleted exist (deleted_items entry has been deleted).
 	// The solution would be to permanently store the list of deleted items on each client.
 	public static deletedItems(syncTarget: number): Promise<DeletedItemEntity[]> {
-		return this.db().selectAll('SELECT * FROM deleted_items WHERE sync_target = ?', [syncTarget]);
+		return this.db().selectAll(compileQuery(kysely.selectFrom('deleted_items').selectAll().where('sync_target', '=', syncTarget)));
 	}
 
 	public static async deletedItemCount(syncTarget: number) {
-		const r = await this.db().selectOne('SELECT count(*) as total FROM deleted_items WHERE sync_target = ?', [syncTarget]);
+		const r = await this.db().selectOne(compileQuery(kysely.selectFrom('deleted_items').select(eb => eb.fn.countAll().as('total')).where('sync_target', '=', syncTarget)));
 		return r['total'];
 	}
 
 	public static async allItemsInTrash() {
-		const noteRows = await this.db().selectAll('SELECT id FROM notes WHERE deleted_time != 0');
-		const folderRows = await this.db().selectAll('SELECT id FROM folders WHERE deleted_time != 0');
+		const noteRows = await this.db().selectAll(compileQuery(kysely.selectFrom('notes').select('id').where('deleted_time', '!=', 0)));
+		const folderRows = await this.db().selectAll(compileQuery(kysely.selectFrom('folders').select('id').where('deleted_time', '!=', 0)));
 		return {
 			noteIds: noteRows.map(r => r.id),
 			folderIds: folderRows.map(r => r.id),
@@ -392,10 +400,7 @@ export default class BaseItem extends BaseModel {
 	public static async remoteDeletedItems(syncTarget: number, itemIds: string[]) {
 		if (itemIds.length === 0) return;
 
-		await this.db().exec(
-			`DELETE FROM deleted_items WHERE item_id IN (${this.escapeIdsForSql(itemIds)}) AND sync_target = ?`,
-			[syncTarget],
-		);
+		await this.db().exec(compileQuery(kysely.deleteFrom('deleted_items').where(inLiterals('item_id', itemIds)).where('sync_target', '=', syncTarget)));
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- propValue is the raw entity value (string|number|null|object for diffs); the function reassigns it through coercions then calls .replace on it
@@ -649,7 +654,7 @@ export default class BaseItem extends BaseModel {
 
 		for (let i = 0; i < classNames.length; i++) {
 			const ItemClass = this.getClass(classNames[i]);
-			encryptedCount += await ItemClass.count({ where: 'encryption_applied = 1' });
+			encryptedCount += await ItemClass.count({ where: eb => eb('encryption_applied', '=', 1) });
 			totalCount += await ItemClass.count();
 		}
 
@@ -666,7 +671,7 @@ export default class BaseItem extends BaseModel {
 		for (let i = 0; i < classNames.length; i++) {
 			const className = classNames[i];
 			const ItemClass = this.getClass(className);
-			const count = await ItemClass.count({ where: 'encryption_applied = 1' });
+			const count = await ItemClass.count({ where: eb => eb('encryption_applied', '=', 1) });
 			output += count;
 		}
 
@@ -680,7 +685,7 @@ export default class BaseItem extends BaseModel {
 			const className = classNames[i];
 			const ItemClass = this.getClass(className);
 
-			const count = await ItemClass.count({ where: 'encryption_applied = 1' });
+			const count = await ItemClass.count({ where: eb => eb('encryption_applied', '=', 1) });
 			if (count) return true;
 		}
 
@@ -694,30 +699,23 @@ export default class BaseItem extends BaseModel {
 			const className = classNames[i];
 			const ItemClass = this.getClass(className);
 
-			let whereSql = ['encryption_applied = 1'];
+			let query = genericKysely.selectFrom(ItemClass.tableName()).selectAll();
 
 			if (className === 'Resource') {
-				const blobDownloadedButEncryptedSql = 'encryption_blob_encrypted = 1 AND id IN (SELECT resource_id FROM resource_local_states WHERE fetch_status = 2))';
-				whereSql = [`(encryption_applied = 1 OR (${blobDownloadedButEncryptedSql})`];
+				query = query.where(eb => eb.or([
+					eb('encryption_applied', '=', 1),
+					eb.and([
+						eb('encryption_blob_encrypted', '=', 1),
+						eb('id', 'in', eb.selectFrom('resource_local_states').select('resource_id').where('fetch_status', '=', 2)),
+					]),
+				]));
+			} else {
+				query = query.where('encryption_applied', '=', 1);
 			}
 
-			if (exclusions.length) {
-				whereSql.push(`id NOT IN (${this.escapeIdsForSql(exclusions)})`);
-			}
+			if (exclusions.length) query = query.where(notInLiterals('id', exclusions));
 
-			const sql = sprintf(
-				`
-				SELECT *
-				FROM %s
-				WHERE %s
-				LIMIT %d
-				`,
-				this.db().escapeField(ItemClass.tableName()),
-				whereSql.join(' AND '),
-				limit,
-			);
-
-			const items = await ItemClass.modelSelectAll(sql);
+			const items = await ItemClass.modelSelectAll(query.limit(limit));
 
 			if (i >= classNames.length - 1) {
 				return { hasMore: items.length >= limit, items: items };
@@ -730,7 +728,7 @@ export default class BaseItem extends BaseModel {
 	}
 
 	public static async itemHasBeenSynced(itemId: string): Promise<boolean> {
-		const r = await this.db().selectOne('SELECT item_id FROM sync_items WHERE item_id = ?', [itemId]);
+		const r = await this.db().selectOne(compileQuery(kysely.selectFrom('sync_items').select('item_id').where('item_id', '=', itemId)));
 		return !!r;
 	}
 
@@ -749,12 +747,10 @@ export default class BaseItem extends BaseModel {
 			// // CHANGED:
 			// 'SELECT * FROM [ITEMS] items JOIN sync_items s ON s.item_id = items.id WHERE sync_target = ? AND'
 
-			let extraWhere: string[]|string = [];
-			if (className === 'Note') extraWhere.push('is_conflict = 0');
-			if (className === 'Resource') extraWhere.push('encryption_blob_encrypted = 0');
-			if (ItemClass.encryptionSupported()) extraWhere.push('encryption_applied = 0');
-
-			extraWhere = extraWhere.length ? `AND ${extraWhere.join(' AND ')}` : '';
+			const extraWhere: [string, number][] = [];
+			if (className === 'Note') extraWhere.push(['is_conflict', 0]);
+			if (className === 'Resource') extraWhere.push(['encryption_blob_encrypted', 0]);
+			if (ItemClass.encryptionSupported()) extraWhere.push(['encryption_applied', 0]);
 
 			// First get all the items that have never been synced under this sync target
 			//
@@ -763,24 +759,14 @@ export default class BaseItem extends BaseModel {
 			// data set it does. In that case it means the recent notes, those that are likely
 			// to be modified again, will be synced first, thus avoiding potential conflicts.
 
-			const sql = sprintf(`
-				SELECT %s
-				FROM %s items
-				WHERE id NOT IN (
-					SELECT item_id FROM sync_items WHERE sync_target = %d
-				)
-				%s
-				ORDER BY items.updated_time DESC
-				LIMIT %d
-			`,
-			this.db().escapeFields(fieldNames),
-			this.db().escapeField(ItemClass.tableName()),
-			Number(syncTarget),
-			extraWhere,
-			limit,
-			);
+			const syncedItemIds = genericKysely.selectFrom('sync_items').select('item_id').where('sync_target', '=', Number(syncTarget));
+			let neverSyncedQuery = genericKysely
+				.selectFrom(`${ItemClass.tableName()} as items`)
+				.select(fieldNames)
+				.where('id', 'not in', syncedItemIds);
+			for (const [field, value] of extraWhere) neverSyncedQuery = neverSyncedQuery.where(field, '=', value);
 
-			const neverSyncedItem = await ItemClass.modelSelectAll(sql);
+			const neverSyncedItem = await ItemClass.modelSelectAll(neverSyncedQuery.orderBy('items.updated_time', 'desc').limit(limit));
 
 			// Secondly get the items that have been synced under this sync target but that have been changed since then
 
@@ -792,25 +778,16 @@ export default class BaseItem extends BaseModel {
 				fieldNames.push('sync_time');
 				fieldNames.push('remote_item_updated_time');
 
-				const sql = sprintf(
-					`
-					SELECT %s FROM %s items
-					JOIN sync_items s ON s.item_id = items.id
-					WHERE sync_target = %d
-					AND (s.sync_time < items.updated_time OR force_sync = 1)
-					AND s.sync_disabled = 0
-					%s
-					ORDER BY items.updated_time DESC
-					LIMIT %d
-				`,
-					this.db().escapeFields(fieldNames),
-					this.db().escapeField(ItemClass.tableName()),
-					Number(syncTarget),
-					extraWhere,
-					newLimit,
-				);
+				let changedQuery = genericKysely
+					.selectFrom(`${ItemClass.tableName()} as items`)
+					.innerJoin('sync_items as s', 's.item_id', 'items.id')
+					.select(fieldNames)
+					.where('sync_target', '=', Number(syncTarget))
+					.where(eb => eb.or([eb('s.sync_time', '<', eb.ref('items.updated_time')), eb('force_sync', '=', 1)]))
+					.where('s.sync_disabled', '=', 0);
+				for (const [field, value] of extraWhere) changedQuery = changedQuery.where(field, '=', value);
 
-				changedItems = await ItemClass.modelSelectAll(sql);
+				changedItems = await ItemClass.modelSelectAll(changedQuery.orderBy('items.updated_time', 'desc').limit(newLimit));
 			}
 
 			const neverSyncedItemIds = neverSyncedItem.map((it: BaseItemEntity) => it.id);
@@ -856,7 +833,7 @@ export default class BaseItem extends BaseModel {
 	}
 
 	public static async syncDisabledItems(syncTargetId: number) {
-		const rows = await this.db().selectAll('SELECT * FROM sync_items WHERE sync_disabled = 1 AND sync_target = ?', [syncTargetId]);
+		const rows = await this.db().selectAll(compileQuery(kysely.selectFrom('sync_items').selectAll().where('sync_disabled', '=', 1).where('sync_target', '=', syncTargetId)));
 		const output = [];
 		for (let i = 0; i < rows.length; i++) {
 			const row = rows[i];
@@ -874,12 +851,12 @@ export default class BaseItem extends BaseModel {
 	}
 
 	public static async syncDisabledItemsCount(syncTargetId: number, includeIgnored = false) {
-		const whereQueries = ['sync_disabled = 1', 'sync_target = ?'];
-		const whereArgs = [syncTargetId];
-		if (!includeIgnored) {
-			whereQueries.push('sync_warning_ignored = 0');
-		}
-		const r = await this.db().selectOne(`SELECT count(*) as total FROM sync_items WHERE ${whereQueries.join(' AND ')}`, whereArgs);
+		const r = await this.db().selectOne(compileQuery(kysely
+			.selectFrom('sync_items')
+			.select(eb => eb.fn.countAll().as('total'))
+			.where('sync_disabled', '=', 1)
+			.where('sync_target', '=', syncTargetId)
+			.$if(!includeIgnored, qb => qb.where('sync_warning_ignored', '=', 0))));
 		return r ? r.total : 0;
 	}
 
@@ -896,14 +873,17 @@ export default class BaseItem extends BaseModel {
 		if (itemLocation === null) itemLocation = BaseItem.SYNC_ITEM_LOCATION_LOCAL;
 
 		return [
-			{
-				sql: 'DELETE FROM sync_items WHERE sync_target = ? AND item_type = ? AND item_id = ?',
-				params: [syncTarget, itemType, itemId],
-			},
-			{
-				sql: 'INSERT INTO sync_items (sync_target, item_type, item_id, item_location, sync_time, remote_item_updated_time, sync_disabled, sync_disabled_reason) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-				params: [syncTarget, itemType, itemId, itemLocation, syncTime, remoteItemUpdatedTime, syncDisabled ? 1 : 0, `${syncDisabledReason}`],
-			},
+			compileQuery(kysely.deleteFrom('sync_items').where('sync_target', '=', syncTarget).where('item_type', '=', itemType).where('item_id', '=', itemId)),
+			compileQuery(insertRow('sync_items', {
+				sync_target: syncTarget,
+				item_type: itemType,
+				item_id: itemId,
+				item_location: itemLocation,
+				sync_time: syncTime,
+				remote_item_updated_time: remoteItemUpdatedTime,
+				sync_disabled: syncDisabled ? 1 : 0,
+				sync_disabled_reason: `${syncDisabledReason}`,
+			})),
 		];
 	}
 
@@ -921,16 +901,14 @@ export default class BaseItem extends BaseModel {
 	}
 
 	public static async saveSyncEnabled(itemType: ModelType, itemId: string) {
-		await this.db().exec('DELETE FROM sync_items WHERE item_type = ? AND item_id = ?', [itemType, itemId]);
+		await this.db().exec(compileQuery(kysely.deleteFrom('sync_items').where('item_type', '=', itemType).where('item_id', '=', itemId)));
 	}
 
 	public static async ignoreItemSyncWarning(syncTarget: number, item: { type_?: number; id?: string }) {
 		checkObjectHasProperties(item, ['type_', 'id']);
 		const itemType = item.type_;
 		const itemId = item.id;
-		const sql = 'UPDATE sync_items SET sync_warning_ignored = ? WHERE item_id = ? AND item_type = ? AND sync_target = ?';
-		const params = [1, itemId, itemType, syncTarget];
-		await this.db().exec(sql, params);
+		await this.db().exec(compileQuery(kysely.updateTable('sync_items').set({ sync_warning_ignored: 1 }).where('item_id', '=', itemId).where('item_type', '=', itemType).where('sync_target', '=', syncTarget)));
 	}
 
 	// When an item is deleted, its associated sync_items data is not immediately deleted for
@@ -944,10 +922,14 @@ export default class BaseItem extends BaseModel {
 			const className = classNames[i];
 			const ItemClass = this.getClass(className);
 
-			let selectSql = `SELECT id FROM ${ItemClass.tableName()}`;
-			if (ItemClass.modelType() === this.TYPE_NOTE) selectSql += ' WHERE is_conflict = 0';
+			let existingItemIds = genericKysely.selectFrom(ItemClass.tableName()).select('id');
+			if (ItemClass.modelType() === this.TYPE_NOTE) existingItemIds = existingItemIds.where('is_conflict', '=', 0);
 
-			queries.push(`DELETE FROM sync_items WHERE item_location = ${BaseItem.SYNC_ITEM_LOCATION_LOCAL} AND item_type = ${ItemClass.modelType()} AND item_id NOT IN (${selectSql})`);
+			queries.push(compileQuery(genericKysely
+				.deleteFrom('sync_items')
+				.where('item_location', '=', BaseItem.SYNC_ITEM_LOCATION_LOCAL)
+				.where('item_type', '=', ItemClass.modelType())
+				.where('item_id', 'not in', existingItemIds)));
 		}
 
 		await this.db().transactionExecBatch(queries);
@@ -966,19 +948,11 @@ export default class BaseItem extends BaseModel {
 			const className = classNames[i];
 			const ItemClass = this.getClass(className);
 
-			const sql = sprintf(
-				`
-				SELECT id
-				FROM %s
-				WHERE encryption_applied = 0`,
-				this.db().escapeField(ItemClass.tableName()),
-			);
-
-			const items = await ItemClass.modelSelectAll<{ id: string }>(sql);
+			const items = await ItemClass.modelSelectAll<{ id: string }>(genericKysely.selectFrom(ItemClass.tableName()).select('id').where('encryption_applied', '=', 0));
 			const ids = items.map(item => item.id);
 			if (!ids.length) continue;
 
-			await this.db().exec(`UPDATE sync_items SET force_sync = 1 WHERE item_id IN (${this.escapeIdsForSql(ids)})`);
+			await this.db().exec(compileQuery(kysely.updateTable('sync_items').set({ force_sync: 1 }).where(inLiterals('item_id', ids))));
 		}
 	}
 
@@ -1002,11 +976,11 @@ export default class BaseItem extends BaseModel {
 	}
 
 	public static async forceSync(itemId: string) {
-		await this.db().exec('UPDATE sync_items SET force_sync = 1 WHERE item_id = ?', [itemId]);
+		await this.db().exec(compileQuery(kysely.updateTable('sync_items').set({ force_sync: 1 }).where('item_id', '=', itemId)));
 	}
 
 	public static async forceSyncAll() {
-		await this.db().exec('UPDATE sync_items SET force_sync = 1');
+		await this.db().exec(compileQuery(kysely.updateTable('sync_items').set({ force_sync: 1 })));
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- save() accepts any BaseItemEntity subclass plus disable-readonly options; subclasses override with stricter per-entity types

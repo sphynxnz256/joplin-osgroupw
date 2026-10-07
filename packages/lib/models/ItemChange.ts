@@ -1,4 +1,6 @@
 import BaseModel, { ModelType } from '../BaseModel';
+import kysely, { compileQuery, insertRow } from '../services/database/kysely/kysely';
+import { ItemChangesTable } from '../services/database/kysely/tables';
 import shim from '../shim';
 import eventManager, { EventName } from '../eventManager';
 import { ItemChangeEntity, SqlQuery } from '../services/database/types';
@@ -68,15 +70,16 @@ export default class ItemChange extends BaseModel {
 				const itemId = itemIds[i];
 				const beforeChangeItemJson = beforeChangeItemJsons ? beforeChangeItemJsons[i] : '';
 
-				queries.push({
-					sql: 'DELETE FROM item_changes WHERE item_id = ?',
-					params: [itemId],
-				});
+				queries.push(compileQuery(kysely.deleteFrom('item_changes').where('item_id', '=', itemId)));
 
-				queries.push({
-					sql: 'INSERT INTO item_changes (item_type, item_id, type, source, created_time, before_change_item) VALUES (?, ?, ?, ?, ?, ?)',
-					params: [itemType, itemId, type, changeSource, Date.now(), beforeChangeItemJson],
-				});
+				queries.push(compileQuery(insertRow('item_changes', {
+					item_type: itemType,
+					item_id: itemId,
+					type: type,
+					source: changeSource,
+					created_time: Date.now(),
+					before_change_item: beforeChangeItemJson,
+				})));
 			}
 
 			await this.db().transactionExecBatch(queries);
@@ -103,7 +106,7 @@ export default class ItemChange extends BaseModel {
 	}
 
 	public static async lastChangeId() {
-		const row = await this.db().selectOne('SELECT max(id) as max_id FROM item_changes');
+		const row = await this.db().selectOne(compileQuery(kysely.selectFrom('item_changes').select(eb => eb.fn.max('id').as('max_id'))));
 		return row && row.max_id ? row.max_id : 0;
 	}
 
@@ -125,11 +128,7 @@ export default class ItemChange extends BaseModel {
 
 		const cutOffDate = Date.now() - itemMinTtl;
 
-		return this.db().exec(`
-			DELETE FROM item_changes
-			WHERE id <= ?
-			AND created_time <= ?
-		`, [lowestChangeId, cutOffDate]);
+		return this.db().exec(compileQuery(kysely.deleteFrom('item_changes').where('id', '<=', lowestChangeId).where('created_time', '<=', cutOffDate)));
 	}
 
 	public static async changesSinceId(changeId: number, options: ChangeSinceIdOptions = null): Promise<ItemChangeEntity[]> {
@@ -139,23 +138,11 @@ export default class ItemChange extends BaseModel {
 			...options,
 		};
 
-		return this.db().selectAll(`
-			SELECT ${this.db().escapeFieldsToString(options.fields)}
-			FROM item_changes
-			WHERE id > ?
-			ORDER BY id
-			LIMIT ?
-		`, [changeId, options.limit]);
+		return this.db().selectAll(compileQuery(kysely.selectFrom('item_changes').select(options.fields as (keyof ItemChangesTable)[]).where('id', '>', changeId).orderBy('id').limit(options.limit)));
 	}
 
 	public static async itemChange(itemType: ModelType, itemId: string): Promise<ItemChangeEntity> {
-		return await this.db().selectOne(`
-			SELECT item_type, item_id, type, source, created_time, before_change_item
-			FROM item_changes
-			WHERE item_type = ? AND item_id = ?
-			ORDER BY created_time DESC
-			LIMIT 1
-		`, [itemType, itemId]);
+		return await this.db().selectOne(compileQuery(kysely.selectFrom('item_changes').select(['item_type', 'item_id', 'type', 'source', 'created_time', 'before_change_item']).where('item_type', '=', itemType).where('item_id', '=', itemId).orderBy('created_time', 'desc').limit(1)));
 	}
 
 	public static async oldNoteContent(noteId: string): Promise<string> {

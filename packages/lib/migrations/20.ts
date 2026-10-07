@@ -1,4 +1,5 @@
 import Resource from '../models/Resource';
+import kysely, { compileQuery } from '../services/database/kysely/kysely';
 import Setting from '../models/Setting';
 import shim from '../shim';
 import { reg } from '../registry';
@@ -20,7 +21,7 @@ script.exec = async () => {
 		const resourceId = Resource.pathToId(stat.path);
 		if (!resourceId) continue;
 
-		queries.push({ sql: 'UPDATE resources SET `size` = ? WHERE id = ?', params: [stat.size, resourceId] });
+		queries.push(compileQuery(kysely.updateTable('resources').set({ size: stat.size }).where('id', '=', resourceId)));
 
 		if (queries.length >= 1000) {
 			await reg.db().transactionExecBatch(queries);

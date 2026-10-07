@@ -1,7 +1,8 @@
+import { addColumnQuery, intDefaultingTo } from '../kysely/schema';
 import { SqlQuery } from '../types';
 
-export default (): (SqlQuery|string)[] => {
+export default (): SqlQuery[] => {
 	return [
-		'ALTER TABLE sync_items ADD COLUMN sync_warning_ignored INT NOT NULL DEFAULT "0"',
+		addColumnQuery('sync_items', 'sync_warning_ignored', intDefaultingTo(0, true)),
 	];
 };

@@ -1,7 +1,8 @@
+import { addColumnQuery, intDefaultingTo } from '../kysely/schema';
 import { SqlQuery } from '../types';
 
-export default (): (SqlQuery|string)[] => {
+export default (): SqlQuery[] => {
 	return [
-		'ALTER TABLE sync_items ADD COLUMN remote_item_updated_time INT NOT NULL DEFAULT 0',
+		addColumnQuery('sync_items', 'remote_item_updated_time', intDefaultingTo(0)),
 	];
 };

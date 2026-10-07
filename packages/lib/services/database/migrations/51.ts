@@ -1,17 +1,18 @@
+import { addColumnQuery, createTableQuery, emptyText, intDefaultingTo, textPrimaryKey } from '../kysely/schema';
 import { SqlQuery } from '../types';
 
-export default (): (SqlQuery|string)[] => {
+export default (): SqlQuery[] => {
 	return [
-		'ALTER TABLE sync_items ADD COLUMN base_body TEXT NOT NULL DEFAULT ""',
-		'ALTER TABLE sync_items ADD COLUMN base_title TEXT NOT NULL DEFAULT ""',
-		'ALTER TABLE sync_items ADD COLUMN base_conflict_note_id TEXT NOT NULL DEFAULT ""',
-		`CREATE TABLE IF NOT EXISTS conflict_note_states (
-			note_id TEXT PRIMARY KEY,
-			base_body TEXT NOT NULL DEFAULT "",
-			base_title TEXT NOT NULL DEFAULT "",
-			remote_body TEXT NOT NULL DEFAULT "",
-			remote_title TEXT NOT NULL DEFAULT "",
-			remote_updated_time INT NOT NULL DEFAULT 0
-		)`,
+		addColumnQuery('sync_items', 'base_body', emptyText),
+		addColumnQuery('sync_items', 'base_title', emptyText),
+		addColumnQuery('sync_items', 'base_conflict_note_id', emptyText),
+		createTableQuery('conflict_note_states', {
+			note_id: textPrimaryKey,
+			base_body: emptyText,
+			base_title: emptyText,
+			remote_body: emptyText,
+			remote_title: emptyText,
+			remote_updated_time: intDefaultingTo(0),
+		}, { ifNotExists: true }),
 	];
 };
