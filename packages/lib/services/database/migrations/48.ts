@@ -1,7 +1,8 @@
 import { SqlQuery } from '../types';
+import { addColumnQuery, required } from '../kysely/rawFragments/schema';
 
 export default (): (SqlQuery|string)[] => {
 	return [
-		'ALTER TABLE `resources` ADD COLUMN `ocr_driver_id` INT NOT NULL DEFAULT "1"',
+		addColumnQuery('resources', 'ocr_driver_id', required('INT', '1')),
 	];
 };

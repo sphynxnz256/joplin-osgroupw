@@ -1,7 +1,8 @@
 import { SqlQuery } from '../types';
+import { addColumnQuery, required } from '../kysely/rawFragments/schema';
 
 export default (): (SqlQuery|string)[] => {
 	return [
-		'ALTER TABLE sync_items ADD COLUMN sync_warning_ignored INT NOT NULL DEFAULT "0"',
+		addColumnQuery('sync_items', 'sync_warning_ignored', required('INT', '0')),
 	];
 };

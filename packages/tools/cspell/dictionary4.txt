@@ -341,3 +341,10 @@ Socialboom
 AABB
 Koofr
 undecryptable
+
+kysely
+ctes
+introspector
+matchlen
+langid
+eperm

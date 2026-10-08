@@ -4,6 +4,9 @@ import shim from './shim';
 import { SqlParams, SqlQuery, StringOrSqlQuery } from './services/database/types';
 
 import { Mutex } from 'async-mutex';
+import { sql } from 'kysely';
+import { compile, kysely, undefinedToNull } from './services/database/kysely';
+import { DB } from './services/database/kysely/tables';
 
 // Row values come back as SQLite primitives (string|number|null|Buffer for BLOBs)
 // but per-table column shapes vary, and callers across the codebase index without
@@ -78,10 +81,8 @@ export default class Database {
 	public escapeField(field: string) {
 		if (field === '*') return '*';
 		const p = field.split('.');
-		if (p.length === 1) return `\`${field}\``;
-		if (p.length === 2) return `${p[0]}.\`${p[1]}\``;
-
-		throw new Error(`Invalid field format: ${field}`);
+		if (p.length > 2) throw new Error(`Invalid field format: ${field}`);
+		return sql.id(...p).compile(kysely).sql;
 	}
 
 	public escapeFields(fields: string[] | string): string[] | string {
@@ -95,23 +96,8 @@ export default class Database {
 	}
 
 	public escapeValues(values: string[]) {
-		return values.map(value => {
-			// See https://www.sqlite.org/printf.html#percentq
-			return `'${value.replace(/[']/g, '\'\'')}'`;
-		});
-	}
-
-	public escapeFieldsToString(fields: string[] | string): string {
-		if (typeof fields === 'string') {
-			if (fields === '*') return '*';
-			throw new Error(`Invalid field value (only "*" is supported): ${fields}`);
-		}
-
-		const output = [];
-		for (let i = 0; i < fields.length; i++) {
-			output.push(this.escapeField(fields[i]));
-		}
-		return output.join(',');
+		// See https://www.sqlite.org/printf.html#percentq
+		return values.map(value => sql.lit(value).compile(kysely).sql);
 	}
 
 	public async tryCall(callName: string, inputSql: StringOrSqlQuery, inputParams: SqlParams) {
@@ -294,83 +280,56 @@ export default class Database {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- data is an arbitrary entity slice (e.g. NoteEntity, FolderEntity); narrowing forces index-signature errors at call sites
 	public static insertQuery(tableName: string, data: Record<string, any>) {
 		if (!data || !Object.keys(data).length) throw new Error('Data is empty');
-
-		let keySql = '';
-		let valueSql = '';
-		const params = [];
-		for (const key in data) {
-			if (!data.hasOwnProperty(key)) continue;
-			if (key[key.length - 1] === '_') continue;
-			if (keySql !== '') keySql += ', ';
-			if (valueSql !== '') valueSql += ', ';
-			keySql += `\`${key}\``;
-			valueSql += '?';
-			params.push(data[key]);
-		}
-		return {
-			sql: `INSERT INTO \`${tableName}\` (${keySql}) VALUES (${valueSql})`,
-			params: params,
-		};
+		return compile(kysely.insertInto(tableName as keyof DB).values(undefinedToNull(this.filterWritableKeys(data)) as never));
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- See insertQuery above
 	public static updateQuery(tableName: string, data: Record<string, any>, where: string | Record<string, any>) {
 		if (!data || !Object.keys(data).length) throw new Error('Data is empty');
 
-		let sql = '';
-		const params = [];
-		for (const key in data) {
-			if (!data.hasOwnProperty(key)) continue;
-			if (key[key.length - 1] === '_') continue;
-			if (sql !== '') sql += ', ';
-			sql += `\`${key}\`=?`;
-			params.push(data[key]);
+		let query = kysely.updateTable(tableName as keyof DB).set(undefinedToNull(this.filterWritableKeys(data)) as never);
+		if (typeof where === 'string') {
+			query = query.where(sql<boolean>`${sql.raw(where)}`);
+		} else {
+			for (const n of Object.keys(where)) query = query.where(sql.id(n), '=', undefinedToNull({ v: where[n] }).v as never);
 		}
+		return compile(query);
+	}
 
-		if (typeof where !== 'string') {
-			const s = [];
-			for (const n in where) {
-				if (!where.hasOwnProperty(n)) continue;
-				params.push(where[n]);
-				s.push(`\`${n}\`=?`);
-			}
-			where = s.join(' AND ');
+	// Keys ending with "_" are not database columns
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- See insertQuery above
+	private static filterWritableKeys(data: Record<string, any>) {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- See insertQuery above
+		const output: Record<string, any> = {};
+		for (const key of Object.keys(data)) {
+			if (key[key.length - 1] !== '_') output[key] = data[key];
 		}
-
-		return {
-			sql: `UPDATE \`${tableName}\` SET ${sql} WHERE ${where}`,
-			params: params,
-		};
+		return output;
 	}
 
 	public alterColumnQueries(tableName: string, fields: Record<string, string>) {
-		const fieldsNoType = [];
-		for (const n in fields) {
-			if (!fields.hasOwnProperty(n)) continue;
-			fieldsNoType.push(n);
-		}
+		const names = Object.keys(fields);
+		const backupName = `${tableName}_backup`;
 
-		const fieldsWithType = [];
-		for (const n in fields) {
-			if (!fields.hasOwnProperty(n)) continue;
-			fieldsWithType.push(`${this.escapeField(n)} ${fields[n]}`);
-		}
+		const createTable = (name: string, temporary: boolean) => {
+			let builder = kysely.schema.createTable(name);
+			if (temporary) builder = builder.temporary();
+			for (const n of names) builder = builder.addColumn(n, sql.raw(fields[n]));
+			return compile(builder).sql;
+		};
 
-		let sql = `
-			CREATE TEMPORARY TABLE _BACKUP_TABLE_NAME_(_FIELDS_TYPE_);
-			INSERT INTO _BACKUP_TABLE_NAME_ SELECT _FIELDS_NO_TYPE_ FROM _TABLE_NAME_;
-			DROP TABLE _TABLE_NAME_;
-			CREATE TABLE _TABLE_NAME_(_FIELDS_TYPE_);
-			INSERT INTO _TABLE_NAME_ SELECT _FIELDS_NO_TYPE_ FROM _BACKUP_TABLE_NAME_;
-			DROP TABLE _BACKUP_TABLE_NAME_;
-		`;
+		const copy = (to: string, from: string) => {
+			return compile(kysely.insertInto(to as keyof DB).expression(kysely.selectFrom(from as keyof DB).select(names as never[]))).sql;
+		};
 
-		sql = sql.replace(/_BACKUP_TABLE_NAME_/g, this.escapeField(`${tableName}_backup`));
-		sql = sql.replace(/_TABLE_NAME_/g, this.escapeField(tableName));
-		sql = sql.replace(/_FIELDS_NO_TYPE_/g, (this.escapeFields(fieldsNoType) as string[]).join(','));
-		sql = sql.replace(/_FIELDS_TYPE_/g, fieldsWithType.join(','));
-
-		return sql.trim().split('\n');
+		return [
+			createTable(backupName, true),
+			copy(backupName, tableName),
+			compile(kysely.schema.dropTable(tableName)).sql,
+			createTable(tableName, false),
+			copy(tableName, backupName),
+			compile(kysely.schema.dropTable(backupName)).sql,
+		].map(q => `${q};`);
 	}
 
 	public wrapQueries(queries: (string | SqlQuery | [string, SqlParams?])[]) {

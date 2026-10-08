@@ -1,10 +1,11 @@
 import { SqlQuery } from '../types';
+import { addColumnQuery, required } from '../kysely/rawFragments/schema';
 
 export default (): (SqlQuery|string)[] => {
 	return [
-		'ALTER TABLE notes ADD COLUMN is_locked INT NOT NULL DEFAULT 0',
-		'ALTER TABLE notes ADD COLUMN extracted_resource_ids TEXT NOT NULL DEFAULT ""',
-		'ALTER TABLE revisions ADD COLUMN is_locked INT NOT NULL DEFAULT 0',
-		'ALTER TABLE resources ADD COLUMN is_locked INT NOT NULL DEFAULT 0',
+		addColumnQuery('notes', 'is_locked', required('INT', 0)),
+		addColumnQuery('notes', 'extracted_resource_ids', required('TEXT', '')),
+		addColumnQuery('revisions', 'is_locked', required('INT', 0)),
+		addColumnQuery('resources', 'is_locked', required('INT', 0)),
 	];
 };

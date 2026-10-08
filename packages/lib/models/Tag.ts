@@ -7,6 +7,8 @@ import Note, { PreviewsOptions } from './Note';
 import { _ } from '../locale';
 import ActionLogger from '../utils/ActionLogger';
 import { LoadOptions, SaveOptions } from './utils/types';
+import { sql, SqlBool } from 'kysely';
+import { compile, kysely } from '../services/database/kysely';
 
 export default class Tag extends BaseItem {
 	public static tableName() {
@@ -18,12 +20,14 @@ export default class Tag extends BaseItem {
 	}
 
 	public static async noteIds(tagId: string) {
-		const rows = await this.db().selectAll(`
-			SELECT note_id
-			FROM note_tags
-			LEFT JOIN notes ON notes.id = note_tags.note_id
-			WHERE tag_id = ? AND notes.deleted_time = 0
-		`, [tagId]);
+		const q = compile(
+			kysely.selectFrom('note_tags')
+				.leftJoin('notes', 'notes.id', 'note_tags.note_id')
+				.select('note_tags.note_id')
+				.where('note_tags.tag_id', '=', tagId)
+				.where('notes.deleted_time', '=', 0),
+		);
+		const rows = await this.db().selectAll(q.sql, q.params);
 		const output = [];
 		for (let i = 0; i < rows.length; i++) {
 			output.push(rows[i].note_id);
@@ -39,13 +43,13 @@ export default class Tag extends BaseItem {
 
 		return Note.previews(
 			null,
-			{ ...options, conditions: [`id IN (${this.escapeIdsForSql(noteIds)})`] },
+			{ ...options, noteIds },
 		);
 	}
 
 	// Untag all the notes and delete tag
 	public static async untagAll(tagId: string) {
-		const noteTags = await NoteTag.modelSelectAll('SELECT id FROM note_tags WHERE tag_id = ?', [tagId]);
+		const noteTags = await NoteTag.modelSelectAll(kysely.selectFrom('note_tags').select('id').where('tag_id', '=', tagId));
 		for (let i = 0; i < noteTags.length; i++) {
 			await NoteTag.delete(noteTags[i].id, { sourceDescription: 'untagAll/disassociate note' });
 		}
@@ -106,7 +110,7 @@ export default class Tag extends BaseItem {
 
 		const actionLogger = ActionLogger.from(`Tag/removeNote - tag: ${tag.title}`);
 
-		const noteTags = await NoteTag.modelSelectAll('SELECT id FROM note_tags WHERE tag_id = ? and note_id = ?', [tagId, noteId]);
+		const noteTags = await NoteTag.modelSelectAll(kysely.selectFrom('note_tags').select('id').where('tag_id', '=', tagId).where('note_id', '=', noteId));
 		for (let i = 0; i < noteTags.length; i++) {
 			await NoteTag.delete(noteTags[i].id, { sourceDescription: actionLogger.clone() });
 		}
@@ -119,30 +123,33 @@ export default class Tag extends BaseItem {
 	}
 
 	public static loadWithCount(tagId: string) {
-		const sql = 'SELECT * FROM tags_with_note_count WHERE id = ?';
-		return this.modelSelectOne(sql, [tagId]);
+		return this.modelSelectOne(kysely.selectFrom('tags_with_note_count').selectAll().where('id', '=', tagId));
 	}
 
 	public static async hasNote(tagId: string, noteId: string) {
-		const r = await this.db().selectOne(`
-			SELECT note_id
-			FROM note_tags
-			LEFT JOIN notes ON notes.id = note_tags.note_id
-			WHERE tag_id = ? AND note_id = ? AND deleted_time = 0
-			LIMIT 1
-		`, [tagId, noteId]);
+		const q = compile(
+			kysely.selectFrom('note_tags')
+				.leftJoin('notes', 'notes.id', 'note_tags.note_id')
+				.select('note_tags.note_id')
+				.where('note_tags.tag_id', '=', tagId)
+				.where('note_tags.note_id', '=', noteId)
+				.where('notes.deleted_time', '=', 0)
+				.limit(1),
+		);
+		const r = await this.db().selectOne(q.sql, q.params);
 		return !!r;
 	}
 
 	public static async allWithNotes(): Promise<TagsWithNoteCountEntity[]> {
-		return await Tag.modelSelectAll('SELECT * FROM tags_with_note_count');
+		return await Tag.modelSelectAll(kysely.selectFrom('tags_with_note_count').selectAll());
 	}
 
 	public static async searchAllWithNotes(options: SearchOptions) {
 		if (!options) options = {};
-		if (!options.conditions) options.conditions = [];
-		options.conditions.push('id IN (SELECT distinct id FROM tags_with_note_count)');
-		return this.search(options);
+		if ('limit' in options && options.limit <= 0) return [];
+		let query = this.selectQuery(options as LoadOptions).where('id', 'in', kysely.selectFrom('tags_with_note_count').select('id').distinct());
+		if (options.titlePattern) query = query.where('title', 'like', options.titlePattern.replace(/\*/g, '%'));
+		return this.modelSelectAll(query);
 	}
 
 	public static async tagsByNoteId(noteId: string, options: LoadOptions = null) {
@@ -152,7 +159,7 @@ export default class Tag extends BaseItem {
 
 		const tagIds = await NoteTag.tagIdsByNoteId(noteId);
 		if (!tagIds.length) return [];
-		return this.modelSelectAll(`SELECT ${options.fields ? this.db().escapeFields(options.fields) : '*'} FROM tags WHERE id IN (${this.escapeIdsForSql(tagIds)})`);
+		return this.modelSelectAll(this.selectQuery({ fields: options.fields }).where('id', 'in', tagIds));
 	}
 
 	public static async commonTagsByNoteIds(noteIds: string[]) {
@@ -167,7 +174,11 @@ export default class Tag extends BaseItem {
 				break;
 			}
 		}
-		return this.modelSelectAll(`SELECT * FROM tags WHERE id IN (${this.escapeIdsForSql(commonTagIds)})`);
+		return this.modelSelectAll(this.selectQuery().where('id', 'in', commonTagIds));
+	}
+
+	private static loadByTitleNoCase_(title: string) {
+		return this.modelSelectOne(this.selectQuery().where(sql<SqlBool>`${sql.ref('title')} = ${title} collate nocase`).orderBy('created_time', 'asc'));
 	}
 
 	public static async loadByTitle(title: string): Promise<TagEntity | null> {
@@ -178,11 +189,11 @@ export default class Tag extends BaseItem {
 		// We use a manual query here instead of loadByField to ensure deterministic ordering (ORDER BY created_time ASC)
 		// when visually similar tags exist in the database.
 		// We use created_time instead of id because IDs are UUIDs and cannot be meaningfully ordered.
-		const tag = await this.modelSelectOne(`SELECT * FROM ${this.tableName()} WHERE title = ? COLLATE NOCASE ORDER BY created_time ASC`, [trimmedTitle]);
+		const tag = await this.loadByTitleNoCase_(trimmedTitle);
 		if (tag) return tag;
 
 		if (normalizedTitle !== trimmedTitle) {
-			return await this.modelSelectOne(`SELECT * FROM ${this.tableName()} WHERE title = ? COLLATE NOCASE ORDER BY created_time ASC`, [normalizedTitle]);
+			return await this.loadByTitleNoCase_(normalizedTitle);
 		}
 
 		return null;

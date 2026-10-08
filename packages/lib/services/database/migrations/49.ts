@@ -1,7 +1,8 @@
 import { SqlQuery } from '../types';
+import { addColumnQuery, required } from '../kysely/rawFragments/schema';
 
 export default (): (SqlQuery|string)[] => {
 	return [
-		'ALTER TABLE sync_items ADD COLUMN remote_item_updated_time INT NOT NULL DEFAULT 0',
+		addColumnQuery('sync_items', 'remote_item_updated_time', required('INT', 0)),
 	];
 };

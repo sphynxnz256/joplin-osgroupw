@@ -1,6 +1,9 @@
 import BaseModel from '../BaseModel';
 import JoplinDatabase from '../JoplinDatabase';
-import { NoteEmbeddingsMetaEntity } from '../services/database/types';
+import { NoteEmbeddingsMetaEntity, SqlQuery } from '../services/database/types';
+import { sql } from 'kysely';
+import { compile, insertRow, kysely } from '../services/database/kysely';
+import { createVecTableQuery, deleteAllVecRowsQuery, deleteVecRowsQuery, insertVecRowQuery, lastInsertRowidQuery, vecDistance, vecMatch, vecTableExistsQuery, vecToJson } from '../services/database/kysely/rawFragments/vector';
 
 // Storage for per-note chunk embeddings.
 //
@@ -62,30 +65,23 @@ export default class NoteEmbedding extends BaseModel {
 	// Called lazily — CREATE VIRTUAL TABLE fails without sqlite-vec loaded.
 	public static async ensureVecTable(dimension: number) {
 		this.requireVec();
-		await this.db().exec(
-			`CREATE VIRTUAL TABLE IF NOT EXISTS note_embeddings_vec USING vec0(embedding FLOAT[${dimension}])`,
-		);
+		await this.db().exec(createVecTableQuery(dimension));
 	}
 
 	public static async byNoteId(noteId: string): Promise<NoteEmbeddingsMetaEntity[]> {
-		return this.db().selectAll<NoteEmbeddingsMetaEntity>(
-			'SELECT * FROM note_embeddings_meta WHERE note_id = ? ORDER BY chunk_index ASC',
-			[noteId],
-		);
+		const q = compile(kysely.selectFrom('note_embeddings_meta').selectAll().where('note_id', '=', noteId).orderBy('chunk_index', 'asc'));
+		return this.db().selectAll<NoteEmbeddingsMetaEntity>(q.sql, q.params);
 	}
 
 	public static async countByNoteId(noteId: string): Promise<number> {
-		const row = await this.db().selectOne(
-			'SELECT COUNT(*) AS c FROM note_embeddings_meta WHERE note_id = ?',
-			[noteId],
-		) as { c: number } | null;
+		const q = compile(kysely.selectFrom('note_embeddings_meta').select(sql<number>`COUNT(*)`.as('c')).where('note_id', '=', noteId));
+		const row = await this.db().selectOne(q.sql, q.params) as { c: number } | null;
 		return row?.c ?? 0;
 	}
 
 	public static async distinctNoteIdCount(): Promise<number> {
-		const row = await this.db().selectOne(
-			'SELECT COUNT(DISTINCT note_id) AS c FROM note_embeddings_meta',
-		) as { c: number } | null;
+		const q = compile(kysely.selectFrom('note_embeddings_meta').select(sql<number>`COUNT(DISTINCT note_id)`.as('c')));
+		const row = await this.db().selectOne(q.sql, q.params) as { c: number } | null;
 		return row?.c ?? 0;
 	}
 
@@ -93,44 +89,37 @@ export default class NoteEmbedding extends BaseModel {
 	// `excludeIds` lets the caller skip notes that already failed this session,
 	// so a permanently bad note doesn't keep coming back.
 	public static async notYetIndexedNoteIds(limit: number, excludeIds: string[] = []): Promise<string[]> {
-		const excludeSql = excludeIds.length
-			? ` AND n.id NOT IN (${excludeIds.map(() => '?').join(',')})`
-			: '';
-		const rows = await this.db().selectAll<{ id: string }>(
-			`SELECT n.id FROM notes n
-			 WHERE (n.deleted_time IS NULL OR n.deleted_time = 0)
-			   AND (n.is_conflict IS NULL OR n.is_conflict = 0)
-			   AND n.is_locked = 0
-			   AND NOT EXISTS (SELECT 1 FROM note_embeddings_meta m WHERE m.note_id = n.id)${excludeSql}
-			 LIMIT ?`,
-			[...excludeIds, limit],
-		);
+		let query = kysely.selectFrom('notes as n')
+			.select('n.id')
+			.where(eb => eb.or([eb('n.deleted_time', 'is', null), eb('n.deleted_time', '=', 0)]))
+			.where(eb => eb.or([eb('n.is_conflict', 'is', null), eb('n.is_conflict', '=', 0)]))
+			.where('n.is_locked', '=', 0)
+			.where(eb => eb.not(eb.exists(eb.selectFrom('note_embeddings_meta as m').select(sql.lit(1).as('one')).whereRef('m.note_id', '=', 'n.id'))));
+		if (excludeIds.length) query = query.where('n.id', 'not in', excludeIds);
+		const q = compile(query.limit(limit));
+		const rows = await this.db().selectAll<{ id: string }>(q.sql, q.params);
 		return rows.map(r => r.id);
 	}
 
 	// Vec-table delete is guarded by sqliteVecAvailable() AND vecTableExists()
 	// because saveChunks creates the vec table lazily.
 	public static async deleteByNoteId(noteId: string) {
-		const rows = await this.db().selectAll<{ id: number }>(
-			'SELECT id FROM note_embeddings_meta WHERE note_id = ?',
-			[noteId],
-		);
+		const idsQuery = compile(kysely.selectFrom('note_embeddings_meta').select('id').where('note_id', '=', noteId));
+		const rows = await this.db().selectAll<{ id: number }>(idsQuery.sql, idsQuery.params);
 		if (!rows.length) return;
 		const ids = rows.map(r => r.id);
-		const placeholders = ids.map(() => '?').join(',');
-		const queries: { sql: string; params: (string|number)[] }[] = [
-			{ sql: `DELETE FROM note_embeddings_meta WHERE id IN (${placeholders})`, params: ids },
+		const queries: SqlQuery[] = [
+			compile(kysely.deleteFrom('note_embeddings_meta').where('id', 'in', ids)),
 		];
 		if (this.joplinDb().sqliteVecAvailable() && await this.vecTableExists()) {
-			queries.push({ sql: `DELETE FROM note_embeddings_vec WHERE rowid IN (${placeholders})`, params: ids });
+			queries.push(deleteVecRowsQuery(ids));
 		}
 		await this.db().transactionExecBatch(queries);
 	}
 
 	private static async vecTableExists(): Promise<boolean> {
-		const row = await this.db().selectOne(
-			'SELECT name FROM sqlite_master WHERE type=\'table\' AND name=\'note_embeddings_vec\'',
-		) as { name: string } | null;
+		const q = vecTableExistsQuery();
+		const row = await this.db().selectOne(q.sql, q.params) as { name: string } | null;
 		return !!row;
 	}
 
@@ -160,11 +149,15 @@ export default class NoteEmbedding extends BaseModel {
 			// node-sqlite3's exec() doesn't return the insert id, so read it
 			// back with last_insert_rowid(). The driver serialises queries on
 			// the same connection so there's no race.
-			await this.db().exec({
-				sql: 'INSERT INTO note_embeddings_meta(note_id, chunk_index, model_id, chunk_text, created_time) VALUES (?, ?, ?, ?, ?)',
-				params: [noteId, chunk.chunkIndex, modelId, chunk.chunkText, now],
-			});
-			const row = await this.db().selectOne('SELECT last_insert_rowid() AS id') as { id: number } | null;
+			await this.db().exec(insertRow('note_embeddings_meta', {
+				note_id: noteId,
+				chunk_index: chunk.chunkIndex,
+				model_id: modelId,
+				chunk_text: chunk.chunkText,
+				created_time: now,
+			}));
+			const lastIdQuery = lastInsertRowidQuery();
+			const row = await this.db().selectOne(lastIdQuery.sql, lastIdQuery.params) as { id: number } | null;
 			const lastID = row?.id;
 			if (!lastID) throw new Error('Failed to obtain rowid after embedding insert');
 
@@ -173,14 +166,8 @@ export default class NoteEmbedding extends BaseModel {
 			// and the vec insert: meta was wiped on the next pass but the vec
 			// row stayed, and sqlite later hands us the same rowid (#15761).
 			// vec0 doesn't support INSERT OR REPLACE — explicit DELETE then INSERT.
-			await this.db().exec({
-				sql: 'DELETE FROM note_embeddings_vec WHERE rowid = ?',
-				params: [lastID],
-			});
-			await this.db().exec({
-				sql: 'INSERT INTO note_embeddings_vec(rowid, embedding) VALUES (?, ?)',
-				params: [lastID, JSON.stringify(chunk.vector)],
-			});
+			await this.db().exec(deleteVecRowsQuery([lastID]));
+			await this.db().exec(insertVecRowQuery(lastID, chunk.vector));
 		}
 	}
 
@@ -202,29 +189,23 @@ export default class NoteEmbedding extends BaseModel {
 		// drop non-matches. Pathological vaults can still under-fill.
 		const fetchSize = options.noteIds?.length ? k * 4 : k;
 
-		const whereParts: string[] = [`v.embedding MATCH ? AND k = ${fetchSize}`];
-		const params: (string|number)[] = [JSON.stringify(queryVector)];
+		let query = kysely.selectFrom('note_embeddings_vec as v')
+			.innerJoin('note_embeddings_meta as m', 'm.id', 'v.rowid')
+			.select(['m.note_id', 'm.chunk_index', 'm.chunk_text', vecDistance().as('distance')])
+			.where(vecMatch(queryVector, fetchSize));
 
 		if (options.noteIds && options.noteIds.length) {
-			whereParts.push(`m.note_id IN (${options.noteIds.map(() => '?').join(',')})`);
-			params.push(...options.noteIds);
+			query = query.where('m.note_id', 'in', options.noteIds);
 		}
 
-		const sql = `
-			SELECT m.note_id, m.chunk_index, m.chunk_text, v.distance
-			FROM note_embeddings_vec v
-			JOIN note_embeddings_meta m ON m.id = v.rowid
-			WHERE ${whereParts.join(' AND ')}
-			ORDER BY v.distance
-			LIMIT ${k}
-		`;
+		const q = compile(query.orderBy(vecDistance()).limit(sql<number>`${sql.raw(String(k))}`));
 
 		const rows = await this.db().selectAll<{
 			note_id: string;
 			chunk_index: number;
 			chunk_text: string;
 			distance: number;
-		}>(sql, params);
+		}>(q.sql, q.params);
 
 		const results = rows.map(r => ({
 			noteId: r.note_id,
@@ -256,17 +237,16 @@ export default class NoteEmbedding extends BaseModel {
 		if (!await this.vecTableExists()) return [];
 		if (options.noteIds && options.noteIds.length === 0) return [];
 
-		const whereParts: string[] = [];
-		const params: (string | number)[] = [];
+		let query = kysely.selectFrom('note_embeddings_meta as m')
+			.innerJoin('note_embeddings_vec as v', 'v.rowid', 'm.id')
+			.select(['m.id', 'm.note_id', 'm.model_id', 'm.chunk_index', 'm.chunk_text', vecToJson('v.embedding').as('embedding')]);
 		if (options.afterRowid !== undefined) {
-			whereParts.push('m.id > ?');
-			params.push(options.afterRowid);
+			query = query.where('m.id', '>', options.afterRowid);
 		}
 		if (options.noteIds && options.noteIds.length) {
-			whereParts.push(`m.note_id IN (${options.noteIds.map(() => '?').join(',')})`);
-			params.push(...options.noteIds);
+			query = query.where('m.note_id', 'in', options.noteIds);
 		}
-		const where = whereParts.length ? `WHERE ${whereParts.join(' AND ')}` : '';
+		const q = compile(query.orderBy('m.id', 'asc').limit(options.limit));
 
 		const rows = await this.db().selectAll<{
 			id: number;
@@ -275,15 +255,7 @@ export default class NoteEmbedding extends BaseModel {
 			chunk_index: number;
 			chunk_text: string;
 			embedding: string;
-		}>(
-			`SELECT m.id, m.note_id, m.model_id, m.chunk_index, m.chunk_text, vec_to_json(v.embedding) AS embedding
-			 FROM note_embeddings_meta m
-			 JOIN note_embeddings_vec v ON v.rowid = m.id
-			 ${where}
-			 ORDER BY m.id ASC
-			 LIMIT ?`,
-			[...params, options.limit],
-		);
+		}>(q.sql, q.params);
 
 		return rows.map(r => ({
 			rowid: r.id,
@@ -300,22 +272,22 @@ export default class NoteEmbedding extends BaseModel {
 	public static async vectorsByNoteId(noteId: string): Promise<number[][]> {
 		this.requireVec();
 		if (!await this.vecTableExists()) return [];
-		const rows = await this.db().selectAll<{ embedding: string }>(
-			`SELECT vec_to_json(v.embedding) AS embedding
-			 FROM note_embeddings_vec v
-			 JOIN note_embeddings_meta m ON m.id = v.rowid
-			 WHERE m.note_id = ?
-			 ORDER BY m.chunk_index ASC`,
-			[noteId],
+		const q = compile(
+			kysely.selectFrom('note_embeddings_vec as v')
+				.innerJoin('note_embeddings_meta as m', 'm.id', 'v.rowid')
+				.select(vecToJson('v.embedding').as('embedding'))
+				.where('m.note_id', '=', noteId)
+				.orderBy('m.chunk_index', 'asc'),
 		);
+		const rows = await this.db().selectAll<{ embedding: string }>(q.sql, q.params);
 		return rows.map(r => JSON.parse(r.embedding) as number[]);
 	}
 
 	// Drops every embedding. Used when the active model's id changes.
 	public static async clearAll() {
-		const queries: string[] = ['DELETE FROM note_embeddings_meta'];
+		const queries: SqlQuery[] = [compile(kysely.deleteFrom('note_embeddings_meta'))];
 		if (this.joplinDb().sqliteVecAvailable() && await this.vecTableExists()) {
-			queries.push('DELETE FROM note_embeddings_vec');
+			queries.push(deleteAllVecRowsQuery());
 		}
 		await this.db().transactionExecBatch(queries);
 	}

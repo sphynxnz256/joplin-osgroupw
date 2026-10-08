@@ -1,0 +1,6395 @@
+{
+	"tableFields": [
+		{
+			"id": 1,
+			"table_name": "folders",
+			"field_name": "id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 2,
+			"table_name": "folders",
+			"field_name": "title",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 3,
+			"table_name": "folders",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 4,
+			"table_name": "folders",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 5,
+			"table_name": "folders",
+			"field_name": "user_created_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 6,
+			"table_name": "folders",
+			"field_name": "user_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 7,
+			"table_name": "folders",
+			"field_name": "encryption_cipher_text",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 8,
+			"table_name": "folders",
+			"field_name": "encryption_applied",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 9,
+			"table_name": "folders",
+			"field_name": "parent_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 10,
+			"table_name": "folders",
+			"field_name": "is_shared",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 11,
+			"table_name": "folders",
+			"field_name": "share_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 12,
+			"table_name": "folders",
+			"field_name": "master_key_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 13,
+			"table_name": "folders",
+			"field_name": "icon",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 14,
+			"table_name": "folders",
+			"field_name": "user_data",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 15,
+			"table_name": "folders",
+			"field_name": "deleted_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 16,
+			"table_name": "tags",
+			"field_name": "id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 17,
+			"table_name": "tags",
+			"field_name": "title",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 18,
+			"table_name": "tags",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 19,
+			"table_name": "tags",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 20,
+			"table_name": "tags",
+			"field_name": "user_created_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 21,
+			"table_name": "tags",
+			"field_name": "user_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 22,
+			"table_name": "tags",
+			"field_name": "encryption_cipher_text",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 23,
+			"table_name": "tags",
+			"field_name": "encryption_applied",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 24,
+			"table_name": "tags",
+			"field_name": "is_shared",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 25,
+			"table_name": "tags",
+			"field_name": "parent_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 26,
+			"table_name": "tags",
+			"field_name": "user_data",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 27,
+			"table_name": "note_tags",
+			"field_name": "id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 28,
+			"table_name": "note_tags",
+			"field_name": "note_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 29,
+			"table_name": "note_tags",
+			"field_name": "tag_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 30,
+			"table_name": "note_tags",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 31,
+			"table_name": "note_tags",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 32,
+			"table_name": "note_tags",
+			"field_name": "user_created_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 33,
+			"table_name": "note_tags",
+			"field_name": "user_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 34,
+			"table_name": "note_tags",
+			"field_name": "encryption_cipher_text",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 35,
+			"table_name": "note_tags",
+			"field_name": "encryption_applied",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 36,
+			"table_name": "note_tags",
+			"field_name": "is_shared",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 37,
+			"table_name": "sync_items",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 38,
+			"table_name": "sync_items",
+			"field_name": "sync_target",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 39,
+			"table_name": "sync_items",
+			"field_name": "sync_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 40,
+			"table_name": "sync_items",
+			"field_name": "item_type",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 41,
+			"table_name": "sync_items",
+			"field_name": "item_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 42,
+			"table_name": "sync_items",
+			"field_name": "sync_disabled",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 43,
+			"table_name": "sync_items",
+			"field_name": "sync_disabled_reason",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 44,
+			"table_name": "sync_items",
+			"field_name": "force_sync",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 45,
+			"table_name": "sync_items",
+			"field_name": "item_location",
+			"field_type": 1,
+			"field_default": "1"
+		},
+		{
+			"id": 46,
+			"table_name": "sync_items",
+			"field_name": "sync_warning_ignored",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 47,
+			"table_name": "sync_items",
+			"field_name": "remote_item_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 48,
+			"table_name": "sync_items",
+			"field_name": "base_body",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 49,
+			"table_name": "sync_items",
+			"field_name": "base_title",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 50,
+			"table_name": "sync_items",
+			"field_name": "base_conflict_note_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 51,
+			"table_name": "version",
+			"field_name": "version",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 52,
+			"table_name": "version",
+			"field_name": "table_fields_version",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 53,
+			"table_name": "deleted_items",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 54,
+			"table_name": "deleted_items",
+			"field_name": "item_type",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 55,
+			"table_name": "deleted_items",
+			"field_name": "item_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 56,
+			"table_name": "deleted_items",
+			"field_name": "deleted_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 57,
+			"table_name": "deleted_items",
+			"field_name": "sync_target",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 58,
+			"table_name": "settings",
+			"field_name": "key",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 59,
+			"table_name": "settings",
+			"field_name": "value",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 60,
+			"table_name": "alarms",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 61,
+			"table_name": "alarms",
+			"field_name": "note_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 62,
+			"table_name": "alarms",
+			"field_name": "trigger_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 63,
+			"table_name": "master_keys",
+			"field_name": "id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 64,
+			"table_name": "master_keys",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 65,
+			"table_name": "master_keys",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 66,
+			"table_name": "master_keys",
+			"field_name": "source_application",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 67,
+			"table_name": "master_keys",
+			"field_name": "encryption_method",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 68,
+			"table_name": "master_keys",
+			"field_name": "checksum",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 69,
+			"table_name": "master_keys",
+			"field_name": "content",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 70,
+			"table_name": "item_changes",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 71,
+			"table_name": "item_changes",
+			"field_name": "item_type",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 72,
+			"table_name": "item_changes",
+			"field_name": "item_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 73,
+			"table_name": "item_changes",
+			"field_name": "type",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 74,
+			"table_name": "item_changes",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 75,
+			"table_name": "item_changes",
+			"field_name": "source",
+			"field_type": 1,
+			"field_default": "1"
+		},
+		{
+			"id": 76,
+			"table_name": "item_changes",
+			"field_name": "before_change_item",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 77,
+			"table_name": "note_resources",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 78,
+			"table_name": "note_resources",
+			"field_name": "note_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 79,
+			"table_name": "note_resources",
+			"field_name": "resource_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 80,
+			"table_name": "note_resources",
+			"field_name": "is_associated",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 81,
+			"table_name": "note_resources",
+			"field_name": "last_seen_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 82,
+			"table_name": "resource_local_states",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 83,
+			"table_name": "resource_local_states",
+			"field_name": "resource_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 84,
+			"table_name": "resource_local_states",
+			"field_name": "fetch_status",
+			"field_type": 1,
+			"field_default": "2"
+		},
+		{
+			"id": 85,
+			"table_name": "resource_local_states",
+			"field_name": "fetch_error",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 86,
+			"table_name": "resources",
+			"field_name": "id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 87,
+			"table_name": "resources",
+			"field_name": "title",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 88,
+			"table_name": "resources",
+			"field_name": "mime",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 89,
+			"table_name": "resources",
+			"field_name": "filename",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 90,
+			"table_name": "resources",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 91,
+			"table_name": "resources",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 92,
+			"table_name": "resources",
+			"field_name": "user_created_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 93,
+			"table_name": "resources",
+			"field_name": "user_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 94,
+			"table_name": "resources",
+			"field_name": "file_extension",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 95,
+			"table_name": "resources",
+			"field_name": "encryption_cipher_text",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 96,
+			"table_name": "resources",
+			"field_name": "encryption_applied",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 97,
+			"table_name": "resources",
+			"field_name": "encryption_blob_encrypted",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 98,
+			"table_name": "resources",
+			"field_name": "size",
+			"field_type": 1,
+			"field_default": "-1"
+		},
+		{
+			"id": 99,
+			"table_name": "resources",
+			"field_name": "is_shared",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 100,
+			"table_name": "resources",
+			"field_name": "share_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 101,
+			"table_name": "resources",
+			"field_name": "master_key_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 102,
+			"table_name": "resources",
+			"field_name": "user_data",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 103,
+			"table_name": "resources",
+			"field_name": "blob_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 104,
+			"table_name": "resources",
+			"field_name": "ocr_text",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 105,
+			"table_name": "resources",
+			"field_name": "ocr_details",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 106,
+			"table_name": "resources",
+			"field_name": "ocr_status",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 107,
+			"table_name": "resources",
+			"field_name": "ocr_error",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 108,
+			"table_name": "resources",
+			"field_name": "ocr_driver_id",
+			"field_type": 1,
+			"field_default": "1"
+		},
+		{
+			"id": 109,
+			"table_name": "resources",
+			"field_name": "is_locked",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 110,
+			"table_name": "revisions",
+			"field_name": "id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 111,
+			"table_name": "revisions",
+			"field_name": "parent_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 112,
+			"table_name": "revisions",
+			"field_name": "item_type",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 113,
+			"table_name": "revisions",
+			"field_name": "item_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 114,
+			"table_name": "revisions",
+			"field_name": "item_updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 115,
+			"table_name": "revisions",
+			"field_name": "title_diff",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 116,
+			"table_name": "revisions",
+			"field_name": "body_diff",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 117,
+			"table_name": "revisions",
+			"field_name": "metadata_diff",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 118,
+			"table_name": "revisions",
+			"field_name": "encryption_cipher_text",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 119,
+			"table_name": "revisions",
+			"field_name": "encryption_applied",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 120,
+			"table_name": "revisions",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 121,
+			"table_name": "revisions",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 122,
+			"table_name": "revisions",
+			"field_name": "is_locked",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 123,
+			"table_name": "migrations",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 124,
+			"table_name": "migrations",
+			"field_name": "number",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 125,
+			"table_name": "migrations",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 126,
+			"table_name": "migrations",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 127,
+			"table_name": "resources_to_download",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 128,
+			"table_name": "resources_to_download",
+			"field_name": "resource_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 129,
+			"table_name": "resources_to_download",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 130,
+			"table_name": "resources_to_download",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 131,
+			"table_name": "key_values",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 132,
+			"table_name": "key_values",
+			"field_name": "key",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 133,
+			"table_name": "key_values",
+			"field_name": "value",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 134,
+			"table_name": "key_values",
+			"field_name": "type",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 135,
+			"table_name": "key_values",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 136,
+			"table_name": "notes",
+			"field_name": "id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 137,
+			"table_name": "notes",
+			"field_name": "parent_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 138,
+			"table_name": "notes",
+			"field_name": "title",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 139,
+			"table_name": "notes",
+			"field_name": "body",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 140,
+			"table_name": "notes",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 141,
+			"table_name": "notes",
+			"field_name": "updated_time",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 142,
+			"table_name": "notes",
+			"field_name": "is_conflict",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 143,
+			"table_name": "notes",
+			"field_name": "latitude",
+			"field_type": 3,
+			"field_default": "0"
+		},
+		{
+			"id": 144,
+			"table_name": "notes",
+			"field_name": "longitude",
+			"field_type": 3,
+			"field_default": "0"
+		},
+		{
+			"id": 145,
+			"table_name": "notes",
+			"field_name": "altitude",
+			"field_type": 3,
+			"field_default": "0"
+		},
+		{
+			"id": 146,
+			"table_name": "notes",
+			"field_name": "author",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 147,
+			"table_name": "notes",
+			"field_name": "source_url",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 148,
+			"table_name": "notes",
+			"field_name": "is_todo",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 149,
+			"table_name": "notes",
+			"field_name": "todo_due",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 150,
+			"table_name": "notes",
+			"field_name": "todo_completed",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 151,
+			"table_name": "notes",
+			"field_name": "source",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 152,
+			"table_name": "notes",
+			"field_name": "source_application",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 153,
+			"table_name": "notes",
+			"field_name": "application_data",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 154,
+			"table_name": "notes",
+			"field_name": "order",
+			"field_type": 3,
+			"field_default": "0"
+		},
+		{
+			"id": 155,
+			"table_name": "notes",
+			"field_name": "user_created_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 156,
+			"table_name": "notes",
+			"field_name": "user_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 157,
+			"table_name": "notes",
+			"field_name": "encryption_cipher_text",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 158,
+			"table_name": "notes",
+			"field_name": "encryption_applied",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 159,
+			"table_name": "notes",
+			"field_name": "markup_language",
+			"field_type": 1,
+			"field_default": "1"
+		},
+		{
+			"id": 160,
+			"table_name": "notes",
+			"field_name": "is_shared",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 161,
+			"table_name": "notes",
+			"field_name": "share_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 162,
+			"table_name": "notes",
+			"field_name": "conflict_original_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 163,
+			"table_name": "notes",
+			"field_name": "master_key_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 164,
+			"table_name": "notes",
+			"field_name": "user_data",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 165,
+			"table_name": "notes",
+			"field_name": "deleted_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 166,
+			"table_name": "notes",
+			"field_name": "is_locked",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 167,
+			"table_name": "notes",
+			"field_name": "extracted_resource_ids",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 168,
+			"table_name": "notes_normalized",
+			"field_name": "id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 169,
+			"table_name": "notes_normalized",
+			"field_name": "title",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 170,
+			"table_name": "notes_normalized",
+			"field_name": "body",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 171,
+			"table_name": "notes_normalized",
+			"field_name": "user_created_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 172,
+			"table_name": "notes_normalized",
+			"field_name": "user_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 173,
+			"table_name": "notes_normalized",
+			"field_name": "is_todo",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 174,
+			"table_name": "notes_normalized",
+			"field_name": "todo_completed",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 175,
+			"table_name": "notes_normalized",
+			"field_name": "parent_id",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 176,
+			"table_name": "notes_normalized",
+			"field_name": "latitude",
+			"field_type": 3,
+			"field_default": "0"
+		},
+		{
+			"id": 177,
+			"table_name": "notes_normalized",
+			"field_name": "longitude",
+			"field_type": 3,
+			"field_default": "0"
+		},
+		{
+			"id": 178,
+			"table_name": "notes_normalized",
+			"field_name": "altitude",
+			"field_type": 3,
+			"field_default": "0"
+		},
+		{
+			"id": 179,
+			"table_name": "notes_normalized",
+			"field_name": "source_url",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 180,
+			"table_name": "notes_normalized",
+			"field_name": "todo_due",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 181,
+			"table_name": "items_normalized",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 182,
+			"table_name": "items_normalized",
+			"field_name": "title",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 183,
+			"table_name": "items_normalized",
+			"field_name": "body",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 184,
+			"table_name": "items_normalized",
+			"field_name": "item_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 185,
+			"table_name": "items_normalized",
+			"field_name": "item_type",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 186,
+			"table_name": "items_normalized",
+			"field_name": "user_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 187,
+			"table_name": "items_normalized",
+			"field_name": "reserved1",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 188,
+			"table_name": "items_normalized",
+			"field_name": "reserved2",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 189,
+			"table_name": "items_normalized",
+			"field_name": "reserved3",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 190,
+			"table_name": "items_normalized",
+			"field_name": "reserved4",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 191,
+			"table_name": "items_normalized",
+			"field_name": "reserved5",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 192,
+			"table_name": "items_normalized",
+			"field_name": "reserved6",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 193,
+			"table_name": "note_embeddings_meta",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 194,
+			"table_name": "note_embeddings_meta",
+			"field_name": "note_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 195,
+			"table_name": "note_embeddings_meta",
+			"field_name": "chunk_index",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 196,
+			"table_name": "note_embeddings_meta",
+			"field_name": "model_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 197,
+			"table_name": "note_embeddings_meta",
+			"field_name": "chunk_text",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 198,
+			"table_name": "note_embeddings_meta",
+			"field_name": "created_time",
+			"field_type": 1,
+			"field_default": "0"
+		},
+		{
+			"id": 199,
+			"table_name": "conflict_note_states",
+			"field_name": "id",
+			"field_type": 1,
+			"field_default": null
+		},
+		{
+			"id": 200,
+			"table_name": "conflict_note_states",
+			"field_name": "note_id",
+			"field_type": 2,
+			"field_default": null
+		},
+		{
+			"id": 201,
+			"table_name": "conflict_note_states",
+			"field_name": "base_body",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 202,
+			"table_name": "conflict_note_states",
+			"field_name": "base_title",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 203,
+			"table_name": "conflict_note_states",
+			"field_name": "remote_body",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 204,
+			"table_name": "conflict_note_states",
+			"field_name": "remote_title",
+			"field_type": 2,
+			"field_default": ""
+		},
+		{
+			"id": 205,
+			"table_name": "conflict_note_states",
+			"field_name": "remote_updated_time",
+			"field_type": 1,
+			"field_default": "0"
+		}
+	],
+	"hashes": {
+		"1": "bd60857d363719e2d3078efa6d6e248ca0fa80d5",
+		"2": "439f45bff1c210907a38929b03121320236dc2e2",
+		"3": "36ec7d015c94b94eaad9c8757920648854a36f19",
+		"4": "045c95c0eaff066d28d4038801bd94510e664640",
+		"5": "a5a9a69f4fae25b68f9c155081ae84ffd2c913ea",
+		"6": "8d2c20dd2d2f8b7b40ca5edd845b95b44a24c26b",
+		"7": "80eae33b02be4f2e4cce53d060329034a28a5a2b",
+		"8": "f1d121c99dfa5b3daf5c46a9f3af8b42962b87e0",
+		"9": "a253b3e9389babee1964f7b3c32efb42d810d948",
+		"10": "a2db900e81a46525b46f9b36b301a6abea98082f",
+		"11": "f6d615252ac72b62a852b88f5e6e80f590b687c3",
+		"12": "7221cbbd6e95d88b6f106e0df50d8836c910aa67",
+		"13": "4d1171f3041a7b68666212a6a62fb38df2a08a13",
+		"14": "95190c3cb30df231c1b553913f46f305f0f48505",
+		"15": "f9c4e92ead798cf042b16a25d7390fa9792fcc78",
+		"16": "2f70afe8a14cc627c3834e06d041ccc559f8b406",
+		"17": "57a275019580e2f404253be535f51ea795a70504",
+		"18": "8ac612133f6078d62153e5662444f092350f3fed",
+		"19": "4ae4427cfb2bad04ce79b445a86e46d3cb915604",
+		"20": "3938690112e1919f703b63e1a9eadf55a5df4516",
+		"21": "47728cedcfe213b17327c998577dfffb9717a986",
+		"22": "d40483017909a7f1eb8e7b9c0cab5572dca44e2d",
+		"23": "d8a830503d320016a925d5f394176d7e8b113ee5",
+		"24": "16dd1399aa54b1239fa7b5770bb9050ecc16dde3",
+		"25": "ff160945b2fa9f784cf5e7bd9abb495fd9dc056f",
+		"26": "94710829114278933f5e19904b9f6633dbc98329",
+		"27": "2b11b7e4f966cdf444b85ffb04e8a67345e9f542",
+		"28": "802d50bfce048e70338e8db62dd88cc978854023",
+		"29": "37ed3d16028cd9a2ededdbd3f596bf26d7e986ab",
+		"30": "60300b21b46146b20abbf6ccede8bd10739b03b6",
+		"31": "f5564e69e2cde89cd94b39eb4834df54920bc865",
+		"32": "b7bbc1b0c730b9581269b79dc2ddf4124a46904f",
+		"33": "24ef2e63737b927ca0ac027af59d5b26b2e86b2c",
+		"34": "669ca10f7b15649ab4c991f5cc9d41895025596e",
+		"35": "9c29958a414b2995a93a88fc4a5fb32b619efa81",
+		"36": "1a97dafd947123f92f9453758511eef6ada8c380",
+		"37": "2c764292a3fe56dcfa591946e19e20615a0f554b",
+		"38": "5a58bc0b879a97c79b1156b9a534f77373e40a0b",
+		"39": "eeb6313a9e9576a07e87593236563975ba03fe86",
+		"40": "dbed2db670964be93b811302991fdfa97a9034ae",
+		"41": "1e02ac0cd944cc5592ad779ec3cca2aacd821254",
+		"42": "53216a20aefaa24d9c7afb00c5a6ce4fcda8ec77",
+		"43": "fc3ccd9f88b75f29a14454e3cfbe3930cd1821fb",
+		"44": "832a4e4b196b227fa5a308cc61fd289182d6648b",
+		"45": "0097380d55b168d6d34b525834013129bb7f2b41",
+		"46": "bb5d727738357dfa2ef5835928e7a6cd4ea17eb6",
+		"47": "12e922169f0f168099f352683f98396c0fb7d2d3",
+		"48": "14e26224e0983cf02be540594117451ed46f7367",
+		"49": "1f35c7cf73bbe474e5f09a812c2d641eb42979e9",
+		"50": "35fdedfcdfb3e2328ce4b08dc4686ee1bdf95a28",
+		"51": "ca1d9e57bb3fd373392a02786667def6f4b28381",
+		"52": "57a424516d3e781f2fa7694d634b12fc9267b6fb",
+		"53": "cdd784ecd39ba3315ad77c0fed951686687429b0"
+	},
+	"full": {
+		"v41": {
+			"ver": 41,
+			"master": [
+				{
+					"type": "index",
+					"name": "alarm_note_id",
+					"tbl_name": "alarms",
+					"sql": "CREATE INDEX alarm_note_id ON alarms (note_id)"
+				},
+				{
+					"type": "index",
+					"name": "deleted_items_sync_target",
+					"tbl_name": "deleted_items",
+					"sql": "CREATE INDEX deleted_items_sync_target ON deleted_items (sync_target)"
+				},
+				{
+					"type": "index",
+					"name": "folders_encryption_applied",
+					"tbl_name": "folders",
+					"sql": "CREATE INDEX folders_encryption_applied ON folders (encryption_applied)"
+				},
+				{
+					"type": "index",
+					"name": "folders_title",
+					"tbl_name": "folders",
+					"sql": "CREATE INDEX folders_title ON folders (title)"
+				},
+				{
+					"type": "index",
+					"name": "folders_updated_time",
+					"tbl_name": "folders",
+					"sql": "CREATE INDEX folders_updated_time ON folders (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "folders_user_updated_time",
+					"tbl_name": "folders",
+					"sql": "CREATE INDEX folders_user_updated_time ON folders (user_updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "item_changes_created_time",
+					"tbl_name": "item_changes",
+					"sql": "CREATE INDEX item_changes_created_time ON item_changes (created_time)"
+				},
+				{
+					"type": "index",
+					"name": "item_changes_item_id",
+					"tbl_name": "item_changes",
+					"sql": "CREATE INDEX item_changes_item_id ON item_changes (item_id)"
+				},
+				{
+					"type": "index",
+					"name": "item_changes_item_type",
+					"tbl_name": "item_changes",
+					"sql": "CREATE INDEX item_changes_item_type ON item_changes (item_type)"
+				},
+				{
+					"type": "index",
+					"name": "key_values_key",
+					"tbl_name": "key_values",
+					"sql": "CREATE UNIQUE INDEX key_values_key ON key_values (key)"
+				},
+				{
+					"type": "index",
+					"name": "note_resources_note_id",
+					"tbl_name": "note_resources",
+					"sql": "CREATE INDEX note_resources_note_id ON note_resources (note_id)"
+				},
+				{
+					"type": "index",
+					"name": "note_resources_resource_id",
+					"tbl_name": "note_resources",
+					"sql": "CREATE INDEX note_resources_resource_id ON note_resources (resource_id)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_encryption_applied",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_encryption_applied ON note_tags (encryption_applied)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_note_id",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_note_id ON note_tags (note_id)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_tag_id",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_tag_id ON note_tags (tag_id)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_updated_time",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_updated_time ON note_tags (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_user_updated_time",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_user_updated_time ON note_tags (user_updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_altitude",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_altitude ON notes_normalized (altitude)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_id",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_id ON notes_normalized (id)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_is_todo",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_is_todo ON notes_normalized (is_todo)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_latitude",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_latitude ON notes_normalized (latitude)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_longitude",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_longitude ON notes_normalized (longitude)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_parent_id",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_parent_id ON notes_normalized (parent_id)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_source_url",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_source_url ON notes_normalized (source_url)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_todo_completed",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_todo_completed ON notes_normalized (todo_completed)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_todo_due",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_todo_due ON notes_normalized (todo_due)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_user_created_time",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_user_created_time ON notes_normalized (user_created_time)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_user_updated_time",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_user_updated_time ON notes_normalized (user_updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "resource_local_states_resource_fetch_status",
+					"tbl_name": "resource_local_states",
+					"sql": "CREATE INDEX resource_local_states_resource_fetch_status ON resource_local_states (fetch_status)"
+				},
+				{
+					"type": "index",
+					"name": "resource_local_states_resource_id",
+					"tbl_name": "resource_local_states",
+					"sql": "CREATE INDEX resource_local_states_resource_id ON resource_local_states (resource_id)"
+				},
+				{
+					"type": "index",
+					"name": "resources_size",
+					"tbl_name": "resources",
+					"sql": "CREATE INDEX resources_size ON resources(size)"
+				},
+				{
+					"type": "index",
+					"name": "resources_to_download_resource_id",
+					"tbl_name": "resources_to_download",
+					"sql": "CREATE INDEX resources_to_download_resource_id ON resources_to_download (resource_id)"
+				},
+				{
+					"type": "index",
+					"name": "resources_to_download_updated_time",
+					"tbl_name": "resources_to_download",
+					"sql": "CREATE INDEX resources_to_download_updated_time ON resources_to_download (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_item_id",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_item_id ON revisions (item_id)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_item_type",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_item_type ON revisions (item_type)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_item_updated_time",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_item_updated_time ON revisions (item_updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_parent_id",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_parent_id ON revisions (parent_id)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_updated_time",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_updated_time ON revisions (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_folders_1",
+					"tbl_name": "folders",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_master_keys_1",
+					"tbl_name": "master_keys",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_note_tags_1",
+					"tbl_name": "note_tags",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_notes_1",
+					"tbl_name": "notes",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_notes_fts_segdir_1",
+					"tbl_name": "notes_fts_segdir",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_resources_1",
+					"tbl_name": "resources",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_revisions_1",
+					"tbl_name": "revisions",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_settings_1",
+					"tbl_name": "settings",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_tags_1",
+					"tbl_name": "tags",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sync_items_item_id",
+					"tbl_name": "sync_items",
+					"sql": "CREATE INDEX sync_items_item_id ON sync_items (item_id)"
+				},
+				{
+					"type": "index",
+					"name": "sync_items_item_type",
+					"tbl_name": "sync_items",
+					"sql": "CREATE INDEX sync_items_item_type ON sync_items (item_type)"
+				},
+				{
+					"type": "index",
+					"name": "sync_items_sync_target",
+					"tbl_name": "sync_items",
+					"sql": "CREATE INDEX sync_items_sync_target ON sync_items (sync_target)"
+				},
+				{
+					"type": "index",
+					"name": "sync_items_sync_time",
+					"tbl_name": "sync_items",
+					"sql": "CREATE INDEX sync_items_sync_time ON sync_items (sync_time)"
+				},
+				{
+					"type": "index",
+					"name": "tags_encryption_applied",
+					"tbl_name": "tags",
+					"sql": "CREATE INDEX tags_encryption_applied ON tags (encryption_applied)"
+				},
+				{
+					"type": "index",
+					"name": "tags_title",
+					"tbl_name": "tags",
+					"sql": "CREATE INDEX tags_title ON tags (title)"
+				},
+				{
+					"type": "index",
+					"name": "tags_updated_time",
+					"tbl_name": "tags",
+					"sql": "CREATE INDEX tags_updated_time ON tags (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "tags_user_updated_time",
+					"tbl_name": "tags",
+					"sql": "CREATE INDEX tags_user_updated_time ON tags (user_updated_time)"
+				},
+				{
+					"type": "table",
+					"name": "alarms",
+					"tbl_name": "alarms",
+					"sql": "CREATE TABLE alarms (id INTEGER PRIMARY KEY AUTOINCREMENT, note_id TEXT NOT NULL, trigger_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "deleted_items",
+					"tbl_name": "deleted_items",
+					"sql": "CREATE TABLE deleted_items (id INTEGER PRIMARY KEY, item_type INT NOT NULL, item_id TEXT NOT NULL, deleted_time INT NOT NULL, sync_target INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "folders",
+					"tbl_name": "folders",
+					"sql": "CREATE TABLE folders (id TEXT PRIMARY KEY, title TEXT NOT NULL DEFAULT \"\", created_time INT NOT NULL, updated_time INT NOT NULL, user_created_time INT NOT NULL DEFAULT 0, user_updated_time INT NOT NULL DEFAULT 0, encryption_cipher_text TEXT NOT NULL DEFAULT \"\", encryption_applied INT NOT NULL DEFAULT 0, parent_id TEXT NOT NULL DEFAULT \"\", is_shared INT NOT NULL DEFAULT 0, share_id TEXT NOT NULL DEFAULT \"\", master_key_id TEXT NOT NULL DEFAULT \"\", icon TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "item_changes",
+					"tbl_name": "item_changes",
+					"sql": "CREATE TABLE item_changes (id INTEGER PRIMARY KEY AUTOINCREMENT, item_type INT NOT NULL, item_id TEXT NOT NULL, type INT NOT NULL, created_time INT NOT NULL, source INT NOT NULL DEFAULT 1, before_change_item TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "key_values",
+					"tbl_name": "key_values",
+					"sql": "CREATE TABLE key_values (id INTEGER PRIMARY KEY, `key` TEXT NOT NULL, `value` TEXT NOT NULL, `type` INT NOT NULL, updated_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "master_keys",
+					"tbl_name": "master_keys",
+					"sql": "CREATE TABLE master_keys (id TEXT PRIMARY KEY, created_time INT NOT NULL, updated_time INT NOT NULL, source_application TEXT NOT NULL, encryption_method INT NOT NULL, checksum TEXT NOT NULL, content TEXT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "migrations",
+					"tbl_name": "migrations",
+					"sql": "CREATE TABLE migrations (id INTEGER PRIMARY KEY, number INTEGER NOT NULL, updated_time INT NOT NULL, created_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "note_resources",
+					"tbl_name": "note_resources",
+					"sql": "CREATE TABLE note_resources (id INTEGER PRIMARY KEY, note_id TEXT NOT NULL, resource_id TEXT NOT NULL, is_associated INT NOT NULL, last_seen_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "note_tags",
+					"tbl_name": "note_tags",
+					"sql": "CREATE TABLE note_tags (id TEXT PRIMARY KEY, note_id TEXT NOT NULL, tag_id TEXT NOT NULL, created_time INT NOT NULL, updated_time INT NOT NULL, user_created_time INT NOT NULL DEFAULT 0, user_updated_time INT NOT NULL DEFAULT 0, encryption_cipher_text TEXT NOT NULL DEFAULT \"\", encryption_applied INT NOT NULL DEFAULT 0, is_shared INT NOT NULL DEFAULT 0)"
+				},
+				{
+					"type": "table",
+					"name": "notes",
+					"tbl_name": "notes",
+					"sql": "CREATE TABLE `notes`(`id` TEXT PRIMARY KEY,`parent_id` TEXT NOT NULL DEFAULT \"\",`title` TEXT NOT NULL DEFAULT \"\",`body` TEXT NOT NULL DEFAULT \"\",`created_time` INT NOT NULL,`updated_time` INT NOT NULL,`is_conflict` INT NOT NULL DEFAULT 0,`latitude` NUMERIC NOT NULL DEFAULT 0,`longitude` NUMERIC NOT NULL DEFAULT 0,`altitude` NUMERIC NOT NULL DEFAULT 0,`author` TEXT NOT NULL DEFAULT \"\",`source_url` TEXT NOT NULL DEFAULT \"\",`is_todo` INT NOT NULL DEFAULT 0,`todo_due` INT NOT NULL DEFAULT 0,`todo_completed` INT NOT NULL DEFAULT 0,`source` TEXT NOT NULL DEFAULT \"\",`source_application` TEXT NOT NULL DEFAULT \"\",`application_data` TEXT NOT NULL DEFAULT \"\",`order` NUMERIC NOT NULL DEFAULT 0,`user_created_time` INT NOT NULL DEFAULT 0,`user_updated_time` INT NOT NULL DEFAULT 0,`encryption_cipher_text` TEXT NOT NULL DEFAULT \"\",`encryption_applied` INT NOT NULL DEFAULT 0,`markup_language` INT NOT NULL DEFAULT 1,`is_shared` INT NOT NULL DEFAULT 0, share_id TEXT NOT NULL DEFAULT \"\", conflict_original_id TEXT NOT NULL DEFAULT \"\", master_key_id TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts",
+					"tbl_name": "notes_fts",
+					"sql": "CREATE VIRTUAL TABLE notes_fts USING fts4(content=\"notes_normalized\", notindexed=\"id\", notindexed=\"user_created_time\", notindexed=\"user_updated_time\", notindexed=\"is_todo\", notindexed=\"todo_completed\", notindexed=\"parent_id\", notindexed=\"latitude\", notindexed=\"longitude\", notindexed=\"altitude\", notindexed=\"source_url\", id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url)"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts_docsize",
+					"tbl_name": "notes_fts_docsize",
+					"sql": "CREATE TABLE 'notes_fts_docsize'(docid INTEGER PRIMARY KEY, size BLOB)"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts_segdir",
+					"tbl_name": "notes_fts_segdir",
+					"sql": "CREATE TABLE 'notes_fts_segdir'(level INTEGER,idx INTEGER,start_block INTEGER,leaves_end_block INTEGER,end_block INTEGER,root BLOB,PRIMARY KEY(level, idx))"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts_segments",
+					"tbl_name": "notes_fts_segments",
+					"sql": "CREATE TABLE 'notes_fts_segments'(blockid INTEGER PRIMARY KEY, block BLOB)"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts_stat",
+					"tbl_name": "notes_fts_stat",
+					"sql": "CREATE TABLE 'notes_fts_stat'(id INTEGER PRIMARY KEY, value BLOB)"
+				},
+				{
+					"type": "table",
+					"name": "notes_normalized",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TABLE notes_normalized (id TEXT NOT NULL, title TEXT NOT NULL DEFAULT \"\", body TEXT NOT NULL DEFAULT \"\", user_created_time INT NOT NULL DEFAULT 0, user_updated_time INT NOT NULL DEFAULT 0, is_todo INT NOT NULL DEFAULT 0, todo_completed INT NOT NULL DEFAULT 0, parent_id TEXT NOT NULL DEFAULT \"\", latitude NUMERIC NOT NULL DEFAULT 0, longitude NUMERIC NOT NULL DEFAULT 0, altitude NUMERIC NOT NULL DEFAULT 0, source_url TEXT NOT NULL DEFAULT \"\", todo_due INT NOT NULL DEFAULT 0)"
+				},
+				{
+					"type": "table",
+					"name": "resource_local_states",
+					"tbl_name": "resource_local_states",
+					"sql": "CREATE TABLE resource_local_states (id INTEGER PRIMARY KEY, resource_id TEXT NOT NULL, fetch_status INT NOT NULL DEFAULT \"2\", fetch_error TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "resources",
+					"tbl_name": "resources",
+					"sql": "CREATE TABLE `resources`(`id` TEXT PRIMARY KEY,`title` TEXT NOT NULL DEFAULT \"\",`mime` TEXT NOT NULL,`filename` TEXT NOT NULL DEFAULT \"\",`created_time` INT NOT NULL,`updated_time` INT NOT NULL,`user_created_time` INT NOT NULL DEFAULT 0,`user_updated_time` INT NOT NULL DEFAULT 0,`file_extension` TEXT NOT NULL DEFAULT \"\",`encryption_cipher_text` TEXT NOT NULL DEFAULT \"\",`encryption_applied` INT NOT NULL DEFAULT 0,`encryption_blob_encrypted` INT NOT NULL DEFAULT 0, `size` INT NOT NULL DEFAULT -1, is_shared INT NOT NULL DEFAULT 0, share_id TEXT NOT NULL DEFAULT \"\", master_key_id TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "resources_to_download",
+					"tbl_name": "resources_to_download",
+					"sql": "CREATE TABLE resources_to_download (id INTEGER PRIMARY KEY, resource_id TEXT NOT NULL, updated_time INT NOT NULL, created_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "revisions",
+					"tbl_name": "revisions",
+					"sql": "CREATE TABLE revisions (id TEXT PRIMARY KEY, parent_id TEXT NOT NULL DEFAULT \"\", item_type INT NOT NULL, item_id TEXT NOT NULL, item_updated_time INT NOT NULL, title_diff TEXT NOT NULL DEFAULT \"\", body_diff TEXT NOT NULL DEFAULT \"\", metadata_diff TEXT NOT NULL DEFAULT \"\", encryption_cipher_text TEXT NOT NULL DEFAULT \"\", encryption_applied INT NOT NULL DEFAULT 0, updated_time INT NOT NULL, created_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "settings",
+					"tbl_name": "settings",
+					"sql": "CREATE TABLE `settings`(`key` TEXT PRIMARY KEY,`value` TEXT)"
+				},
+				{
+					"type": "table",
+					"name": "sqlite_sequence",
+					"tbl_name": "sqlite_sequence",
+					"sql": "CREATE TABLE sqlite_sequence(name,seq)"
+				},
+				{
+					"type": "table",
+					"name": "sync_items",
+					"tbl_name": "sync_items",
+					"sql": "CREATE TABLE sync_items (id INTEGER PRIMARY KEY, sync_target INT NOT NULL, sync_time INT NOT NULL DEFAULT 0, item_type INT NOT NULL, item_id TEXT NOT NULL, sync_disabled INT NOT NULL DEFAULT \"0\", sync_disabled_reason TEXT NOT NULL DEFAULT \"\", force_sync INT NOT NULL DEFAULT 0, item_location INT NOT NULL DEFAULT 1)"
+				},
+				{
+					"type": "table",
+					"name": "table_fields",
+					"tbl_name": "table_fields",
+					"sql": "CREATE TABLE table_fields (id INTEGER PRIMARY KEY, table_name TEXT NOT NULL, field_name TEXT NOT NULL, field_type INT NOT NULL, field_default TEXT)"
+				},
+				{
+					"type": "table",
+					"name": "tags",
+					"tbl_name": "tags",
+					"sql": "CREATE TABLE tags (id TEXT PRIMARY KEY, title TEXT NOT NULL DEFAULT \"\", created_time INT NOT NULL, updated_time INT NOT NULL, user_created_time INT NOT NULL DEFAULT 0, user_updated_time INT NOT NULL DEFAULT 0, encryption_cipher_text TEXT NOT NULL DEFAULT \"\", encryption_applied INT NOT NULL DEFAULT 0, is_shared INT NOT NULL DEFAULT 0, parent_id TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "version",
+					"tbl_name": "version",
+					"sql": "CREATE TABLE version (version INT NOT NULL, table_fields_version INT NOT NULL DEFAULT 0)"
+				},
+				{
+					"type": "trigger",
+					"name": "notes_after_insert",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TRIGGER notes_after_insert AFTER INSERT ON notes_normalized BEGIN\n\t\t\t\t\t\tINSERT INTO notes_fts(docid, id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url) SELECT rowid, id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url FROM notes_normalized WHERE new.rowid = notes_normalized.rowid;\n\t\t\t\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "notes_after_update",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TRIGGER notes_after_update AFTER UPDATE ON notes_normalized BEGIN\n\t\t\t\t\t\tINSERT INTO notes_fts(docid, id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url) SELECT rowid, id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url FROM notes_normalized WHERE new.rowid = notes_normalized.rowid;\n\t\t\t\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "notes_fts_before_delete",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TRIGGER notes_fts_before_delete BEFORE DELETE ON notes_normalized BEGIN\n\t\t\t\t\t\tDELETE FROM notes_fts WHERE docid=old.rowid;\n\t\t\t\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "notes_fts_before_update",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TRIGGER notes_fts_before_update BEFORE UPDATE ON notes_normalized BEGIN\n\t\t\t\t\t\tDELETE FROM notes_fts WHERE docid=old.rowid;\n\t\t\t\t\tEND"
+				},
+				{
+					"type": "view",
+					"name": "tags_with_note_count",
+					"tbl_name": "tags_with_note_count",
+					"sql": "CREATE VIEW tags_with_note_count AS \n\t\t\t\t\t\tSELECT tags.id as id, tags.title as title, tags.created_time as created_time, tags.updated_time as updated_time, COUNT(notes.id) as note_count, \n\t\t\t\t\t\t\tSUM(CASE WHEN notes.todo_completed > 0 THEN 1 ELSE 0 END) AS todo_completed_count\n\t\t\t\t\t\tFROM tags \n\t\t\t\t\t\t\tLEFT JOIN note_tags nt on nt.tag_id = tags.id \n\t\t\t\t\t\t\tLEFT JOIN notes on notes.id = nt.note_id \n\t\t\t\t\t\tWHERE notes.id IS NOT NULL \n\t\t\t\t\t\tGROUP BY tags.id"
+				}
+			],
+			"info": {
+				"alarms": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "note_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "trigger_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"deleted_items": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "item_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "item_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "deleted_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "sync_target",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"folders": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "share_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "master_key_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "icon",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"item_changes": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "item_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "item_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "source",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "1",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "before_change_item",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"key_values": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "key",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "value",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"master_keys": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "source_application",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "encryption_method",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "checksum",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "content",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"migrations": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "number",
+						"type": "INTEGER",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"note_resources": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "note_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "resource_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "is_associated",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "last_seen_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"note_tags": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "note_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "tag_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				],
+				"notes": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "body",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "is_conflict",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "latitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "longitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "altitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "author",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "source_url",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "is_todo",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 13,
+						"name": "todo_due",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 14,
+						"name": "todo_completed",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 15,
+						"name": "source",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 16,
+						"name": "source_application",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 17,
+						"name": "application_data",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 18,
+						"name": "order",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 19,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 20,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 21,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 22,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 23,
+						"name": "markup_language",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "1",
+						"pk": 0
+					},
+					{
+						"cid": 24,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 25,
+						"name": "share_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 26,
+						"name": "conflict_original_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 27,
+						"name": "master_key_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"notes_fts": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "body",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "user_created_time",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "user_updated_time",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "is_todo",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "todo_completed",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "parent_id",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "latitude",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "longitude",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "altitude",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "source_url",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_fts_docsize": [
+					{
+						"cid": 0,
+						"name": "docid",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "size",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_fts_segdir": [
+					{
+						"cid": 0,
+						"name": "level",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "idx",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 2
+					},
+					{
+						"cid": 2,
+						"name": "start_block",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "leaves_end_block",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "end_block",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "root",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_fts_segments": [
+					{
+						"cid": 0,
+						"name": "blockid",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "block",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_fts_stat": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "value",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_normalized": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "body",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "is_todo",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "todo_completed",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "latitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "longitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "altitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "source_url",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "todo_due",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				],
+				"resource_local_states": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "resource_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "fetch_status",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "\"2\"",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "fetch_error",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"resources": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "mime",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "filename",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "file_extension",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "encryption_blob_encrypted",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "size",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "-1",
+						"pk": 0
+					},
+					{
+						"cid": 13,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 14,
+						"name": "share_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 15,
+						"name": "master_key_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"resources_to_download": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "resource_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"revisions": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "item_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "item_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "item_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "title_diff",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "body_diff",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "metadata_diff",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"settings": [
+					{
+						"cid": 0,
+						"name": "key",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "value",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"sync_items": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "sync_target",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "sync_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "item_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "item_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "sync_disabled",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "\"0\"",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "sync_disabled_reason",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "force_sync",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "item_location",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "1",
+						"pk": 0
+					}
+				],
+				"table_fields": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "table_name",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "field_name",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "field_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "field_default",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"tags": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"version": [
+					{
+						"cid": 0,
+						"name": "version",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 1,
+						"name": "table_fields_version",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				]
+			}
+		},
+		"v53": {
+			"ver": 53,
+			"master": [
+				{
+					"type": "index",
+					"name": "alarm_note_id",
+					"tbl_name": "alarms",
+					"sql": "CREATE INDEX alarm_note_id ON alarms (note_id)"
+				},
+				{
+					"type": "index",
+					"name": "deleted_items_sync_target",
+					"tbl_name": "deleted_items",
+					"sql": "CREATE INDEX deleted_items_sync_target ON deleted_items (sync_target)"
+				},
+				{
+					"type": "index",
+					"name": "folders_encryption_applied",
+					"tbl_name": "folders",
+					"sql": "CREATE INDEX folders_encryption_applied ON folders (encryption_applied)"
+				},
+				{
+					"type": "index",
+					"name": "folders_title",
+					"tbl_name": "folders",
+					"sql": "CREATE INDEX folders_title ON folders (title)"
+				},
+				{
+					"type": "index",
+					"name": "folders_updated_time",
+					"tbl_name": "folders",
+					"sql": "CREATE INDEX folders_updated_time ON folders (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "folders_user_updated_time",
+					"tbl_name": "folders",
+					"sql": "CREATE INDEX folders_user_updated_time ON folders (user_updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "item_changes_created_time",
+					"tbl_name": "item_changes",
+					"sql": "CREATE INDEX item_changes_created_time ON item_changes (created_time)"
+				},
+				{
+					"type": "index",
+					"name": "item_changes_item_id",
+					"tbl_name": "item_changes",
+					"sql": "CREATE INDEX item_changes_item_id ON item_changes (item_id)"
+				},
+				{
+					"type": "index",
+					"name": "item_changes_item_type",
+					"tbl_name": "item_changes",
+					"sql": "CREATE INDEX item_changes_item_type ON item_changes (item_type)"
+				},
+				{
+					"type": "index",
+					"name": "items_normalized_id",
+					"tbl_name": "items_normalized",
+					"sql": "CREATE INDEX items_normalized_id ON items_normalized (id)"
+				},
+				{
+					"type": "index",
+					"name": "items_normalized_item_id",
+					"tbl_name": "items_normalized",
+					"sql": "CREATE INDEX items_normalized_item_id ON items_normalized (item_id)"
+				},
+				{
+					"type": "index",
+					"name": "items_normalized_item_type",
+					"tbl_name": "items_normalized",
+					"sql": "CREATE INDEX items_normalized_item_type ON items_normalized (item_type)"
+				},
+				{
+					"type": "index",
+					"name": "key_values_key",
+					"tbl_name": "key_values",
+					"sql": "CREATE UNIQUE INDEX key_values_key ON key_values (key)"
+				},
+				{
+					"type": "index",
+					"name": "note_embeddings_meta_note_chunk",
+					"tbl_name": "note_embeddings_meta",
+					"sql": "CREATE UNIQUE INDEX note_embeddings_meta_note_chunk ON note_embeddings_meta(note_id, chunk_index)"
+				},
+				{
+					"type": "index",
+					"name": "note_embeddings_meta_note_id",
+					"tbl_name": "note_embeddings_meta",
+					"sql": "CREATE INDEX note_embeddings_meta_note_id ON note_embeddings_meta(note_id)"
+				},
+				{
+					"type": "index",
+					"name": "note_resources_note_id",
+					"tbl_name": "note_resources",
+					"sql": "CREATE INDEX note_resources_note_id ON note_resources (note_id)"
+				},
+				{
+					"type": "index",
+					"name": "note_resources_resource_id",
+					"tbl_name": "note_resources",
+					"sql": "CREATE INDEX note_resources_resource_id ON note_resources (resource_id)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_encryption_applied",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_encryption_applied ON note_tags (encryption_applied)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_note_id",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_note_id ON note_tags (note_id)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_tag_id",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_tag_id ON note_tags (tag_id)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_updated_time",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_updated_time ON note_tags (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "note_tags_user_updated_time",
+					"tbl_name": "note_tags",
+					"sql": "CREATE INDEX note_tags_user_updated_time ON note_tags (user_updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_altitude",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_altitude ON notes_normalized (altitude)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_id",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_id ON notes_normalized (id)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_is_todo",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_is_todo ON notes_normalized (is_todo)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_latitude",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_latitude ON notes_normalized (latitude)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_longitude",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_longitude ON notes_normalized (longitude)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_parent_id",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_parent_id ON notes_normalized (parent_id)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_source_url",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_source_url ON notes_normalized (source_url)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_todo_completed",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_todo_completed ON notes_normalized (todo_completed)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_todo_due",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_todo_due ON notes_normalized (todo_due)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_user_created_time",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_user_created_time ON notes_normalized (user_created_time)"
+				},
+				{
+					"type": "index",
+					"name": "notes_normalized_user_updated_time",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE INDEX notes_normalized_user_updated_time ON notes_normalized (user_updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "resource_local_states_resource_fetch_status",
+					"tbl_name": "resource_local_states",
+					"sql": "CREATE INDEX resource_local_states_resource_fetch_status ON resource_local_states (fetch_status)"
+				},
+				{
+					"type": "index",
+					"name": "resource_local_states_resource_id",
+					"tbl_name": "resource_local_states",
+					"sql": "CREATE INDEX resource_local_states_resource_id ON resource_local_states (resource_id)"
+				},
+				{
+					"type": "index",
+					"name": "resources_size",
+					"tbl_name": "resources",
+					"sql": "CREATE INDEX resources_size ON resources(size)"
+				},
+				{
+					"type": "index",
+					"name": "resources_to_download_resource_id",
+					"tbl_name": "resources_to_download",
+					"sql": "CREATE INDEX resources_to_download_resource_id ON resources_to_download (resource_id)"
+				},
+				{
+					"type": "index",
+					"name": "resources_to_download_updated_time",
+					"tbl_name": "resources_to_download",
+					"sql": "CREATE INDEX resources_to_download_updated_time ON resources_to_download (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_item_id",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_item_id ON revisions (item_id)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_item_type",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_item_type ON revisions (item_type)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_item_updated_time",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_item_updated_time ON revisions (item_updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_parent_id",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_parent_id ON revisions (parent_id)"
+				},
+				{
+					"type": "index",
+					"name": "revisions_updated_time",
+					"tbl_name": "revisions",
+					"sql": "CREATE INDEX revisions_updated_time ON revisions (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_conflict_note_states_1",
+					"tbl_name": "conflict_note_states",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_folders_1",
+					"tbl_name": "folders",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_items_fts_segdir_1",
+					"tbl_name": "items_fts_segdir",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_master_keys_1",
+					"tbl_name": "master_keys",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_note_tags_1",
+					"tbl_name": "note_tags",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_notes_1",
+					"tbl_name": "notes",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_notes_fts_segdir_1",
+					"tbl_name": "notes_fts_segdir",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_resources_1",
+					"tbl_name": "resources",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_revisions_1",
+					"tbl_name": "revisions",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_settings_1",
+					"tbl_name": "settings",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sqlite_autoindex_tags_1",
+					"tbl_name": "tags",
+					"sql": null
+				},
+				{
+					"type": "index",
+					"name": "sync_items_item_id",
+					"tbl_name": "sync_items",
+					"sql": "CREATE INDEX sync_items_item_id ON sync_items (item_id)"
+				},
+				{
+					"type": "index",
+					"name": "sync_items_item_type",
+					"tbl_name": "sync_items",
+					"sql": "CREATE INDEX sync_items_item_type ON sync_items (item_type)"
+				},
+				{
+					"type": "index",
+					"name": "sync_items_sync_target",
+					"tbl_name": "sync_items",
+					"sql": "CREATE INDEX sync_items_sync_target ON sync_items (sync_target)"
+				},
+				{
+					"type": "index",
+					"name": "sync_items_sync_time",
+					"tbl_name": "sync_items",
+					"sql": "CREATE INDEX sync_items_sync_time ON sync_items (sync_time)"
+				},
+				{
+					"type": "index",
+					"name": "tags_encryption_applied",
+					"tbl_name": "tags",
+					"sql": "CREATE INDEX tags_encryption_applied ON tags (encryption_applied)"
+				},
+				{
+					"type": "index",
+					"name": "tags_title",
+					"tbl_name": "tags",
+					"sql": "CREATE INDEX tags_title ON tags (title)"
+				},
+				{
+					"type": "index",
+					"name": "tags_updated_time",
+					"tbl_name": "tags",
+					"sql": "CREATE INDEX tags_updated_time ON tags (updated_time)"
+				},
+				{
+					"type": "index",
+					"name": "tags_user_updated_time",
+					"tbl_name": "tags",
+					"sql": "CREATE INDEX tags_user_updated_time ON tags (user_updated_time)"
+				},
+				{
+					"type": "table",
+					"name": "alarms",
+					"tbl_name": "alarms",
+					"sql": "CREATE TABLE alarms (id INTEGER PRIMARY KEY AUTOINCREMENT, note_id TEXT NOT NULL, trigger_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "conflict_note_states",
+					"tbl_name": "conflict_note_states",
+					"sql": "CREATE TABLE conflict_note_states (\n\t\t\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n\t\t\tnote_id TEXT NOT NULL UNIQUE,\n\t\t\tbase_body TEXT NOT NULL DEFAULT \"\",\n\t\t\tbase_title TEXT NOT NULL DEFAULT \"\",\n\t\t\tremote_body TEXT NOT NULL DEFAULT \"\",\n\t\t\tremote_title TEXT NOT NULL DEFAULT \"\",\n\t\t\tremote_updated_time INT NOT NULL DEFAULT 0\n\t\t)"
+				},
+				{
+					"type": "table",
+					"name": "deleted_items",
+					"tbl_name": "deleted_items",
+					"sql": "CREATE TABLE deleted_items (id INTEGER PRIMARY KEY, item_type INT NOT NULL, item_id TEXT NOT NULL, deleted_time INT NOT NULL, sync_target INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "folders",
+					"tbl_name": "folders",
+					"sql": "CREATE TABLE folders (id TEXT PRIMARY KEY, title TEXT NOT NULL DEFAULT \"\", created_time INT NOT NULL, updated_time INT NOT NULL, user_created_time INT NOT NULL DEFAULT 0, user_updated_time INT NOT NULL DEFAULT 0, encryption_cipher_text TEXT NOT NULL DEFAULT \"\", encryption_applied INT NOT NULL DEFAULT 0, parent_id TEXT NOT NULL DEFAULT \"\", is_shared INT NOT NULL DEFAULT 0, share_id TEXT NOT NULL DEFAULT \"\", master_key_id TEXT NOT NULL DEFAULT \"\", icon TEXT NOT NULL DEFAULT \"\", `user_data` TEXT NOT NULL DEFAULT \"\", `deleted_time` INT NOT NULL DEFAULT 0)"
+				},
+				{
+					"type": "table",
+					"name": "item_changes",
+					"tbl_name": "item_changes",
+					"sql": "CREATE TABLE item_changes (id INTEGER PRIMARY KEY AUTOINCREMENT, item_type INT NOT NULL, item_id TEXT NOT NULL, type INT NOT NULL, created_time INT NOT NULL, source INT NOT NULL DEFAULT 1, before_change_item TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "items_fts",
+					"tbl_name": "items_fts",
+					"sql": "CREATE VIRTUAL TABLE items_fts USING fts4(content=\"items_normalized\", notindexed=\"id\", notindexed=\"item_id\", notindexed=\"item_type\", notindexed=\"user_updated_time\", notindexed=\"reserved1\", notindexed=\"reserved2\", notindexed=\"reserved3\", notindexed=\"reserved4\", notindexed=\"reserved5\", notindexed=\"reserved6\", id, title, body, item_id, item_type, user_updated_time, reserved1, reserved2, reserved3, reserved4, reserved5, reserved6)"
+				},
+				{
+					"type": "table",
+					"name": "items_fts_docsize",
+					"tbl_name": "items_fts_docsize",
+					"sql": "CREATE TABLE 'items_fts_docsize'(docid INTEGER PRIMARY KEY, size BLOB)"
+				},
+				{
+					"type": "table",
+					"name": "items_fts_segdir",
+					"tbl_name": "items_fts_segdir",
+					"sql": "CREATE TABLE 'items_fts_segdir'(level INTEGER,idx INTEGER,start_block INTEGER,leaves_end_block INTEGER,end_block INTEGER,root BLOB,PRIMARY KEY(level, idx))"
+				},
+				{
+					"type": "table",
+					"name": "items_fts_segments",
+					"tbl_name": "items_fts_segments",
+					"sql": "CREATE TABLE 'items_fts_segments'(blockid INTEGER PRIMARY KEY, block BLOB)"
+				},
+				{
+					"type": "table",
+					"name": "items_fts_stat",
+					"tbl_name": "items_fts_stat",
+					"sql": "CREATE TABLE 'items_fts_stat'(id INTEGER PRIMARY KEY, value BLOB)"
+				},
+				{
+					"type": "table",
+					"name": "items_normalized",
+					"tbl_name": "items_normalized",
+					"sql": "CREATE TABLE items_normalized (id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT NOT NULL DEFAULT \"\", body TEXT NOT NULL DEFAULT \"\", item_id TEXT NOT NULL, item_type INT NOT NULL, user_updated_time INT NOT NULL DEFAULT 0, reserved1 INT NULL, reserved2 INT NULL, reserved3 INT NULL, reserved4 INT NULL, reserved5 INT NULL, reserved6 INT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "key_values",
+					"tbl_name": "key_values",
+					"sql": "CREATE TABLE key_values (id INTEGER PRIMARY KEY, `key` TEXT NOT NULL, `value` TEXT NOT NULL, `type` INT NOT NULL, updated_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "master_keys",
+					"tbl_name": "master_keys",
+					"sql": "CREATE TABLE master_keys (id TEXT PRIMARY KEY, created_time INT NOT NULL, updated_time INT NOT NULL, source_application TEXT NOT NULL, encryption_method INT NOT NULL, checksum TEXT NOT NULL, content TEXT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "migrations",
+					"tbl_name": "migrations",
+					"sql": "CREATE TABLE migrations (id INTEGER PRIMARY KEY, number INTEGER NOT NULL, updated_time INT NOT NULL, created_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "note_embeddings_meta",
+					"tbl_name": "note_embeddings_meta",
+					"sql": "CREATE TABLE note_embeddings_meta (\n\t\t\tid INTEGER PRIMARY KEY AUTOINCREMENT,\n\t\t\tnote_id TEXT NOT NULL,\n\t\t\tchunk_index INTEGER NOT NULL,\n\t\t\tmodel_id TEXT NOT NULL,\n\t\t\tchunk_text TEXT NOT NULL,\n\t\t\tcreated_time INT NOT NULL DEFAULT 0\n\t\t)"
+				},
+				{
+					"type": "table",
+					"name": "note_resources",
+					"tbl_name": "note_resources",
+					"sql": "CREATE TABLE note_resources (id INTEGER PRIMARY KEY, note_id TEXT NOT NULL, resource_id TEXT NOT NULL, is_associated INT NOT NULL, last_seen_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "note_tags",
+					"tbl_name": "note_tags",
+					"sql": "CREATE TABLE note_tags (id TEXT PRIMARY KEY, note_id TEXT NOT NULL, tag_id TEXT NOT NULL, created_time INT NOT NULL, updated_time INT NOT NULL, user_created_time INT NOT NULL DEFAULT 0, user_updated_time INT NOT NULL DEFAULT 0, encryption_cipher_text TEXT NOT NULL DEFAULT \"\", encryption_applied INT NOT NULL DEFAULT 0, is_shared INT NOT NULL DEFAULT 0)"
+				},
+				{
+					"type": "table",
+					"name": "notes",
+					"tbl_name": "notes",
+					"sql": "CREATE TABLE `notes`(`id` TEXT PRIMARY KEY,`parent_id` TEXT NOT NULL DEFAULT \"\",`title` TEXT NOT NULL DEFAULT \"\",`body` TEXT NOT NULL DEFAULT \"\",`created_time` INT NOT NULL,`updated_time` INT NOT NULL,`is_conflict` INT NOT NULL DEFAULT 0,`latitude` NUMERIC NOT NULL DEFAULT 0,`longitude` NUMERIC NOT NULL DEFAULT 0,`altitude` NUMERIC NOT NULL DEFAULT 0,`author` TEXT NOT NULL DEFAULT \"\",`source_url` TEXT NOT NULL DEFAULT \"\",`is_todo` INT NOT NULL DEFAULT 0,`todo_due` INT NOT NULL DEFAULT 0,`todo_completed` INT NOT NULL DEFAULT 0,`source` TEXT NOT NULL DEFAULT \"\",`source_application` TEXT NOT NULL DEFAULT \"\",`application_data` TEXT NOT NULL DEFAULT \"\",`order` NUMERIC NOT NULL DEFAULT 0,`user_created_time` INT NOT NULL DEFAULT 0,`user_updated_time` INT NOT NULL DEFAULT 0,`encryption_cipher_text` TEXT NOT NULL DEFAULT \"\",`encryption_applied` INT NOT NULL DEFAULT 0,`markup_language` INT NOT NULL DEFAULT 1,`is_shared` INT NOT NULL DEFAULT 0, share_id TEXT NOT NULL DEFAULT \"\", conflict_original_id TEXT NOT NULL DEFAULT \"\", master_key_id TEXT NOT NULL DEFAULT \"\", `user_data` TEXT NOT NULL DEFAULT \"\", `deleted_time` INT NOT NULL DEFAULT 0, is_locked INT NOT NULL DEFAULT 0, extracted_resource_ids TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts",
+					"tbl_name": "notes_fts",
+					"sql": "CREATE VIRTUAL TABLE notes_fts USING fts4(content=\"notes_normalized\", notindexed=\"id\", notindexed=\"user_created_time\", notindexed=\"user_updated_time\", notindexed=\"is_todo\", notindexed=\"todo_completed\", notindexed=\"parent_id\", notindexed=\"latitude\", notindexed=\"longitude\", notindexed=\"altitude\", notindexed=\"source_url\", id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url)"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts_docsize",
+					"tbl_name": "notes_fts_docsize",
+					"sql": "CREATE TABLE 'notes_fts_docsize'(docid INTEGER PRIMARY KEY, size BLOB)"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts_segdir",
+					"tbl_name": "notes_fts_segdir",
+					"sql": "CREATE TABLE 'notes_fts_segdir'(level INTEGER,idx INTEGER,start_block INTEGER,leaves_end_block INTEGER,end_block INTEGER,root BLOB,PRIMARY KEY(level, idx))"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts_segments",
+					"tbl_name": "notes_fts_segments",
+					"sql": "CREATE TABLE 'notes_fts_segments'(blockid INTEGER PRIMARY KEY, block BLOB)"
+				},
+				{
+					"type": "table",
+					"name": "notes_fts_stat",
+					"tbl_name": "notes_fts_stat",
+					"sql": "CREATE TABLE 'notes_fts_stat'(id INTEGER PRIMARY KEY, value BLOB)"
+				},
+				{
+					"type": "table",
+					"name": "notes_normalized",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TABLE notes_normalized (id TEXT NOT NULL, title TEXT NOT NULL DEFAULT \"\", body TEXT NOT NULL DEFAULT \"\", user_created_time INT NOT NULL DEFAULT 0, user_updated_time INT NOT NULL DEFAULT 0, is_todo INT NOT NULL DEFAULT 0, todo_completed INT NOT NULL DEFAULT 0, parent_id TEXT NOT NULL DEFAULT \"\", latitude NUMERIC NOT NULL DEFAULT 0, longitude NUMERIC NOT NULL DEFAULT 0, altitude NUMERIC NOT NULL DEFAULT 0, source_url TEXT NOT NULL DEFAULT \"\", todo_due INT NOT NULL DEFAULT 0)"
+				},
+				{
+					"type": "table",
+					"name": "resource_local_states",
+					"tbl_name": "resource_local_states",
+					"sql": "CREATE TABLE resource_local_states (id INTEGER PRIMARY KEY, resource_id TEXT NOT NULL, fetch_status INT NOT NULL DEFAULT \"2\", fetch_error TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "resources",
+					"tbl_name": "resources",
+					"sql": "CREATE TABLE `resources`(`id` TEXT PRIMARY KEY,`title` TEXT NOT NULL DEFAULT \"\",`mime` TEXT NOT NULL,`filename` TEXT NOT NULL DEFAULT \"\",`created_time` INT NOT NULL,`updated_time` INT NOT NULL,`user_created_time` INT NOT NULL DEFAULT 0,`user_updated_time` INT NOT NULL DEFAULT 0,`file_extension` TEXT NOT NULL DEFAULT \"\",`encryption_cipher_text` TEXT NOT NULL DEFAULT \"\",`encryption_applied` INT NOT NULL DEFAULT 0,`encryption_blob_encrypted` INT NOT NULL DEFAULT 0, `size` INT NOT NULL DEFAULT -1, is_shared INT NOT NULL DEFAULT 0, share_id TEXT NOT NULL DEFAULT \"\", master_key_id TEXT NOT NULL DEFAULT \"\", `user_data` TEXT NOT NULL DEFAULT \"\", blob_updated_time INT NOT NULL DEFAULT 0, `ocr_text` TEXT NOT NULL DEFAULT \"\", `ocr_details` TEXT NOT NULL DEFAULT \"\", `ocr_status` INT NOT NULL DEFAULT 0, `ocr_error` TEXT NOT NULL DEFAULT \"\", `ocr_driver_id` INT NOT NULL DEFAULT \"1\", is_locked INT NOT NULL DEFAULT 0)"
+				},
+				{
+					"type": "table",
+					"name": "resources_to_download",
+					"tbl_name": "resources_to_download",
+					"sql": "CREATE TABLE resources_to_download (id INTEGER PRIMARY KEY, resource_id TEXT NOT NULL, updated_time INT NOT NULL, created_time INT NOT NULL)"
+				},
+				{
+					"type": "table",
+					"name": "revisions",
+					"tbl_name": "revisions",
+					"sql": "CREATE TABLE revisions (id TEXT PRIMARY KEY, parent_id TEXT NOT NULL DEFAULT \"\", item_type INT NOT NULL, item_id TEXT NOT NULL, item_updated_time INT NOT NULL, title_diff TEXT NOT NULL DEFAULT \"\", body_diff TEXT NOT NULL DEFAULT \"\", metadata_diff TEXT NOT NULL DEFAULT \"\", encryption_cipher_text TEXT NOT NULL DEFAULT \"\", encryption_applied INT NOT NULL DEFAULT 0, updated_time INT NOT NULL, created_time INT NOT NULL, is_locked INT NOT NULL DEFAULT 0)"
+				},
+				{
+					"type": "table",
+					"name": "settings",
+					"tbl_name": "settings",
+					"sql": "CREATE TABLE `settings`(`key` TEXT PRIMARY KEY,`value` TEXT)"
+				},
+				{
+					"type": "table",
+					"name": "sqlite_sequence",
+					"tbl_name": "sqlite_sequence",
+					"sql": "CREATE TABLE sqlite_sequence(name,seq)"
+				},
+				{
+					"type": "table",
+					"name": "sync_items",
+					"tbl_name": "sync_items",
+					"sql": "CREATE TABLE sync_items (id INTEGER PRIMARY KEY, sync_target INT NOT NULL, sync_time INT NOT NULL DEFAULT 0, item_type INT NOT NULL, item_id TEXT NOT NULL, sync_disabled INT NOT NULL DEFAULT \"0\", sync_disabled_reason TEXT NOT NULL DEFAULT \"\", force_sync INT NOT NULL DEFAULT 0, item_location INT NOT NULL DEFAULT 1, sync_warning_ignored INT NOT NULL DEFAULT \"0\", remote_item_updated_time INT NOT NULL DEFAULT 0, base_body TEXT NOT NULL DEFAULT \"\", base_title TEXT NOT NULL DEFAULT \"\", base_conflict_note_id TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "table_fields",
+					"tbl_name": "table_fields",
+					"sql": "CREATE TABLE table_fields (id INTEGER PRIMARY KEY, table_name TEXT NOT NULL, field_name TEXT NOT NULL, field_type INT NOT NULL, field_default TEXT)"
+				},
+				{
+					"type": "table",
+					"name": "tags",
+					"tbl_name": "tags",
+					"sql": "CREATE TABLE tags (id TEXT PRIMARY KEY, title TEXT NOT NULL DEFAULT \"\", created_time INT NOT NULL, updated_time INT NOT NULL, user_created_time INT NOT NULL DEFAULT 0, user_updated_time INT NOT NULL DEFAULT 0, encryption_cipher_text TEXT NOT NULL DEFAULT \"\", encryption_applied INT NOT NULL DEFAULT 0, is_shared INT NOT NULL DEFAULT 0, parent_id TEXT NOT NULL DEFAULT \"\", `user_data` TEXT NOT NULL DEFAULT \"\")"
+				},
+				{
+					"type": "table",
+					"name": "version",
+					"tbl_name": "version",
+					"sql": "CREATE TABLE version (version INT NOT NULL, table_fields_version INT NOT NULL DEFAULT 0)"
+				},
+				{
+					"type": "trigger",
+					"name": "items_after_insert",
+					"tbl_name": "items_normalized",
+					"sql": "CREATE TRIGGER items_after_insert AFTER INSERT ON items_normalized BEGIN\n\t\t\tINSERT INTO items_fts(docid, id, title, body, item_id, item_type, user_updated_time, reserved1, reserved2, reserved3, reserved4, reserved5, reserved6) SELECT rowid, id, title, body, item_id, item_type, user_updated_time, reserved1, reserved2, reserved3, reserved4, reserved5, reserved6 FROM items_normalized WHERE new.rowid = items_normalized.rowid;\n\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "items_after_update",
+					"tbl_name": "items_normalized",
+					"sql": "CREATE TRIGGER items_after_update AFTER UPDATE ON items_normalized BEGIN\n\t\t\tINSERT INTO items_fts(docid, id, title, body, item_id, item_type, user_updated_time, reserved1, reserved2, reserved3, reserved4, reserved5, reserved6) SELECT rowid, id, title, body, item_id, item_type, user_updated_time, reserved1, reserved2, reserved3, reserved4, reserved5, reserved6 FROM items_normalized WHERE new.rowid = items_normalized.rowid;\n\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "items_fts_before_delete",
+					"tbl_name": "items_normalized",
+					"sql": "CREATE TRIGGER items_fts_before_delete BEFORE DELETE ON items_normalized BEGIN\n\t\t\tDELETE FROM items_fts WHERE docid=old.rowid;\n\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "items_fts_before_update",
+					"tbl_name": "items_normalized",
+					"sql": "CREATE TRIGGER items_fts_before_update BEFORE UPDATE ON items_normalized BEGIN\n\t\t\tDELETE FROM items_fts WHERE docid=old.rowid;\n\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "notes_after_insert",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TRIGGER notes_after_insert AFTER INSERT ON notes_normalized BEGIN\n\t\t\t\t\t\tINSERT INTO notes_fts(docid, id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url) SELECT rowid, id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url FROM notes_normalized WHERE new.rowid = notes_normalized.rowid;\n\t\t\t\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "notes_after_update",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TRIGGER notes_after_update AFTER UPDATE ON notes_normalized BEGIN\n\t\t\t\t\t\tINSERT INTO notes_fts(docid, id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url) SELECT rowid, id, title, body, user_created_time, user_updated_time, is_todo, todo_completed, parent_id, latitude, longitude, altitude, source_url FROM notes_normalized WHERE new.rowid = notes_normalized.rowid;\n\t\t\t\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "notes_fts_before_delete",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TRIGGER notes_fts_before_delete BEFORE DELETE ON notes_normalized BEGIN\n\t\t\t\t\t\tDELETE FROM notes_fts WHERE docid=old.rowid;\n\t\t\t\t\tEND"
+				},
+				{
+					"type": "trigger",
+					"name": "notes_fts_before_update",
+					"tbl_name": "notes_normalized",
+					"sql": "CREATE TRIGGER notes_fts_before_update BEFORE UPDATE ON notes_normalized BEGIN\n\t\t\t\t\t\tDELETE FROM notes_fts WHERE docid=old.rowid;\n\t\t\t\t\tEND"
+				},
+				{
+					"type": "view",
+					"name": "tags_with_note_count",
+					"tbl_name": "tags_with_note_count",
+					"sql": "CREATE VIEW tags_with_note_count AS \n\t\t\tSELECT\n\t\t\t\ttags.id as id,\n\t\t\t\ttags.title as title,\n\t\t\t\ttags.created_time as created_time,\n\t\t\t\ttags.updated_time as updated_time,\n\t\t\t\tCOUNT(notes.id) as note_count, \n\t\t\t\tSUM(CASE WHEN notes.todo_completed > 0 THEN 1 ELSE 0 END) AS todo_completed_count\n\t\t\tFROM tags \n\t\t\t\tLEFT JOIN note_tags nt on nt.tag_id = tags.id \n\t\t\t\tLEFT JOIN notes on notes.id = nt.note_id \n\t\t\tWHERE\n\t\t\t\tnotes.id IS NOT NULL\n\t\t\t\tAND notes.deleted_time = 0\n\t\t\tGROUP BY tags.id"
+				}
+			],
+			"info": {
+				"alarms": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "note_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "trigger_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"conflict_note_states": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "note_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "base_body",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "base_title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "remote_body",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "remote_title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "remote_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				],
+				"deleted_items": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "item_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "item_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "deleted_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "sync_target",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"folders": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "share_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "master_key_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "icon",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 13,
+						"name": "user_data",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 14,
+						"name": "deleted_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				],
+				"item_changes": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "item_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "item_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "source",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "1",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "before_change_item",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"items_fts": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "body",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "item_id",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "item_type",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "user_updated_time",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "reserved1",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "reserved2",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "reserved3",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "reserved4",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "reserved5",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "reserved6",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"items_fts_docsize": [
+					{
+						"cid": 0,
+						"name": "docid",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "size",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"items_fts_segdir": [
+					{
+						"cid": 0,
+						"name": "level",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "idx",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 2
+					},
+					{
+						"cid": 2,
+						"name": "start_block",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "leaves_end_block",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "end_block",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "root",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"items_fts_segments": [
+					{
+						"cid": 0,
+						"name": "blockid",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "block",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"items_fts_stat": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "value",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"items_normalized": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "body",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "item_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "item_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "reserved1",
+						"type": "INT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "reserved2",
+						"type": "INT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "reserved3",
+						"type": "INT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "reserved4",
+						"type": "INT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "reserved5",
+						"type": "INT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "reserved6",
+						"type": "INT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"key_values": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "key",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "value",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"master_keys": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "source_application",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "encryption_method",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "checksum",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "content",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"migrations": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "number",
+						"type": "INTEGER",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"note_embeddings_meta": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "note_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "chunk_index",
+						"type": "INTEGER",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "model_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "chunk_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				],
+				"note_resources": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "note_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "resource_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "is_associated",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "last_seen_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"note_tags": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "note_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "tag_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				],
+				"notes": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "body",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "is_conflict",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "latitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "longitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "altitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "author",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "source_url",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "is_todo",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 13,
+						"name": "todo_due",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 14,
+						"name": "todo_completed",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 15,
+						"name": "source",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 16,
+						"name": "source_application",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 17,
+						"name": "application_data",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 18,
+						"name": "order",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 19,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 20,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 21,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 22,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 23,
+						"name": "markup_language",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "1",
+						"pk": 0
+					},
+					{
+						"cid": 24,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 25,
+						"name": "share_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 26,
+						"name": "conflict_original_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 27,
+						"name": "master_key_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 28,
+						"name": "user_data",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 29,
+						"name": "deleted_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 30,
+						"name": "is_locked",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 31,
+						"name": "extracted_resource_ids",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"notes_fts": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "body",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "user_created_time",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "user_updated_time",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "is_todo",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "todo_completed",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "parent_id",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "latitude",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "longitude",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "altitude",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "source_url",
+						"type": "",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_fts_docsize": [
+					{
+						"cid": 0,
+						"name": "docid",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "size",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_fts_segdir": [
+					{
+						"cid": 0,
+						"name": "level",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "idx",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 2
+					},
+					{
+						"cid": 2,
+						"name": "start_block",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "leaves_end_block",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "end_block",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "root",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_fts_segments": [
+					{
+						"cid": 0,
+						"name": "blockid",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "block",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_fts_stat": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "value",
+						"type": "BLOB",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"notes_normalized": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "body",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "is_todo",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "todo_completed",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "latitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "longitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "altitude",
+						"type": "NUMERIC",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "source_url",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "todo_due",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				],
+				"resource_local_states": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "resource_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "fetch_status",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "\"2\"",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "fetch_error",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"resources": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "mime",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "filename",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "file_extension",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "encryption_blob_encrypted",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "size",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "-1",
+						"pk": 0
+					},
+					{
+						"cid": 13,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 14,
+						"name": "share_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 15,
+						"name": "master_key_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 16,
+						"name": "user_data",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 17,
+						"name": "blob_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 18,
+						"name": "ocr_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 19,
+						"name": "ocr_details",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 20,
+						"name": "ocr_status",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 21,
+						"name": "ocr_error",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 22,
+						"name": "ocr_driver_id",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "\"1\"",
+						"pk": 0
+					},
+					{
+						"cid": 23,
+						"name": "is_locked",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				],
+				"resources_to_download": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "resource_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"revisions": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "item_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "item_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "item_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "title_diff",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "body_diff",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "metadata_diff",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "is_locked",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				],
+				"settings": [
+					{
+						"cid": 0,
+						"name": "key",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "value",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"sync_items": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "sync_target",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "sync_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "item_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "item_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "sync_disabled",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "\"0\"",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "sync_disabled_reason",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "force_sync",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "item_location",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "1",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "sync_warning_ignored",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "\"0\"",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "remote_item_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 11,
+						"name": "base_body",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 12,
+						"name": "base_title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 13,
+						"name": "base_conflict_note_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"table_fields": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "INTEGER",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "table_name",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "field_name",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "field_type",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "field_default",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 0
+					}
+				],
+				"tags": [
+					{
+						"cid": 0,
+						"name": "id",
+						"type": "TEXT",
+						"notnull": 0,
+						"dflt_value": null,
+						"pk": 1
+					},
+					{
+						"cid": 1,
+						"name": "title",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 2,
+						"name": "created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 3,
+						"name": "updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 4,
+						"name": "user_created_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 5,
+						"name": "user_updated_time",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 6,
+						"name": "encryption_cipher_text",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 7,
+						"name": "encryption_applied",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 8,
+						"name": "is_shared",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					},
+					{
+						"cid": 9,
+						"name": "parent_id",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					},
+					{
+						"cid": 10,
+						"name": "user_data",
+						"type": "TEXT",
+						"notnull": 1,
+						"dflt_value": "\"\"",
+						"pk": 0
+					}
+				],
+				"version": [
+					{
+						"cid": 0,
+						"name": "version",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": null,
+						"pk": 0
+					},
+					{
+						"cid": 1,
+						"name": "table_fields_version",
+						"type": "INT",
+						"notnull": 1,
+						"dflt_value": "0",
+						"pk": 0
+					}
+				]
+			}
+		}
+	},
+	"normalizedHashes": {
+		"1": "92fc22ce99f58bf3736f519d46f11d669520f7d1",
+		"2": "09ddb17284ca775215abab7654e47de59e71c7c1",
+		"3": "a8fab1b1af67d02f11862918b61604c83582fc4a",
+		"4": "953aa8f71c63e4302cb7634a904c06b3fc0df0aa",
+		"5": "1d5af2dc7a8edcbf363b245ebbb6456fe689527b",
+		"6": "dbf3cb161f30ea0dbc2e4bc407cb869683800f72",
+		"7": "453d4556028be719a2f312ce5bce91483de06959",
+		"8": "8f419d2e615a5e3aa3f178f825b4e5282c6faef5",
+		"9": "b39fca93ba22d70fe06f830b0ad6b36f09ba6dc1",
+		"10": "216ba416c6e9dc9fb9be1b42f32f86425f560979",
+		"11": "031b6c8d90e48a769578c7d606984645cc7cdd92",
+		"12": "ee9adf9b28842b3f1a9721e8e131ef3de6083c3d",
+		"13": "6e521fdc1de232a612eb3630677170a18da975d3",
+		"14": "593c6a87bd1e5ccd82cc60693588758c62fc8c38",
+		"15": "8f8006c7704071108afb0bd345075ada714951c2",
+		"16": "6fe1de1e2a01b569c09e961e1dea9123c0496f9d",
+		"17": "cfe60f91dfd6c7888668eef18ca1b6e5aa59c676",
+		"18": "de7fade1478243968b13ba1e801c4fb716b716ba",
+		"19": "f4d45096597e0df63496b38627147d20e00e3a21",
+		"20": "5798923ba6f5a6a8191beb16a6f2b8d91de31e07",
+		"21": "fde1c7b377bfc9f1625776551960190b25c83c4e",
+		"22": "2d47c3a079e42adf0299ce19e530456f0fc078e3",
+		"23": "6061e3413f6957fc042e9c53cb720c5277ad1d08",
+		"24": "e08f302cbec3da3b12196a05caa200cbd4728e27",
+		"25": "1b07c13bd029976a8f550f1dd6f86b293d6e190d",
+		"26": "53a8a098e35f828b2fbde7cfdd8c5541e6cb7522",
+		"27": "bd2ff3b3c76c09f2f69404f09efbb4cda1a4be26",
+		"28": "7fe0dd085b9d1c32decefdcdf635cbbb89e32ca0",
+		"29": "fc379a27e1cc4c5da122721f3870d278d147fe86",
+		"30": "c6577bb126827ca9b909bbf78017600c79807b55",
+		"31": "57ac7a0566789fa68b0885c403ac8aa9b0db4582",
+		"32": "2f80b9acae78656c0d92ad19ade0def8d46ef758",
+		"33": "f171bf6fde0694a5aa963868b21e020d7183901c",
+		"34": "af2d909cfc7699da74a6c4dddc0aeb7620b00dc2",
+		"35": "fa53537b8fec38fa30e703c7f5fe13b714a679f0",
+		"36": "91f17821826ca8c9d0dbfc2234040f7f0e937e45",
+		"37": "5e83002ffd2b3dcc7919569d53e04ff52fc14387",
+		"38": "2a4d953fa6088e42af6308acd59607125ee22131",
+		"39": "d33dc8c6481bbe74e6f6b35167a58646ad794c42",
+		"40": "ba7d526f39073983c7bf945dfa11166078bcf99f",
+		"41": "2ef6eeba586f206099683f9a13cfec561b3a85b4",
+		"42": "8d567971c90560850152d8111d93caa7171e5e14",
+		"43": "35264d1fc7b3adbf1c511fe0b578fc6bd962dac4",
+		"44": "d99d212576876e837a77befbd9110c02e0ac0783",
+		"45": "5d8a26d116520e9af2c8e805db550a18e954d35d",
+		"46": "0436bd603c409c51635561096aedb0fe7122069a",
+		"47": "f4fc1977980e6f3a29b344ab943c8b0332e5d75d",
+		"48": "cd5f060315d23b39a08338dd441c0333e0e62d03",
+		"49": "f4ff3db700d6b9275b32c03204636ea2adc827a7",
+		"50": "bcdca10e46cea7ce5e768ca0f005b5c89ce38c09",
+		"51": "c5f894b09efd1e5bd3e625de0855d95e0b397bbe",
+		"52": "00b12af01b5f9697ff27938b74e82a04c495a0f6",
+		"53": "e937bdc3cc9f06cda02a5d7090354b47c8e95681"
+	}
+}

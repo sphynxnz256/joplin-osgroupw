@@ -4,6 +4,7 @@ import shim from '../shim';
 import { reg } from '../registry';
 import { fileExtension } from '../path-utils';
 import { SqlQuery } from '../services/database/types';
+import { compile, kysely } from '../services/database/kysely';
 
 interface Script {
 	exec: ()=> Promise<void>;
@@ -20,7 +21,7 @@ script.exec = async () => {
 		const resourceId = Resource.pathToId(stat.path);
 		if (!resourceId) continue;
 
-		queries.push({ sql: 'UPDATE resources SET `size` = ? WHERE id = ?', params: [stat.size, resourceId] });
+		queries.push(compile(kysely.updateTable('resources').set({ size: stat.size }).where('id', '=', resourceId)));
 
 		if (queries.length >= 1000) {
 			await reg.db().transactionExecBatch(queries);

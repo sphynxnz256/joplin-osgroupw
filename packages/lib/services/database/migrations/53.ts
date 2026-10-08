@@ -1,4 +1,5 @@
 import { SqlQuery } from '../types';
+import { createTableQuery, dropTableQuery, primaryKey, required } from '../kysely/rawFragments/schema';
 
 // Recreate conflict_note_states with a numeric auto-increment primary key, to
 // match the convention used by the other tables. note_id keeps its uniqueness
@@ -8,15 +9,15 @@ import { SqlQuery } from '../types';
 
 export default (): (SqlQuery|string)[] => {
 	return [
-		'DROP TABLE IF EXISTS conflict_note_states',
-		`CREATE TABLE conflict_note_states (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			note_id TEXT NOT NULL UNIQUE,
-			base_body TEXT NOT NULL DEFAULT "",
-			base_title TEXT NOT NULL DEFAULT "",
-			remote_body TEXT NOT NULL DEFAULT "",
-			remote_title TEXT NOT NULL DEFAULT "",
-			remote_updated_time INT NOT NULL DEFAULT 0
-		)`,
+		dropTableQuery('conflict_note_states', { ifExists: true }),
+		createTableQuery('conflict_note_states', {
+			id: primaryKey('INTEGER', true),
+			note_id: { type: 'TEXT', notNull: true, unique: true },
+			base_body: required('TEXT', ''),
+			base_title: required('TEXT', ''),
+			remote_body: required('TEXT', ''),
+			remote_title: required('TEXT', ''),
+			remote_updated_time: required('INT', 0),
+		}),
 	];
 };

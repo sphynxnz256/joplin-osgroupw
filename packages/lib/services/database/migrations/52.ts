@@ -1,4 +1,5 @@
 import { SqlQuery } from '../types';
+import { createIndexQuery, createTableQuery, primaryKey, required } from '../kysely/rawFragments/schema';
 
 // Storage for the AI embeddings index. Two tables:
 //
@@ -18,15 +19,15 @@ import { SqlQuery } from '../types';
 
 export default (): (SqlQuery|string)[] => {
 	return [
-		`CREATE TABLE IF NOT EXISTS note_embeddings_meta (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			note_id TEXT NOT NULL,
-			chunk_index INTEGER NOT NULL,
-			model_id TEXT NOT NULL,
-			chunk_text TEXT NOT NULL,
-			created_time INT NOT NULL DEFAULT 0
-		)`,
-		'CREATE INDEX IF NOT EXISTS note_embeddings_meta_note_id ON note_embeddings_meta(note_id)',
-		'CREATE UNIQUE INDEX IF NOT EXISTS note_embeddings_meta_note_chunk ON note_embeddings_meta(note_id, chunk_index)',
+		createTableQuery('note_embeddings_meta', {
+			id: primaryKey('INTEGER', true),
+			note_id: required('TEXT'),
+			chunk_index: required('INTEGER'),
+			model_id: required('TEXT'),
+			chunk_text: required('TEXT'),
+			created_time: required('INT', 0),
+		}, { ifNotExists: true }),
+		createIndexQuery('note_embeddings_meta_note_id', 'note_embeddings_meta', ['note_id'], { ifNotExists: true }),
+		createIndexQuery('note_embeddings_meta_note_chunk', 'note_embeddings_meta', ['note_id', 'chunk_index'], { unique: true, ifNotExists: true }),
 	];
 };

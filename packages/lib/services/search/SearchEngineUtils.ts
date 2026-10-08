@@ -56,7 +56,7 @@ export default class SearchEngineUtils {
 
 		const previewOptions: PreviewsOptions = { order: [],
 			fields: fields,
-			conditions: [`id IN (${Note.escapeIdsForSql(noteIds)})`],
+			noteIds,
 			...options };
 
 		const notes = await Note.previews(null, previewOptions);

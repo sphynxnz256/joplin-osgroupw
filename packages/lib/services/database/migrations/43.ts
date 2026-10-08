@@ -1,10 +1,11 @@
 import { SqlQuery } from '../types';
+import { addColumnQuery, required } from '../kysely/rawFragments/schema';
 
 export default (): (SqlQuery|string)[] => {
 	return [
-		'ALTER TABLE `notes` ADD COLUMN `user_data` TEXT NOT NULL DEFAULT ""',
-		'ALTER TABLE `tags` ADD COLUMN `user_data` TEXT NOT NULL DEFAULT ""',
-		'ALTER TABLE `folders` ADD COLUMN `user_data` TEXT NOT NULL DEFAULT ""',
-		'ALTER TABLE `resources` ADD COLUMN `user_data` TEXT NOT NULL DEFAULT ""',
+		addColumnQuery('notes', 'user_data', required('TEXT', '')),
+		addColumnQuery('tags', 'user_data', required('TEXT', '')),
+		addColumnQuery('folders', 'user_data', required('TEXT', '')),
+		addColumnQuery('resources', 'user_data', required('TEXT', '')),
 	];
 };
